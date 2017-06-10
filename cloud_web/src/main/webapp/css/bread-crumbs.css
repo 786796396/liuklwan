@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/*面包屑*/
+.bread-crumbs {
+  height: 45px;
+  width: 100%;
+  background: #fdfdfd;
+  border: 1px solid #e3def0; }
+
+.bread-crumbs-content {
+  padding: 0 0 0 20px;
+  color: #7c7c7c; }
+
+.bread-crumbs-content span, .bread-crumbs-content i {
+  font: normal  16px/45px 'Microsoft Yahei'; }
+
+.bread-crumbs-content i {
+  margin: 0 2px 0 2px; }
+
+/*# sourceMappingURL=bread-crumbs.css.map */

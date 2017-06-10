@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.NoticeSenderDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.NoticeSender" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="orgSiteCode !=null and orgSiteCode!=''" >
+				and org_site_code=#{orgSiteCode}
+			</if>
+			<if test="topic !=null and topic!=''">
+				and topic like '%' #{topic} '%'
+			</if>
+			<if test="publishDateStart !=null and publishDateStart!=''">
+				<![CDATA[and publish_date>=#{publishDateStart}]]>
+			</if>
+			<if test="publishDateEnd !=null and publishDateEnd!=''">	
+				<![CDATA[and publish_date<=#{publishDateEnd}]]>
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.NoticeSender" useGeneratedKeys="true" keyProperty="id">
+		insert into notice_sender ( 
+			<if test="id != null ">id,</if>
+			<if test="orgSiteCode != null ">org_site_code,</if>
+			<if test="topic != null ">topic,</if>
+			<if test="contents != null ">contents,</if>
+			<if test="affixUrl != null ">affix_url,</if>
+			<if test="affixName != null ">affix_name,</if>
+			<if test="isFeedback != null ">is_feedback,</if>
+			<if test="feedDeadlineDate != null ">feed_deadline_date,</if>
+			<if test="status != null ">status,</if>
+			<if test="publishDate != null ">publish_date,</if>
+			create_date,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="orgSiteCode != null ">#{orgSiteCode},</if>
+			<if test="topic != null ">#{topic},</if>
+			<if test="contents != null ">#{contents},</if>
+			<if test="affixUrl != null ">#{affixUrl},</if>
+			<if test="affixName != null ">#{affixName},</if>
+			<if test="isFeedback != null ">#{isFeedback},</if>
+			<if test="feedDeadlineDate != null ">#{feedDeadlineDate},</if>
+			<if test="status != null ">#{status},</if>
+			<if test="publishDate != null ">#{publishDate},</if>
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.NoticeSender">
+		select * from notice_sender where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.NoticeSender">
+		update notice_sender 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="orgSiteCode != null ">org_site_code = #{orgSiteCode},</if>
+				<if test="topic != null ">topic = #{topic},</if>
+				<if test="contents != null ">contents = #{contents},</if>
+				<if test="affixUrl != null ">affix_url = #{affixUrl},</if>
+				<if test="affixName != null ">affix_name = #{affixName},</if>
+				<if test="isFeedback != null ">is_feedback = #{isFeedback},</if>
+				<if test="feedDeadlineDate != null ">feed_deadline_date = #{feedDeadlineDate},</if>
+				<if test="status != null ">status = #{status},</if>
+				<if test="publishDate != null ">publish_date = #{publishDate},</if>
+				<if test="createDate != null ">create_date = #{createDate},</if>
+				modify_time=now()
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from notice_sender where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from notice_sender
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from notice_sender
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

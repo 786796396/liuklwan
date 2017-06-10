@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+	
+	<rule>	
+		<from>^/(/)?$</from>
+		<to last="true">/home.jsp</to>
+	</rule>
+	<!-- <rule>	
+		<from>^/spChannel/(\w+)/(.*)(/)?$</from>
+		<to last="true">/spChannel_$1.action?siteCode=$2</to>
+	</rule> -->
+	<!-- <rule>	
+		<from>^/databaseInfo/(\w+)(/)?$</from>
+		<to last="true">/databaseInfo_$1.action</to> 
+	</rule>
+	<rule>	
+		<from>^/errorInfo/(\w+)/(.*)(/)?$</from>
+		<to last="true">/errorInfo_$1.action?errorInfo.website=$2</to>
+	</rule>
+	<rule>	
+		<from>^/errorInfo/(\w+)(/)?$</from>
+		<to last="true">/errorInfo_$1.action</to>
+	</rule>
+	<rule>	
+		<from>^/map/index(/)?$</from>
+		<to last="true">/map_index.action</to>
+	</rule>
+	<rule>	
+		<from>^/map/pageOne(/)?$</from>
+		<to last="true">/map_pageOne.action</to>
+	</rule>
+	<rule>	
+		<from>^/map/pageTwo(/)?$</from>
+		<to last="true">/map_pageTwo.action</to>
+	</rule>
+	<rule>	
+		<from>^/map/pageThree(/)?$</from>
+		<to last="true">/map_pageThree.action</to>
+	</rule>
+	<rule>	
+		<from>^/map/china(/)?$</from>
+		<to last="true">/map_china.action</to>
+	</rule>
+	<rule>	
+		<from>^/map/pageChina(/)?$</from>
+		<to last="true">/map_pageChina.action</to>
+	</rule> -->
+</urlrewrite>

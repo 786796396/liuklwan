@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.ReportManageLogDao">
+<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+	<resultMap type="com.ucap.cloud_web.entity.ReportManageLog" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="servicePeriodId !=null ">
+				and service_period_id=#{servicePeriodId}
+			</if>
+			<if test="siteCode !=null ">
+				and site_code=#{siteCode}
+			</if>
+			<if test="term !=null">
+				and  (site_code like '%${term}%'  OR  
+					 site_name like '%${term}%') 
+			</if>
+			<if test="createTime !=null">
+				and create_time like '${createTime}%'
+			</if>
+			<if test="sendWxState !=null">
+				and send_wx_state =#{sendWxState}
+			</if>
+			<if test="currentNextSiteCode !=null">
+				and site_code in 
+				<foreach collection="currentNextSiteCode" item="item" open="(" separator="," close=")">
+					#{item.siteCode}
+				</foreach>
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.ReportManageLog" useGeneratedKeys="true" keyProperty="id">
+		insert into report_manage_log ( 
+			<if test="id != null ">id,</if>
+			<if test="servicePeriodId != null ">service_period_id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="siteName != null ">site_name,</if>
+			send_time,
+			<if test="sendState != null ">send_state,</if>
+			<if test="sendWxState != null ">send_wx_state,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="servicePeriodId != null ">#{servicePeriodId},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="siteName != null ">#{siteName},</if>
+			now(),
+			<if test="sendState != null ">#{sendState},</if>
+			<if test="sendWxState != null ">#{sendWxState},</if>
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.ReportManageLog">
+		select * from report_manage_log where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.ReportManageLog">
+		update report_manage_log 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="servicePeriodId != null ">service_period_id = #{servicePeriodId},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="siteName != null ">site_name = #{siteName},</if>
+				<if test="sendTime != null ">send_time = #{sendTime},</if>
+				<if test="sendState != null ">send_state = #{sendState},</if>
+				<if test="sendWxState != null ">send_wx_state=#{sendWxState},</if>
+				<if test="createTime != null ">create_time = #{createTime}</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from report_manage_log where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from report_manage_log
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from report_manage_log
+		<include refid="where" />
+	</select>
+	
+	<!--组织单位报告管理列表查询  -->
+	<select id="queryByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ReportManageLogRequest">
+		SELECT 
+			a.site_code AS siteCode,
+			a.site_name AS siteName,
+			a.send_time AS sendTime,
+			a.send_state AS sendState,
+		 	c.dic_site_id AS dicSiteId,
+		 	c.dic_combo_id AS dicComboId,
+		 	c.service_begin_time as serviceBeginTime,
+		 	d.pdf_url AS pdfUrl,
+		 	b.start_time AS startTime,
+		 	b.period_num AS periodNum
+		FROM 
+			report_manage_log a,
+			service_period b,
+			database_info c,
+			report_word_result d
+		WHERE 
+			a.site_code=b.site_code 
+		AND a.site_code=c.site_code
+		AND a.service_period_id=b.id
+		AND a.site_code = d.site_code
+		AND d.service_period_id=b.id
+ 		<if test="currentNextSiteCode !=null">
+			AND a.site_code  IN 
+				<foreach collection="currentNextSiteCode" item="websiteIdList" open="(" separator="," close=")">
+				     #{websiteIdList.siteCode}
+				</foreach>
+			
+			AND b.website_info_id IN
+				<foreach collection="currentNextSiteCode" item="websiteIdList" open="(" separator="," close=")">
+				     #{websiteIdList.id}
+				</foreach>
+		</if>
+		<if test="siteCodeList !=null">
+			and a.site_code in 
+			<foreach collection="siteCodeList" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="periodNum !=null">
+			AND b.period_num=#{periodNum}
+		</if>
+		<if test="comboType !=null">
+			AND c.dic_combo_id=#{comboType}
+		</if>
+		<if test="nowTime !=null">
+			and #{nowTime} BETWEEN c.service_begin_time AND c.service_end_time
+		</if>
+
+		order by a.send_time desc 
+	</select>
+	<select id="queryListByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ReportManageLogRequest">
+		SELECT 
+		  a.site_code AS siteCode,
+		  a.site_name AS siteName,
+		  a.send_time AS sendTime,
+		  a.send_state AS sendState,
+		  c.dic_site_id AS dicSiteId,
+		  c.dic_combo_id AS dicComboId,
+		  c.service_begin_time AS serviceBeginTime,
+		  b.start_time AS startTime,
+		  b.period_num AS periodNum 
+		FROM
+		  report_manage_log a,
+		  service_period b,
+		  website_info c 
+		WHERE a.site_code = b.site_code 
+		  AND a.site_code = c.site_code 
+		  AND a.service_period_id = b.id 
+		  AND a.site_code LIKE '53%' 
+
+		<if test="currentNextSiteCode !=null">
+			AND a.site_code  IN 
+				<foreach collection="currentNextSiteCode" item="websiteIdList" open="(" separator="," close=")">
+				     #{websiteIdList.siteCode}
+				</foreach>
+		</if>
+		<if test="nowTime !=null">
+			and #{nowTime} BETWEEN c.service_begin_time AND c.service_end_time
+		</if>
+		<if test="createTime !=null">
+			and a.create_time like '${createTime}%'
+		</if>
+		ORDER BY a.send_time DESC 
+	</select>
+
+
+	<select id="querySum" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ReportManageLogRequest">
+		SELECT 
+			COUNT(a.site_code) AS siteCodeNum,
+			SUM(CASE WHEN a.send_state=1 THEN 1 ELSE 0 END  ) AS successNum,
+			SUM(CASE WHEN a.send_state=0 THEN 1 ELSE 0 END ) AS errorNum
+		FROM report_manage_log a,service_period b
+		WHERE a.service_period_id=b.id
+		<if test="periodNum !=null">
+			and b.period_num=#{periodNum}
+		</if>
+	
+	</select>
+</mapper>

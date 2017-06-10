@@ -1,0 +1,123 @@
+@charset "utf-8";
+/* CSS Document */
+
+dl,ul,dd,dt,li{ list-style:none; padding:0}
+
+.banner{ background: url(../../images/banner.png) center center repeat-x; color:#fff;}
+.banner .row{ position:relative}
+.tj_list{ padding:20px;}
+.tj_list h2{ font-size:42px; color:#fff; position:relative; height:42px; margin:0px;}
+.tj_list h2 font{font-weight:bold; color:#e60027;}
+.tj_list h2 i{ font-size:20px; color:#e60027;height:66px; line-height:66px; padding-left:32px; background:url(../../images/index/icon14.png) no-repeat 0px 0px; margin:0 0 0px 16px; font-style:normal}
+.tj_list h2 i.bottom{ font-size:20px; color:#e60027;width:70%;height:66px; line-height:66px; padding-left:29px; background:url(../../images/index/icon15.png) no-repeat 0px 0px; margin:0 0 13px 16px; font-style:normal}
+.tj_list h2 span{ position:absolute; top:10px; right:0; font-size:22px; color:#fff; background:url(../../images/index/icon13.png) no-repeat; width:35px; height:35px; display:inline-block; line-height:35px; text-align:center}
+.tj_list h4{ font-size:16px; color:#fff; line-height:37px; font-weight:normal; margin:0 0 5px 0;}
+.tj_list p{line-height:32px;height:32px; margin-bottom:0px;}
+.tj_list p font{ font-size:16px; color:#fff;}
+.tj_list p span{ font-size:24px; display:inline-block; margin-left:5px;}
+.tj_list p .span1{ color:#35bfb3}
+.tj_list p #pageNum.span1{ width:32%;}
+
+.tj_list p .span2{ color:#ffe00f}
+
+/*banner登录*/
+.loginbox{ background:#fff; background:rgba(255,255,255,0.9); margin-top:30px; padding:28px 23px 35px 23px; color:#515151}
+
+.loginbox .nav-tabs > li.active > a, .loginbox .nav-tabs > li.active > a:focus, .loginbox .nav-tabs > li.active > a:hover{ background:none;}
+.loginbox .nav-tabs>li{ width:50%;}
+.loginbox .nav-tabs>li.active>a,.loginbox .nav-tabs>li.active>a:focus,.loginbox .nav-tabs>li.active>a:hover{
+	border-top:none;	border-left:none;	border-right:none;	border-bottom:6px #0cbbef solid;	color:#0cbbef }
+.loginbox .nav>li>a{ font-size:18px;padding:0px; color:#354052; height:42px; font-family:'微软雅黑';}
+.loginbox .nav>li>a>span{ font-size:16px;}
+.loginbox .nav>li>a:hover{
+	background:none;}
+	#myTabContent{ margin-top:30px; position:relative;}
+	#loginError{ position:absolute; top:-23px;}
+	.login-input-box{width:100%;margin:17px auto 0px;}
+	input.form-control{height:51px; padding:8px 9px; font-size:16px; border-radius:0px; box-shadow:none; background:#fff}
+   .error-msg{ padding-left:5px; position:relative; color:red; top:4px;}
+ .zhuangtai{width:100%;margin:0 auto; margin-top:20px; height:35px;}
+   .zhuangtai .dlzt{float:left; color:#919191;font-size:14px;}
+   .zhuangtai .dlzt input{margin-right:7px; appearance:none; -moz-appearance:none; -ms-appearance:none; -o-appearance:none; -webkit-appearance:none; width:16px; height:16px; border:1px #d6d6d6 solid; float:left; margin-top:1px; cursor:pointer;}
+	   
+	   
+   .zhuangtai .jym{float:right; color:#51bce8;font-size:14px;}
+   .zhuangtai .jym a{color:#51bce8;}
+   
+   .dlk input[type=button]{height:53px; width:100%; background:#2caee4; border:none; color:#fff; font-size:18px; margin-top:32px;
+   transition:background .5s;
+   -moz-transition:background .5s; /* Firefox 4 */
+-webkit-transition:background .5s; /* Safari 和 Chrome */
+-o-transition:background .5s; /* Opera */}
+   .dlk input:hover[type=button]{ background:#108ec3}
+   
+   .dlts{background:url(../images/login/dlts.gif) no-repeat center center; height:32px; width:100%; margin:12px 0px 10px 0px;}
+   .dltsnr{width:98%;font-size:14px; color:#7f7f7f; height:24px}
+
+.loginbox .error-msg{ margin:}
+
+.v-code{ border:1px solid #cccccc; background:#fff; width:100%; display:inline-block; margin-top:14px; position:relative;}
+.v-code input.login_input1{ width:165px; border:0px none; padding:8px 10px; background:#fff;}
+.v-code-box{ float:right; margin:5px 5px 0px 0px; width:107px; height:30px;}
+.img-responsive{ margin-left:14px;}
+
+@media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+  .tj_list{
+    background-color:#000000;
+    filter:Alpha(opacity=50);
+    position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+    *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+  }
+}
+
+@media (min-width:1000px) {
+
+h3{ font-size:42px;}
+.banner{ height:422px;}
+.banner .row{ margin:0 8%;}
+.tj_list{ width:100%; background-color: rgba(0,0,0,0.5); margin-top:20px;}
+.tj_list h4{ border-bottom:1px #414d55 solid} 
+.loginbox{ width:331px;}
+}
+@media (min-width:768px) and (max-width:1000px){
+h3{ font-size:42px;}
+
+.loginbox .nav>li>a{ font-size:16px;padding:0px; color:#354052; height:42px;}
+.loginbox .nav>li>a>span{ font-size:14px;}
+.banner{ height:422px;}
+.banner .row{ margin:0 5%;}
+.tj_list{ width:100%; background-color: rgba(0,0,0,0.5); margin-top:20px;}
+.tj_list h4{ border-bottom:1px #3d8991 solid; font-size:16px;} 
+.tj_list h5{ border-bottom:1px #3d8991 solid; font-size:14px;}
+.tj_list h2{ font-size:30px;}
+
+.tj_list p font{ font-size:16px;}
+.tj_list p span{ font-size:16px;}
+.tj_list p #pageNum.span1{ width:27%;}
+.tj_list h2 i.bottom{ font-size:16px;}
+.banner_left{ padding:0px;}
+}
+
+@media (max-width:768px){
+h3{ font-size:25px;}
+.banner{ height:800px; padding:0}
+.banner .row{ margin:0; padding:0;height:800px; background-color: rgba(0,0,0,0.7);}
+.tj_list{ width:66%; margin:0 8%; padding:0; height:190px;}
+.banner img{ display:block; margin:0 auto}
+.tj_list h4{ border-bottom:1px #696d78 solid; font-size:16px;} 
+.tj_list h5{ border-bottom:1px #696d78 solid; font-size:14px;}
+
+.tj_list h2{ font-size:30px;}
+
+.banner{ background:none}
+.banner_left{ padding:0px;}
+.sm-banner-bg{ background:url(../../images/banner.png) no-repeat center bottom}
+.banner_left{ padding:0px;}
+
+.banner img.img-responsive{ padding:30px 0 80px;}
+.tj_list p span.question-font{ display:block; margin-top:0px; margin-left:0px;}
+
+}
+
+
+

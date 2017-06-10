@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<project name="cloud_web" default="dist">
+	<!--  删除build 路径--> 
+	<delete includeEmptyDirs="true">  
+	    <fileset dir="build/classes"/>          
+	</delete>
+	
+	<property name="build.dest" value="build/classes"/>
+	
+	
+	<path id="compile.classpath">
+		<fileset dir="WebRoot/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${build.dest}"/>
+	</target>
+
+	<target name="compile" depends="init" >
+		<javac destdir="${build.dest}" debug="true" srcdir="src" encoding="utf-8" includeantruntime="on">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<target name="copy" depends="compile" description="配置文件拷贝">
+		<javac srcdir="src/main/resources" destdir="${build.dest}" encoding="utf-8" includeantruntime="on">
+			<classpath refid="classpath"/>
+		</javac>
+		<copy todir="${build.dest}">
+			<fileset dir="src/main/resources">
+				<include name="*"/>
+			</fileset>
+		</copy>
+		<copy todir="${build.dest}/sqlMapper" description="sqlMapper文件拷贝">
+			<fileset dir="src/main/resources/sqlMapper">
+				<include name="*"/>
+			</fileset>
+		</copy>
+		<copy todir="${build.dest}/ftl" description="ftl文件拷贝">
+			<fileset dir="src/main/resources/ftl">
+				<include name="*"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="dist" depends="copy">
+		<war destfile="cloud_web.war">
+			<!--  拷贝WebRoot 所有的文件，jsp--> 
+			<fileset dir ="src/main/webapp"/>
+			<lib dir="WebRoot/WEB-INF/lib"/>
+			<classes dir="${build.dest}"/>
+		</war>
+	</target>
+
+	
+	<!--delete includeEmptyDirs="true">
+		<fileset dir="${build.dest}"/>
+	</delete-->
+</project>

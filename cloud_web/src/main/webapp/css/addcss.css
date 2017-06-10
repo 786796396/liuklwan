@@ -1,0 +1,63 @@
+/*-----------------人工抽查样式--------------*/
+--.reng-chouc-tab{margin:30px 10px 20px 200px; }
+
+/*.reng-chouc-tab .tree-cor-msg span.cor-49cbe1{ color:#838383;}
+.reng-chouc-tab .tree-cor-msg span.cor-49cbe1 i{ width:10px; height:10px; }
+.reng-chouc-tab .tree-cor-msg span.cor-b937b5{ color:#838383;}
+.reng-chouc-tab .tree-cor-msg span.cor-b937b5 i{width:10px; height:10px; }
+.reng-chouc-tab .tree-cor-msg span.cor-f55555{ color:#838383;}
+.reng-chouc-tab .tree-cor-msg span.cor-f55555 i{ width:10px; height:10px; }*/
+
+.reng-chouc-tab .modal-con-center{ margin:180px 20px 0 34px;}
+.reng-chouc-tab .addh3{ font-size: 16px; color: #2dcc70; font-family: '微软雅黑'; margin: 0px; padding: 0px 0px 0px 25px; line-height: 40px; font-weight: normal; border-bottom: 1px solid #eaecf2;}
+
+.reng-chouc-tab .tree-cor-msg{ font-size:12px; font-family:'宋体'; color:#8d8d8d; font-weight:bold; line-height:30px; margin-top:15px;}
+.reng-chouc-tab .shuoming span{ font-size:12px; font-family:'宋体';}
+.reng-chouc-tab .shuoming span i{ display:inline-block; width:9px; height:9px; margin:0px 8px 0px 15px;}
+.reng-chouc-tab .shuoming span.door{ color:#49cbe1;}
+.reng-chouc-tab .shuoming span.door i{ width:10px; height:10px; background: #49cbe1;}
+.reng-chouc-tab .shuoming span.excep{ color:#b937b5;}
+.reng-chouc-tab .shuoming span.excep i{ width:10px; height:10px; background: #b937b5;}
+.reng-chouc-tab .shuoming span.closedw{ color:#f55555;}
+.reng-chouc-tab .shuoming span.closedw i{ width:10px; height:10px; background: #f55555;}
+
+.newtask{__border-top:1px solid red;}
+.bigbox .bigbox_right .rengongx{ margin:20px 20px 0 20px;}
+.bigbox .bigbox_right .suijix{margin:20px 20px 0 20px;}
+.bigbox .bigbox_right .fuzhix{margin:20px 20px 0 20px;}
+
+.bigbox .bigbox_right{ margin-left:190px;}
+.suijix .suiji-chouc-tabx{ margin:16px 20px 0 4px;}
+.suijix .fuzhi-chouc-tabx{ margin:30px 20px 0 20px;}
+
+.bigbox .reng-chouc-tab .center_botton{ margin:180px 10px 0 10px;}
+.rengong .reng-chouc-tab .modal-body-header1{ margin:0 0 0 20px;}
+.overf{ overflow:hidden;}
+
+.pos{ position:relative;}
+.bigbox_right_top{ margin:150px 30px 0 30px;}
+.brt_tab{ color:#696a7a; font-family:"微软雅黑"; font-size:16px;}
+.brt_tab{ padding:10px 5px;}
+.brt_tab .lineh{ line-height:55px;}
+.fuzhi-chouc-tab .fth{ width:100%;}
+.fuzhi-chouc-tab .fth tr th{ padding:0 21px; font-size:15px;}
+.seth{ __height:600px;}
+
+.fangd{ bottom:3px; right:10px;}
+
+
+/*填报单位上级抽查  */
+#wordList td{ border:none; border-top:1px solid #ccc;font:normal 13px '微软雅黑';}
+#wordList th{height:36px; color:#000; font:normal 14px '微软雅黑'; cursor:auto;}
+#wordList .t-center{ text-align:center;}
+#wordList .t-left{ text-align:left;}
+
+#wordList .p_name{width:20%;}
+#wordList .p_sty{width:7%;}
+#wordList .p_uint{width:7%;}
+#wordList .p_p{width:10%;}
+#wordList .p_rep{width:7%;}
+#wordList .p_sta{width:7%;}
+#wordList .p_al{width:7%;}
+#wordList .p_op{width:20%;}
+

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.MTaskdetailDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.MTaskdetail" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			<if test="siteCode != null ">
+				and siteCode= #{siteCode}
+			</if>
+			<if test="countday != null ">
+			    and countday =#{countday}
+			</if>
+			<if test="noupdatestatusStr != null and noupdatestatus != null">
+				and ${noupdatestatusStr} = #{noupdatestatus}
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.MTaskdetail" useGeneratedKeys="true" keyProperty="id">
+		insert into m_taskdetail ( 
+			<if test="id != null ">id,</if>
+			<if test="sitecode != null ">sitecode,</if>
+			<if test="status != null ">status,</if>
+			<if test="countyear != null ">countyear,</if>
+			<if test="countmonth != null ">countmonth,</if>
+			<if test="countday != null ">countday,</if>
+			<if test="linkerrnum != null ">linkerrnum,</if>
+			<if test="linkerrprop != null ">linkerrprop,</if>
+			<if test="linkerrprop7 != null ">linkerrprop7,</if>
+			<if test="linkerrprop14 != null ">linkerrprop14,</if>
+			<if test="linkerrprop30 != null ">linkerrprop30,</if>
+			<if test="indexloadtime != null ">indexloadtime,</if>
+			<if test="indexloadtime7 != null ">indexloadtime7,</if>
+			<if test="indexloadtime14 != null ">indexloadtime14,</if>
+			<if test="indexloadtime30 != null ">indexloadtime30,</if>
+			<if test="updatenum != null ">updatenum,</if>
+			<if test="updatenum7 != null ">updatenum7,</if>
+			<if test="updatenum14 != null ">updatenum14,</if>
+			<if test="updatenum30 != null ">updatenum30,</if>
+			<if test="updatestatus != null ">updatestatus,</if>
+			<if test="updatestatus7 != null ">updatestatus7,</if>
+			<if test="updatestatus14 != null ">updatestatus14,</if>
+			<if test="updatestatus30 != null ">updatestatus30,</if>
+			<if test="aveupdatenum != null ">aveupdatenum,</if>
+			<if test="aveupdatenum7 != null ">aveupdatenum7,</if>
+			<if test="aveupdatenum14 != null ">aveupdatenum14,</if>
+			<if test="aveupdatenum30 != null ">aveupdatenum30,</if>
+			<if test="indexsize != null ">indexsize,</if>
+			<if test="indexsize2 != null ">indexsize2,</if>
+			<if test="indexsize7 != null ">indexsize7,</if>
+			<if test="indexlinknum != null ">indexlinknum,</if>
+			<if test="indexlinknum2 != null ">indexlinknum2,</if>
+			<if test="indexlinknum7 != null ">indexlinknum7,</if>
+			<if test="indexdeadnum != null ">indexdeadnum,</if>
+			<if test="indexdeadnum7 != null ">indexdeadnum7,</if>
+			<if test="indexdeadnum14 != null ">indexdeadnum14,</if>
+			<if test="indexdeadnum30 != null ">indexdeadnum30,</if>
+			<if test="indexdeadprop != null ">indexdeadprop,</if>
+			<if test="indexdeadprop7 != null ">indexdeadprop7,</if>
+			<if test="indexdeadprop14 != null ">indexdeadprop14,</if>
+			<if test="indexdeadprop30 != null ">indexdeadprop30,</if>
+			<if test="insidedeadlinknum != null ">insidedeadlinknum,</if>
+			<if test="outsidedeadlinknum != null ">outsidedeadlinknum,</if>
+			<if test="insideurlnum != null ">insideurlnum,</if>
+			<if test="insideurlnum2 != null ">insideurlnum2,</if>
+			<if test="insideurlnum7 != null ">insideurlnum7,</if>
+			<if test="outsideurlnum != null ">outsideurlnum,</if>
+			<if test="outsideurlnum2 != null ">outsideurlnum2,</if>
+			<if test="outsideurlnum7 != null ">outsideurlnum7,</if>
+			<if test="alert != null ">alert,</if>
+			<if test="lastupdatedate != null ">lastupdatedate,</if>
+			<if test="noupdateday != null ">noupdateday,</if>
+			<if test="updatecodes != null ">updatecodes,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="sitecode != null ">#{sitecode},</if>
+			<if test="status != null ">#{status},</if>
+			<if test="countyear != null ">#{countyear},</if>
+			<if test="countmonth != null ">#{countmonth},</if>
+			<if test="countday != null ">#{countday},</if>
+			<if test="linkerrnum != null ">#{linkerrnum},</if>
+			<if test="linkerrprop != null ">#{linkerrprop},</if>
+			<if test="linkerrprop7 != null ">#{linkerrprop7},</if>
+			<if test="linkerrprop14 != null ">#{linkerrprop14},</if>
+			<if test="linkerrprop30 != null ">#{linkerrprop30},</if>
+			<if test="indexloadtime != null ">#{indexloadtime},</if>
+			<if test="indexloadtime7 != null ">#{indexloadtime7},</if>
+			<if test="indexloadtime14 != null ">#{indexloadtime14},</if>
+			<if test="indexloadtime30 != null ">#{indexloadtime30},</if>
+			<if test="updatenum != null ">#{updatenum},</if>
+			<if test="updatenum7 != null ">#{updatenum7},</if>
+			<if test="updatenum14 != null ">#{updatenum14},</if>
+			<if test="updatenum30 != null ">#{updatenum30},</if>
+			<if test="updatestatus != null ">#{updatestatus},</if>
+			<if test="updatestatus7 != null ">#{updatestatus7},</if>
+			<if test="updatestatus14 != null ">#{updatestatus14},</if>
+			<if test="updatestatus30 != null ">#{updatestatus30},</if>
+			<if test="aveupdatenum != null ">#{aveupdatenum},</if>
+			<if test="aveupdatenum7 != null ">#{aveupdatenum7},</if>
+			<if test="aveupdatenum14 != null ">#{aveupdatenum14},</if>
+			<if test="aveupdatenum30 != null ">#{aveupdatenum30},</if>
+			<if test="indexsize != null ">#{indexsize},</if>
+			<if test="indexsize2 != null ">#{indexsize2},</if>
+			<if test="indexsize7 != null ">#{indexsize7},</if>
+			<if test="indexlinknum != null ">#{indexlinknum},</if>
+			<if test="indexlinknum2 != null ">#{indexlinknum2},</if>
+			<if test="indexlinknum7 != null ">#{indexlinknum7},</if>
+			<if test="indexdeadnum != null ">#{indexdeadnum},</if>
+			<if test="indexdeadnum7 != null ">#{indexdeadnum7},</if>
+			<if test="indexdeadnum14 != null ">#{indexdeadnum14},</if>
+			<if test="indexdeadnum30 != null ">#{indexdeadnum30},</if>
+			<if test="indexdeadprop != null ">#{indexdeadprop},</if>
+			<if test="indexdeadprop7 != null ">#{indexdeadprop7},</if>
+			<if test="indexdeadprop14 != null ">#{indexdeadprop14},</if>
+			<if test="indexdeadprop30 != null ">#{indexdeadprop30},</if>
+			<if test="insidedeadlinknum != null ">#{insidedeadlinknum},</if>
+			<if test="outsidedeadlinknum != null ">#{outsidedeadlinknum},</if>
+			<if test="insideurlnum != null ">#{insideurlnum},</if>
+			<if test="insideurlnum2 != null ">#{insideurlnum2},</if>
+			<if test="insideurlnum7 != null ">#{insideurlnum7},</if>
+			<if test="outsideurlnum != null ">#{outsideurlnum},</if>
+			<if test="outsideurlnum2 != null ">#{outsideurlnum2},</if>
+			<if test="outsideurlnum7 != null ">#{outsideurlnum7},</if>
+			<if test="alert != null ">#{alert},</if>
+			<if test="lastupdatedate != null ">#{lastupdatedate},</if>
+			<if test="noupdateday != null ">#{noupdateday},</if>
+			<if test="updatecodes != null ">#{updatecodes},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.MTaskdetail">
+		select * from m_taskdetail where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.MTaskdetail">
+		update m_taskdetail 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="sitecode != null ">sitecode = #{sitecode},</if>
+				<if test="status != null ">status = #{status},</if>
+				<if test="countyear != null ">countyear = #{countyear},</if>
+				<if test="countmonth != null ">countmonth = #{countmonth},</if>
+				<if test="countday != null ">countday = #{countday},</if>
+				<if test="linkerrnum != null ">linkerrnum = #{linkerrnum},</if>
+				<if test="linkerrprop != null ">linkerrprop = #{linkerrprop},</if>
+				<if test="linkerrprop7 != null ">linkerrprop7 = #{linkerrprop7},</if>
+				<if test="linkerrprop14 != null ">linkerrprop14 = #{linkerrprop14},</if>
+				<if test="linkerrprop30 != null ">linkerrprop30 = #{linkerrprop30},</if>
+				<if test="indexloadtime != null ">indexloadtime = #{indexloadtime},</if>
+				<if test="indexloadtime7 != null ">indexloadtime7 = #{indexloadtime7},</if>
+				<if test="indexloadtime14 != null ">indexloadtime14 = #{indexloadtime14},</if>
+				<if test="indexloadtime30 != null ">indexloadtime30 = #{indexloadtime30},</if>
+				<if test="updatenum != null ">updatenum = #{updatenum},</if>
+				<if test="updatenum7 != null ">updatenum7 = #{updatenum7},</if>
+				<if test="updatenum14 != null ">updatenum14 = #{updatenum14},</if>
+				<if test="updatenum30 != null ">updatenum30 = #{updatenum30},</if>
+				<if test="updatestatus != null ">updatestatus = #{updatestatus},</if>
+				<if test="updatestatus7 != null ">updatestatus7 = #{updatestatus7},</if>
+				<if test="updatestatus14 != null ">updatestatus14 = #{updatestatus14},</if>
+				<if test="updatestatus30 != null ">updatestatus30 = #{updatestatus30},</if>
+				<if test="aveupdatenum != null ">aveupdatenum = #{aveupdatenum},</if>
+				<if test="aveupdatenum7 != null ">aveupdatenum7 = #{aveupdatenum7},</if>
+				<if test="aveupdatenum14 != null ">aveupdatenum14 = #{aveupdatenum14},</if>
+				<if test="aveupdatenum30 != null ">aveupdatenum30 = #{aveupdatenum30},</if>
+				<if test="indexsize != null ">indexsize = #{indexsize},</if>
+				<if test="indexsize2 != null ">indexsize2 = #{indexsize2},</if>
+				<if test="indexsize7 != null ">indexsize7 = #{indexsize7},</if>
+				<if test="indexlinknum != null ">indexlinknum = #{indexlinknum},</if>
+				<if test="indexlinknum2 != null ">indexlinknum2 = #{indexlinknum2},</if>
+				<if test="indexlinknum7 != null ">indexlinknum7 = #{indexlinknum7},</if>
+				<if test="indexdeadnum != null ">indexdeadnum = #{indexdeadnum},</if>
+				<if test="indexdeadnum7 != null ">indexdeadnum7 = #{indexdeadnum7},</if>
+				<if test="indexdeadnum14 != null ">indexdeadnum14 = #{indexdeadnum14},</if>
+				<if test="indexdeadnum30 != null ">indexdeadnum30 = #{indexdeadnum30},</if>
+				<if test="indexdeadprop != null ">indexdeadprop = #{indexdeadprop},</if>
+				<if test="indexdeadprop7 != null ">indexdeadprop7 = #{indexdeadprop7},</if>
+				<if test="indexdeadprop14 != null ">indexdeadprop14 = #{indexdeadprop14},</if>
+				<if test="indexdeadprop30 != null ">indexdeadprop30 = #{indexdeadprop30},</if>
+				<if test="insidedeadlinknum != null ">insidedeadlinknum = #{insidedeadlinknum},</if>
+				<if test="outsidedeadlinknum != null ">outsidedeadlinknum = #{outsidedeadlinknum},</if>
+				<if test="insideurlnum != null ">insideurlnum = #{insideurlnum},</if>
+				<if test="insideurlnum2 != null ">insideurlnum2 = #{insideurlnum2},</if>
+				<if test="insideurlnum7 != null ">insideurlnum7 = #{insideurlnum7},</if>
+				<if test="outsideurlnum != null ">outsideurlnum = #{outsideurlnum},</if>
+				<if test="outsideurlnum2 != null ">outsideurlnum2 = #{outsideurlnum2},</if>
+				<if test="outsideurlnum7 != null ">outsideurlnum7 = #{outsideurlnum7},</if>
+				<if test="alert != null ">alert = #{alert},</if>
+				<if test="lastupdatedate != null ">lastupdatedate = #{lastupdatedate},</if>
+				<if test="noupdateday != null ">noupdateday = #{noupdateday},</if>
+				<if test="updatecodes != null ">updatecodes = #{updatecodes},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				modify_time = now()
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from m_taskdetail where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from m_taskdetail
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	
+	<select id="queryResultList" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.Result">
+		select * from m_taskdetail
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from m_taskdetail
+		<include refid="where" />
+	</select>
+	
+	<select id="queryByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.MTaskdetailRequest">
+		SELECT 
+		  mtd.linkerrprop7 linkerrprop7,
+		  mtd.sitecode siteCode
+		FROM
+		  m_taskdetail mtd 
+		  LEFT JOIN database_info di 
+		    ON mtd.sitecode =di.site_code
+		WHERE  1=1
+		<if test="errorProportion !=null">
+			<![CDATA[ and mtd.linkerrprop7 > #{errorProportion}]]>
+		</if>
+		<if test="scanDate !=null">
+			and mtd.countday=#{scanDate}
+		</if>
+		<if test="isScan !=null">
+			and di.is_scan=#{isScan}
+		</if>
+		<if test="isCost !=null">
+			and di.iscost=#{isCost}
+		</if>
+		<if test="siteCode !=null">
+			and mtd.sitecode=#{siteCode}
+		</if>
+		<if test="dataLinkList != null">
+		 	and mtd.sitecode in
+           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+      			#{term.siteCode}
+			</foreach>
+		</if>
+		GROUP BY mtd.sitecode 
+	</select>
+	
+	<select id="queryConnPer" parameterType="HashMap" resultType="int">
+		SELECT 
+		   COUNT(*) 
+		FROM
+		  m_taskdetail 
+		WHERE 1 = 1 
+		  <if test="linkerrprop7 !=null ">
+		   	AND linkerrprop7 > #{linkerrprop7}
+		  </if>
+		  <if test="scanDate !=null">
+		  	AND countday = #{scanDate} 
+		  </if>
+		  <if test="dataLinkList != null">
+		 	AND sitecode in
+           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+      			#{term}
+			</foreach>
+		</if>
+	</select>
+	
+	<select id="queryPerLin7ByMap"  parameterType="HashMap" resultType="com.ucap.cloud_web.dto.MTaskdetailRequest">
+		SELECT 
+		  di.site_code AS siteCode,
+		  di.name AS siteName,
+		  mt.linkerrprop7 AS linkerrprop7 
+		FROM
+		  database_tree_info dti,
+		  database_info di,
+		  m_taskdetail mt 
+		WHERE dti.site_code = di.site_code 
+		  AND di.site_code = mt.sitecode 
+		  <if test="orgSiteCode !=null">
+		  	AND dti.org_site_code = #{orgSiteCode}
+		  </if>
+		  <if test="layerType !=null">
+		  	AND dti.layer_type = #{layerType}
+		  </if>
+		  <if test="isexp !=null">
+		    AND di.isexp =#{isexp} 
+		  </if>
+		  <if test="isLink !=null">
+		    AND dti.is_link = #{isLink}
+		  </if>
+		  <if test="countday !=null">
+		    AND mt.countday =#{countday}
+		  </if>
+		  <if test="linkerrprop !=null">
+		   AND mt.linkerrprop7 > #{linkerrprop}
+		  </if>
+		 order by mt.linkerrprop7 desc
+		 <if test="begin !=null and end !=null">
+		 	limit #{begin},#{end}
+		 </if>
+	</select>
+	
+	<select id="queryPerLin7ByMapCount"  parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)  FROM (
+			SELECT 
+			  di.site_code AS siteCode,
+			  di.name AS siteName,
+			  mt.linkerrprop7 AS linkerrprop7 
+			FROM
+			  database_tree_info dti,
+			  database_info di,
+			  m_taskdetail mt 
+			WHERE dti.site_code = di.site_code 
+			  AND di.site_code = mt.sitecode 
+			  <if test="orgSiteCode !=null">
+			  	AND dti.org_site_code = #{orgSiteCode}
+			  </if>
+			  <if test="layerType !=null">
+			  	AND dti.layer_type = #{layerType}
+			  </if>
+			  <if test="isexp !=null">
+			    AND di.isexp =#{isexp} 
+			  </if>
+			  <if test="isLink !=null">
+			    AND dti.is_link = #{isLink}
+			  </if>
+			  <if test="countday !=null">
+			    AND mt.countday =#{countday}
+			  </if>
+			  <if test="linkerrprop !=null">
+			   AND mt.linkerrprop7 > #{linkerrprop}
+			  </if>
+			 order by mt.linkerrprop7 desc
+		) AS a
+	</select>
+</mapper>

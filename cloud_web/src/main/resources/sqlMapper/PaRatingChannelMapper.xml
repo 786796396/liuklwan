@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.PaRatingChannelDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.PaRatingChannel" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="ratingDetailId != null ">
+			  and rating_detail_id = ${ratingDetailId}  
+			</if>
+			<if test="addType != null ">
+			  and add_type = ${addType}  
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.PaRatingChannel" useGeneratedKeys="true" keyProperty="id">
+		insert into pa_rating_channel ( 
+			<if test="id != null ">id,</if>
+			<if test="ratingDetailId != null ">rating_detail_id,</if>
+			<if test="channelId != null ">channel_id,</if>
+			<if test="addType != null ">add_type,</if>
+			<if test="imgUrl != null ">img_url,</if>
+			<if test="userId != null ">user_id,</if>
+			<if test="modifyUserId != null ">modify_user_id,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="ratingDetailId != null ">#{ratingDetailId},</if>
+			<if test="channelId != null ">#{channelId},</if>
+			<if test="addType != null ">#{addType},</if>
+			<if test="imgUrl != null ">#{imgUrl},</if>
+			<if test="userId != null ">#{userId},</if>
+			<if test="modifyUserId != null ">#{modifyUserId},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.PaRatingChannel">
+		select * from pa_rating_channel where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.PaRatingChannel">
+		update pa_rating_channel 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="ratingDetailId != null ">rating_detail_id = #{ratingDetailId},</if>
+				<if test="channelId != null ">channel_id = #{channelId},</if>
+				<if test="addType != null ">add_type = #{addType},</if>
+				<if test="imgUrl != null ">img_url = #{imgUrl},</if>
+				<if test="userId != null ">user_id = #{userId},</if>
+				<if test="modifyUserId != null ">modify_user_id = #{modifyUserId},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				modify_time = now()
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from pa_rating_channel where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from pa_rating_channel
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from pa_rating_channel
+		<include refid="where" />
+	</select>
+	<select id="getImgsAndAttch" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.PaRatingChannel">
+		select p.* ,a.alias_name,a.path  from pa_rating_channel p join sys_attach a on p.id=a.tb_key
+		 where  a.tb_name='pa_rating_channel' and  p.add_type = 1 and p.id =#{id}
+	</select>
+	
+	<select id="queryJoinList" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.PaRatingChannel">
+		select r.* ,p.channel_name,p.channel_url 
+			from pa_rating_channel r 
+			join pa_channel_point p 
+			on r.channel_id = p.id 
+			where r.rating_detail_id =${ratingDetailId} and  r.add_type=1
+	</select>
+</mapper>

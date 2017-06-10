@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.JcStatisticsDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.JcStatistics" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1 
+			<if test="yDay != null and sDay != null">
+				and (visit_date between #{sDay} and #{yDay}) 
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.JcStatistics" useGeneratedKeys="true" keyProperty="id">
+		insert into jc_statistics ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="url != null ">url,</if>
+			<if test="ip != null ">ip,</if>
+			<if test="visitDate != null ">visit_date,</if>
+			<if test="siteCodeCnt != null ">site_code_cnt,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="url != null ">#{url},</if>
+			<if test="ip != null ">#{ip},</if>
+			<if test="visitDate != null ">#{visitDate},</if>
+			<if test="siteCodeCnt != null ">#{siteCodeCnt},</if>
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.JcStatistics">
+		select * from jc_statistics where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.JcStatistics">
+		update jc_statistics 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="url != null ">url = #{url},</if>
+				<if test="ip != null ">ip = #{ip},</if>
+				<if test="visitDate != null ">visit_date = #{visitDate},</if>
+				<if test="siteCodeCnt != null ">site_code_cnt = #{siteCodeCnt},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from jc_statistics where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from jc_statistics
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from jc_statistics
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

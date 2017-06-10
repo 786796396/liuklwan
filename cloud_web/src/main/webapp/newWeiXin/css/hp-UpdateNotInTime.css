@@ -1,0 +1,17 @@
+/* 组织单位 */
+/*.seven-words-tit{
+    width: 3.33rem;
+    margin: 0 auto;
+}*/
+
+/*填报单位 快照图片*/
+.hp-snapshot-part{
+    width: 3.06rem;
+    margin: 0 auto;
+}
+.hp-snapshot-part img{
+    width: 3.06rem;
+    height:3.06rem;
+    margin: 1.2rem 0 2rem 0;
+}
+

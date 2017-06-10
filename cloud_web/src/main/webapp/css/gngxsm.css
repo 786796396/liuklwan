@@ -1,0 +1,53 @@
+@charset "utf-8";﻿
+*{margin:0;padding:0;font:12px/1.5em "微软雅黑",Arial,Helvetica,sans-serif;color:#666}
+body{margin:0;padding:0;}
+.clear{clear:both}
+/*======================technical_support========================*/
+.t_sup_conbox > ul > li{ display:none;}
+.t_support_line{ background:#006dcc; height:6px; width:100%;}
+.t_support_header{ background:#f4f4f4; height:130px; width:100%;}
+.t_support_hcon{ width:1000px; margin:auto;}
+.t_support_hcon h1{ font-size:38px; font-family:'微软雅黑'; color:#055ca8; margin:42px 0px 0px; float:left;}
+.t_support_hcon span{ font-size:14px; font-family:'微软雅黑'; color:#828282; margin-top:57px; text-align:right; float:right;}
+
+.t_support_titcon{ width:1000px; margin:auto; padding-top:70px;}
+.t_support_tit h3{ font-family:'微软雅黑'; color:#fff; font-size:30px; border-left:6px solid #fff; margin:0px 0 0 55px; padding:0px 0px 0px 20px; font-weight:normal;}
+#tSupport ul.service_ul>li>i{ background-image:url(/boxpro/images/t_support_icon.png); background-repeat:no-repeat; width:25px; height:25px; display:inline-block; margin-right:10px; vertical-align:middle;}
+#tSupport ul li i.shouc{ background-position:3px -2px;}
+#tSupport ul li i.jiaoc{ background-position:-48px -2px;}
+#tSupport ul li i.ruanj{ background-position:-101px 0;}
+#tSupport ul li i.faq{ background-position:-152px 0;}
+#tSupport .service_ul li{ margin:0 30px 0 30px; color:#000000; font-size:20px; cursor:pointer; padding:0px 25px 0 15px;}
+#tSupport .service_ul li.on{ color:#0578c1;}
+#tSupport .service_ul{ height:60px; padding-top:43px;}
+#tSupport{ margin:0px;}
+.t_sup_conbox{ min-height:209px; border-bottom:1px solid #d7d9dc; width:1000px; margin:auto;}
+#tSupport .service_main_con .line{ border-top:4px solid #00b5f3;}
+#tSupport .service_main_con{ border-bottom:1px solid #d4d8d8;}
+ul.t_sup_link_ul{ margin:80px 0 0 50px;}
+ul.t_sup_link_ul li{ font-size:18px; color:#000000; font-family:'微软雅黑'; line-height:25px; margin-bottom:20px;}
+ul.t_sup_link_ul li a{ color:#00b5f3; font-size: 18px;}
+ul.t_sup_link_ul li i{ background:url(/boxpro/images/t_support_icon2.png) 0 0 no-repeat; width:16px; height:20px; display:inline-block; vertical-align:middle; margin-right:15px;}
+.t_support_footer{ background:#f2f2f2; border-top:1px solid #e6e6e6; margin-top:137px; height:71px;}
+.a_footer_conleft{ float:left; font-size:12px; color:#777; line-height:20px;}
+.a_footer_conright{ float:right; font-size:12px; color:#777;}
+.t_support_footer_con{ width:1000px; margin:auto; position: relative;}
+.t_sup_h3{ font-size: 20px; color: #333; font-weight: normal; margin: 40px 0px 20px 40px;}
+.t_sup_mar1{ margin:0px 0 50px 60px !important;}
+.t_sup_mar2{ margin:0px 0 80px 60px !important;}
+.t_sup_mar3{ margin:80px 0 80px 60px !important;}
+.t_sup_color1{ color: #666; font-size: 18px;}
+
+.t_support_tit{background:url(../images/t_support_rbg.jpg) repeat-x 0 0;width:100%;height:186px;position:relative}
+.t_support_bg{background:url(../images/t_support_bg.jpg) no-repeat 0 0 #0075d6;top:0;width:802px;height:186px;right:0;position:absolute}
+.main{width:1005px;margin:0 auto}
+.coloum1{padding-left:280px;padding-top:37px}
+.coloum2_left{padding-left:54px;width:248px;font-size:22px;color:#bfbfbf;float:left;padding-top:36px}
+.coloum2_left span{font-size:32px;color:#7f7f7f}
+.coloum2_right{float:left;border-left:1px solid #d7d9dc;padding-left:28px;padding-top:36px;position:relative}
+.coloum2_right_tit{color:#000;font-size:28px;font-weight:700}
+.coloum2_right_tit img{position:absolute;top:50px;left:-8px}
+.coloum2_right_1{font-size:20px;padding-top:20px;color:#111}
+.coloum2_right p{line-height:35px;font-size:14px;color:#555}
+.t_support_footer{margin-top:50px}
+

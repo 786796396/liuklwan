@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+#edit.page-dialog.modal {  margin:0px 0px 0px 0px;}
+
+.page-return {  margin: 10px 20px 0 0;}
+.page-content2 {  margin-left:190px;  min-height: 400px;}
+#edit.page-dialog .modal-body {  margin-top:0px;}
+.modal-container {  margin-top: 0px;}
+.modal-nav-box {  padding: 40px 0px 0px 50px;}
+.page-footer {  font-size: 14px;  color: #585f69;
+  margin: 29px 0px 50px 55px;}
+.modal-nav-box .nav-pills > li.active > a {  color: #3ca8ef;  border-bottom: 7px solid #3ca8ef;
+}
+.row-fluid .span2 {  width: 126px}
+.pagination ul > li > a, .pagination ul > li > span {
+  margin-right: 0px;
+}
+.pagination ul > li {
+  display: inline; float:left; margin-right:10px;
+}

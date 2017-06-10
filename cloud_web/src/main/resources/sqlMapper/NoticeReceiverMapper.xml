@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.NoticeReceiverDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.NoticeReceiver" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="noticeSenderId !=null">
+				and notice_sender_id=#{noticeSenderId}
+			</if>
+			<if test="status !=null">
+				and status=#{status}
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.NoticeReceiver" useGeneratedKeys="true" keyProperty="id">
+		insert into notice_receiver ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="noticeSenderId != null ">notice_sender_id,</if>
+			<if test="feedContents != null ">feed_contents,</if>
+			<if test="feedAffixUrl != null ">feed_affix_url,</if>
+			<if test="feedAffixName != null ">feed_affix_name,</if>
+			<if test="status != null ">status,</if>
+			<if test="feedDate != null ">feed_date,</if>
+			<if test="isRead != null ">is_read,</if>
+			return_time,
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="noticeSenderId != null ">#{noticeSenderId},</if>
+			<if test="feedContents != null ">#{feedContents},</if>
+			<if test="feedAffixUrl != null ">#{feedAffixUrl},</if>
+			<if test="feedAffixName != null ">#{feedAffixName},</if>
+			<if test="status != null ">#{status},</if>
+			<if test="feedDate != null ">#{feedDate},</if>
+			<if test="isRead != null ">#{isRead},</if>
+			now(),
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.NoticeReceiver">
+		select * from notice_receiver where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.NoticeReceiver">
+		update notice_receiver 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="noticeSenderId != null ">notice_sender_id = #{noticeSenderId},</if>
+				<if test="feedContents != null ">feed_contents = #{feedContents},</if>
+				<if test="feedAffixUrl != null">feed_affix_url = #{feedAffixUrl},</if>
+				<if test="feedAffixName != null ">feed_affix_name = #{feedAffixName},</if>
+				<if test="status != null ">status = #{status},</if>
+				<if test="feedDate != null ">feed_date = #{feedDate},</if>
+				<if test="isRead != null ">is_read = #{isRead},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="returnTime != null ">return_time = #{returnTime},</if>
+				modify_time=now()
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from notice_receiver where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from notice_receiver
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from notice_receiver
+		<include refid="where" />
+	</select>
+	
+	<!-- 查询与databaseInfo表相连 -->
+	<select id="queryNoticeReceiverList" parameterType="HashMap" resultMap="resultMap">
+		select n.*,di.name as siteName 
+		from notice_receiver n,database_info di
+		where n.site_code = di.site_code
+		<if test="noticeSenderId !=null">
+		   and n.notice_sender_id=#{noticeSenderId}
+		</if>
+		<if test="status !=null">
+		   and n.status=#{status}
+		</if>
+		<if test="siteSearch !=null and siteSearch!=''">
+		  and (di.site_code like '%' #{siteSearch} '%' or di.name like '%' #{siteSearch} '%' )
+		</if>
+		<if test="feedDateStart !=null and feedDateStart!=''">
+			<![CDATA[and n.feed_date>=#{feedDateStart}]]>
+		</if>
+		<if test="feedDateEnd !=null and feedDateEnd!=''">	
+			<![CDATA[and n.feed_date<=#{feedDateEnd}]]>
+		</if>
+		order by n.status=2 desc,n.modify_time desc
+		
+	</select>
+	
+	
+	<!-- 查询与NoticeSender表相连 -->
+	<select id="queryNoticeSenderAndReceiver" parameterType="HashMap" resultMap="resultMap">
+		select s.topic,s.contents,s.affix_url,s.affix_name,s.feed_deadline_date,r.*
+		from notice_receiver r,notice_sender s
+		where r.notice_sender_id = s.id
+		<if test="siteCode !=null">
+			and r.site_code=#{siteCode}
+		</if>
+		<if test="topic !=null and topic!=''">
+		  and s.topic like '%' #{topic} '%' 
+		</if>
+		
+		<if test="feedDateStart !=null and feedDateStart!=''">
+			<![CDATA[and r.feed_date>=#{feedDateStart}]]>
+		</if>
+		<if test="feedDateEnd !=null and feedDateEnd!=''">	
+			<![CDATA[and r.feed_date<=#{feedDateEnd}]]>
+		</if>
+		order by r.modify_time desc
+	</select>
+	
+
+</mapper>

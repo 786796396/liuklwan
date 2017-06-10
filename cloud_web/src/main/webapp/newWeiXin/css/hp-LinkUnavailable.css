@@ -1,0 +1,41 @@
+/* 填报单位 */
+/*.hp-link-unab-tb .details-list-tit{
+    padding: .5rem .26rem .3rem .26rem;
+}*/
+.two-state{
+    margin-top:.34rem;
+}
+.two-state>div{
+    padding: .34rem 0 .16rem 0;
+    width: 2.86rem;
+    text-align: center;
+    background: #f7f7f7;
+}
+.two-state .numbs{
+    color: #333;
+    font: normal .2rem/.2rem 'Microsoft Yahei';
+}
+.hp-tb .details-list-tit{
+     padding: .5rem .26rem .3rem .26rem;
+ }
+.two-state .numbs{
+    display: block;
+    color: #333;
+    font: bold .2rem/.2rem 'Microsoft Yahei';
+}
+.two-state .state-descr{
+    margin-top:.2rem;
+    color: #6b6b6b;
+    font: bold .2rem/.2rem 'Microsoft Yahei';
+}
+/*.details-list-content{
+    padding: .05rem .26rem 0 .26rem;
+}*/
+
+/*.hp-tb .details-list-content li{
+    border-bottom: none;
+    padding-top: .5rem;
+}*/
+
+
+

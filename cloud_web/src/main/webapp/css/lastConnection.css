@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+.fr {
+	float: right;
+}
+
+.fl {
+	float: left;
+}
+
+.clearfix:after {
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.last-update.modal {
+	border-radius: 0;
+}
+
+.last-update.modal {
+	border-radius: 0;
+}
+
+.last-update .modal-header {
+	width: 688px;
+	height: 40px;
+	padding: 0;
+	border: 1px solid #00ccff;
+}
+
+.last-update .modal-header h4 {
+	height: 46px;
+	line-height: 46px;
+	margin: 0 0 0 24px;
+	f font: normal 16px 'Microsoft Yahei', '微软雅黑';
+	color: #fff;
+}
+
+.last-update .green_head {
+	__width: 690px;
+	height: 40px;
+	background: #009dd9;
+	color: #fff;
+}
+
+.last-update .green_head_closeicon {
+	position: absolute;
+	right: 10px;
+	top: 0;
+	width: 22px;
+	height: 22px;
+	margin-top: 11px;
+	margin-right: 4px;
+	background: url("../images/zg-icon.png") no-repeat -16px -14px;
+	opacity: 1;
+}
+
+.lud_calendar {
+	width: 148px;
+	height: 32px;
+	margin: 0 0 0 15px;
+	background: #fff;
+	position: relative;
+	top: 6px;
+}
+
+.lud_calendar input {
+	width: 110px;
+	height: 32px;
+	border: 0;
+	border-radius: 0;
+	outline: 0;
+	padding: 0 0 0 10px;
+}
+
+.lud_calendar input:focus {
+	outline: 0;
+	border: 0;
+	box-shadow: none;
+}
+
+.last-update .table_part_m table {
+	width: 100%;
+}
+
+.last-update table th,.last-update table td {
+	padding: 15px 0 15px 0;
+	font: normal 12px 'Microsoft Yahei', '微软雅黑';
+	border-bottom: 1px solid #ccc;
+}
+
+.last-update table th {
+	font-weight: bold;
+}
+
+.last-update .modal-body {
+	max-height: 490px;
+	min-height: 400px;
+}
+
+.state_num {
+	margin-right: 10px;
+}
+
+.icon-w {
+	position: relative;
+	top: -4px;
+	right: -4px;
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	background: url("../images/icon_w.png") no-repeat center center;
+	cursor: pointer;
+}
+
+.w7p {
+	width: 7%;
+}
+
+.w10p {
+	width: 10%;
+}
+
+.w15p {
+	width: 15%;
+}
+
+.w20p {
+	width: 20%;
+}
+
+.w25p {
+	width: 25%;
+}
+
+.w30p {
+	width: 30%;
+}
+.w100p {
+	width: 30%;
+}
+.last-update .http-html{ left:75px;}
+.modal.fade.in.last-update{ top:5%}
+.last-update .ms-wen-con{ left:-500px;}
+.last-update .angle3{ left:495px;}

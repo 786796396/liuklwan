@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.PaQuotaDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.PaQuota" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1 
+			<if test="appraisalId != null "> 
+			and appraisal_id = #{appraisalId}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.PaQuota" useGeneratedKeys="true" keyProperty="id">
+		insert into pa_quota ( 
+			<if test="id != null ">id,</if>
+			<if test="appraisalId != null ">appraisal_id,</if>
+			<if test="name != null ">name,</if>
+			<if test="scoreRules != null ">score_rules,</if>
+			<if test="parentId != null ">parent_id,</if>
+			<if test="weight != null ">weight,</if>
+			<if test="layer != null ">layer,</if>
+			<if test="content != null ">content,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="appraisalId != null ">#{appraisalId},</if>
+			<if test="name != null ">#{name},</if>
+			<if test="scoreRules != null ">#{scoreRules},</if>
+			<if test="parentId != null ">#{parentId},</if>
+			<if test="weight != null ">#{weight},</if>
+			<if test="layer != null ">#{layer},</if>
+			<if test="content != null ">#{content},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.PaQuota">
+		select * from pa_quota where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.PaQuota">
+		update pa_quota 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="appraisalId != null ">appraisal_id = #{appraisalId},</if>
+				<if test="name != null ">name = #{name},</if>
+				<if test="scoreRules != null ">score_rules = #{scoreRules},</if>
+				<if test="parentId != null ">parent_id = #{parentId},</if>
+				<if test="weight != null ">weight = #{weight},</if>
+				<if test="layer != null ">layer = #{layer},</if>
+				<if test="content != null ">content = #{content},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from pa_quota where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from pa_quota
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from pa_quota
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

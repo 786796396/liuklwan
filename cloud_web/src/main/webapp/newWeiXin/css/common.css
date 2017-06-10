@@ -1,0 +1,282 @@
+html{
+    font-size:100px;
+    background: #f0f0f0;
+}
+.wrap{
+    background: #f0f0f0;
+    width: 100%;
+    padding-bottom:.78rem;
+}
+.block-style-first{
+    border-bottom:1px solid #e4e4e4;
+    background: #fff;
+    overflow: hidden;
+}
+.block-style{
+    margin-top:.26rem;
+    border-top:1px solid #e4e4e4;
+    border-bottom:1px solid #e4e4e4;
+    background: #fff;
+    overflow: hidden;
+}
+.page-footer{
+    position:fixed;
+    bottom:0px;
+    z-index:100;
+    width:100%;
+    height:.5rem;
+    color:#818181;
+    text-align:center;
+    font:normal .18rem/.5rem '微软雅黑';
+    background:#f2f2f2;
+    border-top:1px solid #e1e1e1;
+}
+.every-line{ width:100%;}
+.every-line .half-part{
+    width:50%;
+}
+/* 四字标题s */
+.four-words-tit{
+    width: 2.3rem;
+    margin: 0 auto;
+}
+/* 四字标题e */
+/* 五字标题s */
+.five-words-tit{
+    width: 2.7rem;
+    margin: 0 auto;
+}
+/* 五字标题e */
+/* 七字标题s */
+.seven-words-tit{
+    width: 3.4rem;
+    margin: 0 auto;
+}
+/* 七字标题e */
+/* 组织单位头部图片s */
+.main-title{
+    width:100%;
+    height: 1.36rem;
+    color: #fff;
+    font: normal .32rem/1.36rem 'Microsoft Yahei';
+    background: #01b35d;
+}
+.main-title img{
+    display:inline-block;
+    width: .76rem;
+    height: .76rem;
+    vertical-align: middle;
+    margin-right: .23rem;
+ }
+ .main-title span{
+ 	font: normal .3rem/1.36rem 'Microsoft Yahei';
+ }
+.title-block{
+    width: 100%;
+    border-bottom:1px solid #80d9ae;
+}
+/* 组织单位头部图片e */
+
+/* 组织单位/填报单位 头部结果s */
+.result-set{
+    color: #fff;
+    background: #01b35d;
+}
+.tb-main-title{
+    padding:.3rem 0 .26rem .26rem;
+    border-bottom: 1px solid #80d9ae;
+}
+.result-detail{
+    padding:.15rem .26rem .26rem .26rem;
+}
+.result-detail p{
+    border-bottom: 1px solid #34c27d;
+}
+.result-detail p.last-item{
+    border-bottom:none;
+}
+
+.result-detail p span{
+    font: normal .24rem/.63rem 'Microsoft Yahei';
+}
+/* 组织单位/填报单位 头部结果e */
+
+/*详情列表部分*/
+.details-list-content{
+    /*padding: .05rem .26rem 0 .26rem;*/
+}
+.details-list-tit{
+    padding:.5rem  0 .5rem .26rem;
+    color: #333;
+    font: normal .3rem/.3rem 'Microsoft Yahei';
+    border-bottom: 1px solid #aeaeae;
+}
+.details-list-content ul li{
+    padding: .33rem .27rem;
+    border-bottom:1px solid #aeaeae;
+}
+.details-list-content .top{
+}
+.details-list-content .bottom{
+    margin-top:.2rem;
+}
+.details-list-content .last-time{
+    margin-top: .3rem;
+    padding-top: .3rem;
+    color: #6e6e6e;
+    font: normal .22rem/.22rem 'Microsoft Yahei';
+    position:relative;
+}
+.wx-top-line{
+	  border-top: 1px dashed #e5e5e5;
+	  width:100%;
+	  position:absolute;
+	  top:0;
+	  left:0;
+}
+.artical-list{
+    margin:.24rem .27rem 0 .27rem;
+    padding-bottom: .21rem;
+    border-bottom: 1px solid #bcbcbc;
+}
+.artical-list.item-last{
+    border-bottom:none;
+}
+.details-list-content .artical-list li{
+    padding: 0;
+    color: #6e6e6e;
+    font: normal .22rem/.62rem 'Microsoft Yahei';
+    border-bottom: none;
+}
+.artical-list li i{
+    display: inline-block;
+    width: .08rem;
+    height: .08rem;
+    margin-right: .26rem;
+    background: #ccc;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+/* 绿色原点部分s */
+.hp-tb .details-list-content li{
+    border-bottom: none;
+    /*padding:.5rem 0 0 0;*/
+}
+.green-icon-part{
+    padding: .05rem .26rem 0 .26rem;
+}
+.details-list-content .green-icon-part li{
+    padding:.35rem 0 0 0;
+}
+.green-icon-part li i{
+    display: inline-block;
+    width: .17rem;
+    height: .17rem;
+    margin-right: .18rem;
+    margin-top: .055rem;
+    background: #01b35d;
+    border-radius: 50%;
+}
+.green-icon-part li .special-point{
+    margin-top:.13rem;
+}
+.green-icon-part li .photo-img{
+    display: inline-block;
+    width: .32rem;
+    height: .28rem;
+}
+.photo-img img{
+    display: inherit;
+    width: .32rem;
+    height: .28rem;
+}
+.green-icon-part li .blank-img{
+    display: inline-block;
+    width: .31rem;
+    height: .31rem;
+    margin-top:2px;
+}
+.blank-img img{
+    display: inherit;
+    width: .31rem;
+    height: .31rem;
+}
+.green-icon-part .right-part{
+    width: 5.53rem;
+    padding-bottom: .15rem;
+    border-bottom: 1px solid #bcbcbc;
+}
+.green-icon-part .right-part.last-item{
+    border-bottom:none;
+}
+.green-icon-part .right-part h4{
+    margin-bottom: .3rem;
+    color: #333333;
+    font: normal .24rem/.24rem 'Microsoft Yahei';
+    width:90%;
+    line-height:19px;
+}
+.green-icon-part .right-part p{
+    color: #6e6e6e;
+    font: normal .24rem/.4rem 'Microsoft Yahei';
+    margin-bottom:.2rem;
+}
+.right-part p .title-txt{
+    width:.84rem;
+}
+.right-part p .title-real{
+    width:4.67rem;
+}
+.right-part p .title-txt-f{
+    display: inline-block;
+    width: 1.28rem;
+}
+.except-tit{
+    width: 4.25rem;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+/* 绿色原点部分e */
+
+/* 常用字号颜色s */
+.font-18{ font: normal .18rem/.18rem 'Microsoft Yahei';}
+.font-20{ font: normal .2rem/.2rem 'Microsoft Yahei';}
+.font-22{ font: normal .22rem/.22rem 'Microsoft Yahei';}
+.font-24{ font: normal .24rem/.24rem 'Microsoft Yahei';}
+.font-26{ font: normal .26rem/.26rem 'Microsoft Yahei';}
+.font-30{ font: normal .30rem/.30rem 'Microsoft Yahei';}
+.font-32{ font: normal .32rem/.32rem 'Microsoft Yahei';}
+
+.colo-000{ color: #000;}
+.colo-fff{ color: #fff;}
+.colo-6e{ color: #6e6e6e;}
+.colo-a0{ color: #a0a0a0;}
+.colo-40464c{ color: #40464c;}
+.colo-75787c{ color: #75787c;}
+/* 常用字号颜色e */
+
+.margt-3{ margin-top: .3rem;}
+.margt-17{ margin-top: .17rem;}
+.margt-24{ margin-top: .24rem;}
+
+.margb-58{ margin-bottom: .58rem;}
+.margb-28{ margin-bottom: .28rem;}
+.margb-10{margin-bottom: .1rem;}
+
+/*未知情况*/
+.unkown-p{
+    margin-top:.5rem;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    line-height: 21px;
+    font-size: 0.25rem;
+    color: rgba(152, 150, 150, 0.78);
+}
+.unkown-img{
+    display: block;
+    width:2.6rem;
+    height: 2.35rem;
+    margin: .5rem auto;
+}
+

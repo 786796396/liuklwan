@@ -1,0 +1,17 @@
+
+$blue : #1875e7;
+$font-nav: 20px;
+$font18:18px;
+
+h4{
+  font-size: $font-nav;
+}
+h3{
+  font-size: $font18;
+  a{
+    color: $blue;
+  }
+}
+div{
+  color : $blue;
+}

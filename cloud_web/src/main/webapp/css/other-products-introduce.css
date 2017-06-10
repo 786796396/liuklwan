@@ -1,0 +1,127 @@
+.other-products-part {
+  padding-top: 110px;
+  width: 100%; }
+  .other-products-part .page-footer {
+    margin: 20px 130px 20px 130px; }
+  .other-products-part .com-btns {
+    position: relative;
+    width: 180px;
+    height: 48px;
+    border-radius: 4px;
+    margin: 60px auto 0;
+    cursor: pointer; }
+    .other-products-part .com-btns i.publi-ico_2 {
+      position: absolute;
+      top: 12px;
+      left: 30px; }
+    .other-products-part .com-btns span {
+      display: inline-block;
+      padding-left: 77px;
+      color: #fff;
+      font: normal 16px/48px 'Microsoft Yahei'; }
+  .other-products-part .apply-btn {
+    background: #ed5565; }
+  .other-products-part .login-use {
+    background: #50b14a; }
+
+.other-products-content {
+  margin: 0 130px 0 130px;
+  border: 1px solid #e7eaec;
+  border-top: 3px solid #e7eaec;
+  background: #fff; }
+  .other-products-content .other-products-block {
+    margin: 50px 60px 60px 60px; }
+
+.main-title {
+  height: 51px;
+  padding: 0 17px;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box; }
+  .main-title h4 {
+    color: #34495e;
+    font: normal 18px/50px 'Microsoft Yahei'; }
+
+.other-products-block .span3 {
+  height: 250px;
+  padding-top: 27px;
+  margin-bottom: 13px;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  cursor: all-scroll; 
+  transition: all 2s ease;}
+.other-products-block .span3.active {
+  border: 1px solid #72d5f7;
+  background: #e1f1ff; 
+  }
+.other-products-block h5 {
+  margin: 22px auto 10px;
+  color: #000;
+  text-align: center;
+  font: normal 14px/14px 'Microsoft Yahei'; }
+.other-products-block p {
+  padding: 0 10px;
+  color: #8d8d8d;
+  font: normal 14px/26px 'Microsoft Yahei'; }
+.other-products-block i.op-ico {
+  display: block;
+  position: relative;
+  left: 50%;
+  margin-left: -36px; }
+
+/*cloud security s*/
+.safeM-content {
+  padding: 20px 50px 50px 50px;
+  background: #fff; }
+
+.topline-54d469 {
+  position: relative;
+  z-index: 11;
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #54d469; }
+
+.h4-tit {
+  font: normal 23px 'Microsoft Yahei';
+  color: #34495e;
+  padding: 23px 0;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 0; }
+
+.item-box .each-item {
+  width: 17%;
+  height: 307px;
+  border: 1px solid #fff;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer; }
+
+.each-item.active {
+  border: 1px solid #72d5f7;
+  background: #e1f1ff; }
+
+.item-box .spe-item {
+  margin-right: 3.75%; }
+
+.each-item i {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  margin: 36px 0 30px 0;
+  vertical-align: middle; }
+
+.each-item h5 {
+  font: normal 15px/15px 'Microsoft Yahei';
+  margin-bottom: 16px;
+  color: #000; }
+
+.each-item p {
+  width: 154px;
+  margin: 0 auto;
+  font: normal 14px/27px 'Microsoft Yahei';
+  color: #969696;
+  text-align: left; }
+
+/*cloud security e*/
+
+/*# sourceMappingURL=other-products-introduce.css.map */

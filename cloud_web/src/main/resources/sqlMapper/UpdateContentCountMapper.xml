@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.UpdateContentCountDao">
+
+	<resultMap type="com.ucap.cloud_web.entity.UpdateContentCount" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				and site_code = #{siteCode}
+			</if>
+			<if test="type !=null">
+				and type=#{type}
+			</if>
+			<if test="updateNum !=null">
+				and update_num=#{updateNum}
+			</if>
+			<if test="scanDate !=null">
+				and scan_date=#{scanDate}
+			</if>
+			<if test="beginScanDate !=null and endScanDate !=null">
+				and scan_date BETWEEN #{beginScanDate} AND #{endScanDate}
+			</if>
+			<if test="ids != null">
+                 and site_code in
+                <foreach collection="ids" item="term" open="(" separator="," close=")">
+                           #{term.siteCode}
+                </foreach>
+            </if>
+            <if test="linkList != null">
+                 and site_code in
+                <foreach collection="linkList" item="term" open="(" separator="," close=")">
+                           #{term}
+                </foreach>
+            </if>
+		</where>
+	</sql>
+	<sql id="whereCondition">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				and site_code =#{siteCode}  
+				and scan_date BETWEEN DATE_SUB(NOW(),INTERVAL 12 MONTH) AND NOW()
+			</if>
+			<if test="type !=null">
+				and type=#{type}
+			</if>
+		</where>
+	</sql>
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.UpdateContentCount" useGeneratedKeys="true" keyProperty="id">
+		insert into update_content_count ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="type != null ">type,</if>
+			<if test="updateNum != null ">update_num,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="type != null ">#{type},</if>
+			<if test="updateNum != null ">#{updateNum},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.UpdateContentCount">
+		select * from update_content_count where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.UpdateContentCount">
+		update update_content_count 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="type != null ">type = #{type},</if>
+				<if test="updateNum != null ">update_num = #{updateNum},</if>
+				<if test="scanDate != null ">scan_date = #{scanDate},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from update_content_count where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from update_content_count
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		<if test="groupBy != null">
+			select count(*)	from (select count(*) from update_content_count
+			<include refid="where" />
+			group by ${groupBy}
+			)a
+		</if>
+		<if test="groupBy == null">
+			select count(*) from update_content_count
+			<include refid="where" />
+		</if>
+	</select>
+	
+	<select id="queryByMap" parameterType="HashMap" resultMap="resultMap">
+		SELECT SUM(update_num) AS update_num, SUBSTRING(scan_date,1,7) AS scan_date FROM update_content_count 
+		<include refid="whereCondition" />
+		GROUP BY SUBSTRING(scan_date,1,7)
+	</select>
+	<select id="queryCountLine" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+		SELECT 
+		  scan_date,
+		  SUM(
+		    CASE
+		      WHEN TYPE = 0 
+		      THEN update_num 
+		      ELSE 0 
+		    END
+		  ) AS homeNum,
+		  SUM(
+		    CASE
+		      WHEN TYPE = 1 
+		      THEN update_num 
+		      ELSE 0 
+		    END
+		  ) AS channelNum 
+		FROM
+		  update_content_count 
+		<include refid="where" />
+		group by scan_date
+	</select>
+	<select id="queryCountAnalyzeLine" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.UpdateContentCount">
+		select scan_date,SUM(update_num) as update_num
+		from update_content_count 
+		<include refid="where" />
+		group by scan_date
+	</select>
+	<select id="querySumOrg" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+		<if test="isShi!=null">
+			<if test="isShi=='shi'">
+				select c.site_code as siteCode,d.scan_date,
+				sum((case when c.type  = '1' then d.update_num else 0 end)) as shiPortals,
+				sum((case when c.type  = '2' then d.update_num else 0 end)) as shiDepartment,
+				sum((case when c.type  = '3' or c.dic_site_id  = '6' then d.update_num else 0 end)) as xian
+			</if>
+			<if test="isShi=='xian'">
+				select c.site_code as siteCode,d.scan_date,
+				sum((case when c.type  = '2' then d.update_num else 0 end)) as xianDepartment,
+				sum((case when c.type  = '1' then d.update_num else 0 end)) as xian
+			</if>
+		</if>
+		<if test="isShi==null">
+			select c.site_code as siteCode,d.scan_date,sum(d.update_num) as shengDepartment,
+			sum((case when c.type  = '1' then d.update_num else 0 end)) as shengPortals,
+			sum((case when c.type  = '2' then d.update_num else 0 end)) as shiGovernment,
+			sum((case when c.type  = '3' then d.update_num else 0 end)) as xian
+		</if>
+		FROM
+		  contract_info a,
+		  database_link c,
+		  update_content_count d,
+		  dic_channel e 
+		WHERE a.site_code=c.org_site_code
+		AND c.site_code=d.site_code
+		<if test="type!=null">
+			and d.type = #{type}
+		</if>
+		<if test="siteCode!=null">
+		and a.customer_code = #{siteCode}
+		</if>
+		<if test="scanDate!=null">
+			and d.scan_date = #{scanDate}
+		</if>
+		and c.link_status=1
+		group by d.scan_date;
+	</select>
+	<select id="queryChannelName" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+			select d.scan_date as scanDate,e.channel_name as channelName,
+		<if test="isShi!=null">
+			<if test="isShi=='shi'">
+				sum((case when c.type  = '1' then d.update_num else 0 end)) as shiPortals,
+				sum((case when c.type  = '2' then d.update_num else 0 end)) as shiDepartment,
+				sum((case when c.type  = '3' or c.dic_site_id  = '6' then d.update_num else 0 end)) as xian
+			</if>
+			<if test="isShi=='xian'">
+				sum((case when c.type  = '2' then d.update_num else 0 end)) as xianDepartment,
+			</if>
+		</if>
+		<if test="isShi==null">
+			sum((case when c.type  = '1' then d.update_num else 0 end)) as shengDepartment,
+			sum((case when c.type  = '2' then d.update_num else 0 end)) as shengPortals,
+			sum((case when c.type  = '3' then d.update_num else 0 end)) as shiGovernment,
+		</if>
+		FROM
+		  contract_info a,
+		  database_link c,
+		  update_channel_info d,
+		  dic_channel e 
+		WHERE a.site_code=c.org_site_code
+		AND c.site_code=d.site_code
+		
+		<if test="siteCode!=null">
+			and a.site_code =  #{siteCode} 
+		</if>
+		<if test="scanDate!=null">
+			and d.scan_date = #{scanDate}
+		</if>
+		and c.link_status=1
+		group by e.channel_name
+	</select>
+	
+	
+	<select id="querySumByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+		SELECT 
+		  ucc.site_code AS siteCode,
+		  ucc.update_num AS updateNum,
+		  di.name AS siteName,
+		  di.url AS homePageUrl,
+		  di.jump_url AS jumpPageUrl,
+		  di.isorganizational as isorganizational,
+		  di.director as director
+		FROM
+		  update_content_count ucc,
+		  database_info di 
+		WHERE ucc.site_code =di.site_code 
+		<if test="scanDate!=null">
+			and ucc.scan_date = #{scanDate}
+		</if>
+		<if test="ids != null">
+			and ucc.site_code in
+            <foreach collection="ids" item="term" open="(" separator="," close=")">
+       			#{term.siteCode}
+			</foreach>
+		</if>
+		<if test="type !=null">
+			AND ucc.type=#{type}
+		</if>
+		order by ucc.update_num DESC
+	</select>
+	
+	<!--  -->
+	<select id="queryNotUpdateByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+	
+	  SELECT count(*) as total,
+	       site_code as siteCode
+	  FROM update_content_count
+	  
+	  <include refid="where"></include>
+  	  group by site_code
+	  HAVING total= 5
+	</select>
+	
+	<select id="queryUpdateConByMap" parameterType="HashMap" resultType="int">
+		SELECT 
+		  IFNULL(SUM(update_num), 0) AS updateNum 
+		FROM
+		  update_content_count ucc
+		WHERE 1=1
+		<if test="scanDate !=null">
+			AND ucc.scan_date = #{scanDate}
+		</if>
+		<if test="dataLinkList !=null">
+			AND ucc.site_code IN
+				<foreach collection="dataLinkList" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+		</if>
+	</select>
+	
+	
+	<select id="getUpdateHomeList" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+		SELECT
+			a.site_code,
+			a. NAME AS siteName,
+			a.url AS homePageUrl,
+			a.jump_url AS jumpPageUrl,
+			IFNULL(SUM(uc.update_num), 0) update_num
+		FROM
+			database_info a,
+			update_content_count uc,
+			database_tree_info dti
+		WHERE
+			uc.site_code = dti.site_code
+		AND a.site_code = dti.site_code
+		<if test="orgSiteCode != null">
+			and dti.org_site_code= #{orgSiteCode}
+		</if>
+		<if test="isLink != null">
+			and dti.is_link = #{isLink}
+		</if>
+		<if test="siteType != null">
+			and dti.layer_type = #{siteType}
+		</if>
+		<if test="startDate != null and endDate != null">
+			and (uc.scan_date between #{startDate} and #{endDate})
+		</if>
+		<if test="scanDate !=null">
+			and uc.scan_date=#{scanDate}
+		</if>
+		<if test="type !=null">
+			AND uc.type=#{type}
+		</if>
+		<if test="isExp != null">
+			and a.isexp = #{isExp}
+		</if>
+		<if test="updateNum !=null">
+			AND uc.update_num >0
+		</if>
+		GROUP BY
+			uc.site_code
+		ORDER BY
+			uc.update_num DESC
+		<if test="begin !=null and end !=null">
+			limit #{begin},#{end}
+		</if>
+	</select>
+	
+	<select id="queryTotalByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.UpdateContentCountRequest">
+		SELECT 
+		  ucc.update_num homeNum,ucc.site_code siteCode,di.name AS siteName
+		FROM
+		  update_content_count ucc 
+		  LEFT JOIN database_info di 
+		    ON ucc.site_code = di.site_code 
+		    WHERE 1=1
+		    <if test="type !=null">
+		    	AND ucc.type=#{type}
+		    </if>
+		    <if test="scanDate !=null">
+		    	AND ucc.scan_date=#{scanDate}
+		    </if>
+		    <if test="siteCodeList !=null">
+		    	AND  ucc.site_code IN
+	            <foreach collection="siteCodeList" item="term" open="(" separator="," close=")">
+	                   #{term}
+	            </foreach>
+		    </if>
+		    <if test="updateNum !=null">
+		    	AND ucc.update_num > 0
+		    </if>
+		order by ucc.update_num desc
+		<if test="begin !=null and end !=null">
+			limit #{begin},#{end}
+		</if>
+	</select>
+	<select id="queryTotalByMapCount" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*) FROM (
+			SELECT 
+			  ucc.update_num homeNum,ucc.site_code siteCode,di.name AS siteName
+			FROM
+			  update_content_count ucc 
+			  LEFT JOIN database_info di 
+			    ON ucc.site_code = di.site_code 
+			    WHERE 1=1
+			    <if test="type !=null">
+			    	AND ucc.type=#{type}
+			    </if>
+			    <if test="scanDate !=null">
+			    	AND ucc.scan_date=#{scanDate}
+			    </if>
+
+			    <if test="siteCodeList !=null">
+			    	AND  ucc.site_code IN
+		            <foreach collection="siteCodeList" item="term" open="(" separator="," close=")">
+		                   #{term}
+		            </foreach>
+			    </if>
+			    <if test="updateNum !=null">
+		    		AND ucc.update_num > 0
+		       </if>
+			order by ucc.update_num desc
+		)AS a
+	</select>
+	
+	<select id="getUpdateHomeListCount" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*) FROM (
+			SELECT
+				a.site_code,
+				a. NAME AS siteName,
+				a.url AS homePageUrl,
+				a.jump_url AS jumpPageUrl,
+				IFNULL(SUM(uc.update_num), 0) update_num
+			FROM
+				database_info a,
+				update_content_count uc,
+				database_tree_info dti
+			WHERE
+				uc.site_code = dti.site_code
+			AND a.site_code = dti.site_code
+			<if test="orgSiteCode != null">
+				and dti.org_site_code= #{orgSiteCode}
+			</if>
+			<if test="isLink != null">
+				and dti.is_link = #{isLink}
+			</if>
+			<if test="siteType != null">
+				and dti.layer_type = #{siteType}
+			</if>
+			<if test="startDate != null and endDate != null">
+				and (uc.scan_date between #{startDate} and #{endDate})
+			</if>
+			<if test="scanDate !=null">
+				and uc.scan_date=#{scanDate}
+			</if>
+			<if test="type !=null">
+				AND uc.type=#{type}
+			</if>
+			<if test="isExp != null">
+				and a.isexp = #{isExp}
+			</if>
+			<if test="updateNum !=null">
+				AND uc.update_num >0
+			</if>
+			GROUP BY
+				uc.site_code
+			ORDER BY
+				uc.update_num DESC
+			) as a
+	</select>
+</mapper>

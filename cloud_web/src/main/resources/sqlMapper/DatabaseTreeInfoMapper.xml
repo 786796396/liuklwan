@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.DatabaseTreeInfoDao">
+
+	 <cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/> 
+
+	<resultMap type="com.ucap.cloud_web.entity.DatabaseTreeInfo" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="id != null">
+				and id=#{id}
+			</if>	
+			<if test="parentId != null">
+				and parent_id=#{parentId}
+			</if>		
+			<if test="isOrg != null">
+				and length(site_code)=6
+			</if>
+			<if test="isBm !=null">
+				and is_bm=#{isBm}
+			</if>
+			
+			
+			
+			<!-- 新表字段 -->
+			<if test="isBigdata != null">
+				and is_bigdata=#{isBigdata}
+			</if>
+			<if test="isLink != null">
+				and is_link=#{isLink}
+			</if>
+			<if test="layerType != null">
+				and layer_type=#{layerType}
+			</if>
+			<if test="siteCode != null">
+				and site_code=#{siteCode}
+			</if>
+			<if test="orgSiteCode != null">
+				and org_site_code=#{orgSiteCode}
+			</if>
+			<if test="dependType != null">
+				and depend_type=#{dependType}
+			</if>
+			<if test="siteCodeLength != null ">
+			    and length(site_code)=#{siteCodeLength}
+			</if>
+			<if test="exclusiveCode !=null">
+				and exclusive_code=#{exclusiveCode}
+			</if>
+			<if test="typeIn != null">
+				and layer_type in (${typeIn})		
+			</if>
+			<if test="layerTypeArr !=null ">
+				and layer_type in
+            	<foreach collection="layerTypeArr" item="term" index="index" open="(" separator="," close=")">
+       				#{term}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.DatabaseTreeInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into database_tree_info ( 
+			<if test="id != null ">id,</if>
+			<if test="parentId != null ">parent_id,</if>
+			<if test="orgSiteCode != null ">org_site_code,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="level != null ">level,</if>
+			<if test="code != null ">code,</if>
+			<if test="isBm != null ">is_bm,</if>
+			<if test="dependType != null ">depend_type,</if>
+			<if test="layerType != null ">layer_type,</if>
+			<if test="isBigdata != null ">is_bigdata,</if>
+			<if test="isLink != null ">is_link,</if>
+			<if test="isExclusive != null ">is_exclusive,</if>
+			<if test="exclusiveCode != null ">exclusive_code,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="parentId != null ">#{parentId},</if>
+			<if test="orgSiteCode != null ">#{orgSiteCode},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="level != null ">#{level},</if>
+			<if test="code != null ">#{code},</if>
+			<if test="isBm != null ">#{isBm},</if>
+			<if test="dependType != null ">#{dependType},</if>
+			<if test="layerType != null ">#{layerType},</if>
+			<if test="isBigdata != null ">#{isBigdata},</if>
+			<if test="isLink != null ">#{isLink},</if>
+			<if test="isExclusive != null ">#{isExclusive},</if>
+			<if test="exclusiveCode != null ">#{exclusiveCode},</if>
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		select * from database_tree_info where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		update database_tree_info 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="parentId != null ">parent_id = #{parentId},</if>
+				<if test="orgSiteCode != null ">org_site_code = #{orgSiteCode},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="level != null ">level = #{level},</if>
+				<if test="code != null ">code = #{code},</if>
+				<if test="isBm != null ">is_bm = #{isBm},</if>
+				<if test="dependType != null ">depend_type = #{dependType},</if>
+				<if test="layerType != null ">layer_type = #{layerType},</if>
+				<if test="isBigdata != null ">is_bigdata = #{isBigdata},</if>
+				<if test="isLink != null ">is_link = #{isLink},</if>
+				<if test="isExclusive != null ">is_exclusive = #{isExclusive},</if>
+				<if test="exclusiveCode != null ">exclusive_code = #{exclusiveCode},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from database_tree_info where id = #{id}
+	</delete>
+	
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from database_tree_info
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from database_tree_info
+		<include refid="where" />
+	</select>
+	
+	<!-- 查询 组织单位/组织下的填报单位 -->
+	<select id="getDatabaseTreeInfoList" parameterType="com.ucap.cloud_web.dto.DatabaseTreeInfoRequest" resultMap="resultMap">
+		select a.*,
+		(CASE WHEN LENGTH(a.site_code)>6 THEN b.`name` WHEN LENGTH(a.site_code)=6 THEN c.`name` ELSE '' END) as name,
+		(CASE WHEN LENGTH(a.site_code)>6 THEN b.isexp ELSE 1 END) as isexp, 
+		(CASE WHEN LENGTH(a.site_code)>6 THEN b.isorganizational ELSE 0 END) as isorganizational
+		from database_info b
+		RIGHT JOIN database_tree_info a ON b.site_code = a.site_code 
+		LEFT JOIN database_org_info c ON a.site_code = c.site_code
+		where 1 = 1
+		<if test="isLink != null">
+			and a.is_link=#{isLink}
+		</if>
+		<if test="layerType != null">
+			and a.layer_type=#{layerType}
+		</if>
+		<if test="orgSiteCode != null">
+			and a.org_site_code=#{orgSiteCode}
+		</if>
+		<if test="dependType != null">
+			and a.depend_type=#{dependType}
+		</if>
+		<if test="isexp !=null">
+			and b.isexp=#{isexp}
+		</if>
+		<if test="isorganizational != null">
+			and b.isorganizational=#{isorganizational}
+		</if>
+		<if test="exclusiveCode !=null">
+			and a.exclusive_code=#{exclusiveCode}
+		</if>
+		<if test="isBigdata != null">
+			and a.is_bigdata=#{isBigdata}
+		</if>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+	</select>
+
+	<select id="queryTree" parameterType="com.ucap.cloud_web.dto.DatabaseTreeInfoRequest" resultType="com.ucap.cloud_web.constant.TreeVo">
+		 SELECT t.parent_id pId, 
+		t.id,
+		(CASE WHEN LENGTH(t.site_code)>6 THEN d.name WHEN LENGTH(t.site_code)=6 THEN c.name ELSE '' END) AS NAME,
+		 CASE WHEN d.isorganizational=1 THEN '1' ELSE NULL END AS TYPE, 
+		 CASE WHEN d.isorganizational=1 THEN 'ico_new1 'ELSE NULL END AS iconSkin,
+		 d.isexp,
+		IF(LENGTH(t.site_code)=6 || t.parent_id=0,'true','false')AS isParent, 
+		<if test="id != null">
+				 IF(t.id=#{id},'true','false')AS OPEN,
+		</if>
+		t.site_code,t.level,t.is_bm 
+		FROM ( SELECT * FROM database_tree_info WHERE 1 = 1 
+		<if test="code !=null">
+			AND CODE LIKE CONCAT(#{code},'%')  
+		</if>	
+		AND is_bigdata = '1'
+		) t  
+		LEFT JOIN database_org_info c ON t.site_code = c.site_code
+		LEFT JOIN database_info d ON t.site_code = d.site_code 
+	</select>
+	
+	<select id="queryTreeBM" parameterType="com.ucap.cloud_web.dto.DatabaseTreeInfoRequest" resultType="com.ucap.cloud_web.constant.TreeVo">
+			SELECT KK.* 
+			FROM ( 
+				SELECT 
+				tr.parent_id pId, tr.id id,NULL AS isexp, s.name NAME, 
+				IF(LENGTH(tr.site_code)=6 || tr.parent_id=0,'true','false')AS isParent, 
+				IF(tr.parent_id=0,'true','false')AS OPEN, 
+				tr.site_code site_code, tr.level LEVEL, tr.is_bm is_bm, 
+				NULL AS TYPE, NULL AS iconSkin 
+				FROM database_tree_info tr 
+				LEFT JOIN database_org_info s 
+				ON tr.site_code = s.site_code 
+				WHERE 
+				<if test="parentId != null">
+				 	tr.id=#{parentId}
+			 	</if>
+				UNION ALL 
+				SELECT tt.parent_id pId, 
+				tt.id id, 
+				tt.isexp isexp,
+				tt.name NAME, 
+				IF(LENGTH(tt.site_code)=6 || tt.parent_id=0,'true','false')AS isParent,
+				IF(tt.parent_id=0,'true','false')AS OPEN,
+				tt.site_code site_code, tt.level LEVEL, 
+				tt.is_bm is_bm, 
+				CASE WHEN tt.isorganizational=1 THEN '1' ELSE NULL END AS TYPE, 
+				CASE WHEN tt.isorganizational=1 THEN 'ico_new1 'ELSE NULL END AS iconSkin 
+				FROM ( 
+					SELECT t.parent_id,t.id,d.isorganizational,d.name , 
+					d.isexp,t.site_code,t.level,t.is_bm 
+					FROM database_tree_info t LEFT JOIN database_info d ON t.site_code=d.site_code
+					WHERE   t.level='3' AND  d.isorganizational='1' AND d.isexp='1' AND t.is_bigdata='1'
+					UNION ALL
+					SELECT t.parent_id,t.id,d.isorganizational,d.name , 
+					d.isexp,t.site_code,t.level,t.is_bm 
+					FROM database_tree_info t LEFT JOIN database_info d ON t.site_code=d.site_code
+					WHERE 
+					<if test="parentId != null">
+						 t.parent_id=#{parentId} 
+			 		</if>
+					AND t.level='2' AND LENGTH(t.site_code)=10 AND t.is_bigdata='1'
+				) tt 
+			) KK 
+	</select>
+
+<!--下面是以前的sql -->
+
+
+	<select id="getDatas" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		select  z.name,z.oSiteCode siteCode,
+			SUM(IF (z.isexp = 3 , z.count , 0 ) ) as sumClose,
+		  	SUM(IF (z.isexp = 2 , z.count , 0 ) ) as sumException,
+			SUM(IF (z.isexp = 1 and z.isScan != 1 , z.count , 0 ) ) as sumNo,
+			SUM(IF (z.isexp = 1 and z.isScan = 1 , z.count , 0 ) ) as sumNormal,
+			SUM(z.count) as sumAll
+		from (
+			SELECT count(m.oSiteCode) count,m.name name ,m.oSiteCode oSiteCode,m.isexp isexp,m.isScan isScan
+			from (
+					SELECT t.siteCode oSiteCode ,t.name name,dd.site_code tSiteCode ,dd.isexp isexp, dd.is_scan isScan  
+					FROM (
+								select d.site_code siteCode,org.name name, dt.site_code dSiteCode from database_tree_info d 
+								join database_tree_info dt on d.parent_id = #{parentId}
+								join database_org_info org on d.site_code = org.site_code
+								where LENGTH(d.site_code) = 6 and dt.code like CONCAT(d.code,'%') and LENGTH(dt.site_code) = 10 
+												and dt.site_code not like 'N%' and dt.is_bigdata=1
+							) t join database_info dd on dd.site_code = t.dSiteCode
+					 ) m GROUP BY m.oSiteCode,m.isexp,m.isScan
+		)	z GROUP BY z.oSiteCode
+	</select>
+	
+	
+	<select id="getNativeDatas" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseInfo">
+		select d.*
+		from database_tree_info t join database_info d 
+		on t.site_code = d.site_code 
+		where  t.code like concat(#{code},'%')  
+			and t.site_code not like 'N%' 
+			  and t.is_bigdata=1
+		<if test="isexp != null ">
+			and d.isexp =#{isexp}
+		</if>
+		<if test="isScan == 1 ">
+			and  d.is_scan = 1
+		</if>
+		<if test="isScan == 2 ">
+			and  d.is_scan != 1
+		</if>
+		<if test="keyWord != null">
+			and ( d.site_code  like CONCAT('%',#{keyWord},'%')  or d.name  like CONCAT('%',#{keyWord},'%') )
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	
+	
+		<select id="getNativeDatasCount" parameterType="HashMap" resultType="int">
+			select count(d.id)
+			from database_tree_info t join database_info d 
+			on t.site_code = d.site_code 
+			where  t.code like concat(#{code},'%')  
+				and t.site_code not like 'N%' 
+				and t.is_bigdata=1
+			<if test="isexp != null ">
+				and d.isexp =#{isexp}
+			</if>
+			<if test="isScan == 1 ">
+				and  d.is_scan = 1
+			</if>
+			<if test="isScan == 2 ">
+				and  d.is_scan != 1
+			</if>
+			<if test="keyWord != null">
+			and ( d.site_code  like CONCAT('%',#{keyWord},'%')  or d.name  like CONCAT('%',#{keyWord},'%') )
+		</if>
+	</select>
+	
+		<select id="getNatives" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseInfo">
+		select d.*
+		from database_tree_info t 
+		join database_info d on t.site_code = d.site_code 
+		where  t.parent_id = #{parentId} and  t.is_bigdata=1
+		<if test="keyWord != null">
+			and ( d.site_code  like CONCAT('%',#{keyWord},'%')  or d.name  like CONCAT('%',#{keyWord},'%') 
+				<if test="isexp != null">
+					or d.isexp = #{isexp}
+				</if>
+			)
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+<!-- 查询bm0100的本级站点 -->
+<select id="queryBmLocalSites" parameterType="com.ucap.cloud_web.dto.DatabaseTreeInfoRequest" resultType="com.ucap.cloud_web.entity.DatabaseInfo">
+	SELECT * from (
+		(SELECT t.site_code,d.name from database_tree_info t left join database_info d on t.site_code=d.site_code
+		where   t.level='3' and  d.isorganizational='1' and d.isexp='1' and t.is_bigdata='1')
+		UNION ALL
+		(SELECT t.site_code,d.name from database_tree_info t left join database_info d on t.site_code=d.site_code
+		where t.parent_id=#{parentId} and t.level='2' and LENGTH(t.site_code)=10 and t.is_bigdata='1')
+	) dti
+</select>
+	
+	<!-- 大数据查询组织单位集合 -->
+	<select id="queryDatabaseInfoList" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseInfo">
+		select * from database_tree_info t
+		 join database_org_info org 
+		on org.site_code=t.site_code
+		<where>
+			<if test="isBigdata != null">
+				and t.is_bigdata=#{isBigdata}
+			</if>
+			<if test="parentId != null">
+				and t.parent_id=#{parentId}
+			</if>		
+			<if test="isOrg != null">
+				and length(t.site_code)=6
+			</if>
+			<if test="siteCode != null">
+				and t.site_code=#{siteCode}
+			</if>	
+			<if test="isBm !=null">
+				and t.is_bm=#{isBm}
+			</if>
+		
+			
+			<!-- 新表字段 -->
+			<if test="isLink != null">
+				and t.is_link=#{isLink}
+			</if>
+			<if test="layerType != null">
+				and t.layer_type=#{layerType}
+			</if>
+			<if test="orgSiteCode != null">
+				and t.org_site_code=#{orgSiteCode}
+			</if>
+			<if test="dependType != null">
+				and t.depend_type=#{dependType}
+			</if>
+			<if test="siteCodeLength != null ">
+			    and length(t.site_code)=#{siteCodeLength}
+			</if>
+		
+		</where>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<!-- 大数据查询填报单位集合 -->
+	<select id="querySiteDatabaseInfoList" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseInfo">
+		select dti.site_code siteCode,dti.id,dbi.* from database_tree_info dti
+		left join database_info dbi
+		on dbi.site_code=dti.site_code
+		<where>
+		<if test="isBigdata != null">
+			and dti.is_bigdata=#{isBigdata}
+		</if>
+		<if test="parentId != null">
+			and dti.parent_id=#{parentId}
+		</if>
+		<if test="isexp != null">
+			and dbi.isexp=#{isexp}
+		</if>
+		<if test="isorganizational != null">
+			and dbi.isorganizational=#{isorganizational}
+		</if>
+		<if test="siteCodeLength != null ">
+			and length(dti.site_code)=#{siteCodeLength}
+		</if>
+		<if test="codeLike != null ">
+			and code like concat(#{codeLike},'%')
+		</if>
+		<if test="level != null ">
+			and dti.level =#{level}
+		</if>
+		<if test="isScan !=null ">
+			and dbi.is_scan =#{isScan}
+		</if>
+		<if test="isBm !=null">
+			and dti.is_bm=#{isBm}
+		</if>
+		</where>
+	</select>
+	
+	<select id="getInfoStates" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		select  
+			SUM(IF (z.isexp = 3 , z.count , 0 ) ) as sumClose,
+		    SUM(IF (z.isexp = 2 , z.count , 0 ) ) as sumException,
+			SUM(IF (z.isexp = 1, z.count , 0 ) ) as sumNormal,
+			SUM(z.count) as sumAll
+		from (
+			select d.id id,d.isexp isexp,count(d.id) count from database_tree_info t join database_info d 
+		on t.site_code = d.site_code
+		where t.code like concat(#{code},'%')   and LENGTH(t.site_code) = 10  and t.site_code not like 'N%'
+		 and t.is_bigdata =1
+		 GROUP BY d.isexp )	z
+	</select>
+	
+	<select id="queryListJoinInfo" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		select t.*,d.name as name from database_tree_info t
+			join database_info d on t.site_code = d.site_code
+			where t.is_link = 1 
+			<if test="orgSiteCode != null">
+				and t.org_site_code =#{orgSiteCode}		
+			</if>
+			<if test="typeIn != null">
+				and t.layer_type in (${typeIn})		
+			</if>
+			<if test="type != null">
+				and t.layer_type = #{type}	
+			</if>
+			<if test="isexp != null">
+				and d.isexp =#{isexp}				
+			</if>
+			<if test="layerType !=null">
+				and t.layer_type = #{layerType}
+			</if>
+	</select>
+	
+	
+	<select id="queryListByTypeOrIsexp" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.DatabaseTreeInfoRequest">
+		SELECT 
+		<if test="isexp != null">
+				o.isexp isexp,count(o.id) id			
+		</if>
+		<if test="layerType != null">
+				dd.layer_type layerType ,count(dd.id) id
+		</if>
+		from database_tree_info dd 
+			join database_info o on o.site_code = dd.site_code
+			where dd.org_site_code = #{orgSiteCode} and LENGTH(dd.site_code) = 10 
+		
+		<if test="isLink != null">
+				AND dd.is_link = #{isLink}
+		</if>
+		
+		<if test="isexp != null">
+				and o.isexp != 1
+					GROUP BY o.isexp 			
+		</if>
+		<if test="layerType != null">
+				and o.isexp = 1
+					GROUP BY dd.layer_type 	
+		</if>
+
+	</select>
+		<select id="queryJoinContract" parameterType="HashMap" resultMap="resultMap">
+		  SELECT ti.*
+		  FROM database_tree_info ti
+		  JOIN contract_info c 
+		  ON ti.`org_site_code` = c.`site_code`
+		  WHERE  1=1
+		  <if test="siteCode !=null">
+		    AND ti.site_code = #{siteCode}
+		</if>
+		<if test="orgSiteCode !=null">
+			and ti.org_site_code=#{orgSiteCode}
+		</if>
+		  AND ti.layer_type IN (1,2,3,6)	
+		  AND c.execute_status = 1 
+		  AND (
+		    c.contract_code_spot IS NULL 
+		    OR c.contract_code_spot = ''
+		  );
+	</select>
+	
+	<select id="queryDownSite" parameterType="HashMap" resultType="java.lang.String">
+		SELECT 
+		  dti.site_code 
+		FROM
+		  database_tree_info dti 
+		  LEFT JOIN database_info di 
+		    ON dti.site_code = di.site_code 
+		WHERE 1=1
+		<if test="orgSiteCode !=null">
+			and dti.org_site_code =#{orgSiteCode} 
+		</if>
+		<if test="isScan !=null">
+			and di.is_scan =#{isScan}
+		</if>
+		<if test="notIsScan !=null">
+			and di.is_scan !=#{notIsScan}
+		</if>
+		  AND dti.layer_type IN (1, 2, 3, 6) 
+		  AND di.isexp = 1 
+		  AND dti.is_link=1
+	</select>
+	<select id="queryDownSiteInfo" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		SELECT 
+		  dti.* 
+		FROM
+		  database_tree_info dti 
+		  LEFT JOIN database_info di 
+		    ON dti.site_code = di.site_code 
+		WHERE 1=1
+		<if test="orgSiteCode !=null">
+			and dti.org_site_code =#{orgSiteCode} 
+		</if>
+		  AND dti.layer_type IN (1, 2, 3, 6) 
+		  AND di.isexp = 1 
+		  AND dti.is_link=1
+	</select>
+	
+	<select id="queryDownSite2" parameterType="HashMap" resultType="java.lang.String">
+		SELECT 
+		  dti.site_code
+		FROM
+		  database_tree_info dti 
+		  LEFT JOIN database_info di 
+		    ON dti.site_code = di.site_code 
+		WHERE 1=1
+		<if test="orgSiteCode !=null">
+			and dti.org_site_code =#{orgSiteCode} 
+		</if>
+		<if test="layerType !=null">
+			AND dti.layer_type =#{layerType}
+		</if>
+		<if test="isScan !=null">
+			AND di.is_scan = #{isScan}
+		</if>
+		 <if test="isexp !=null">
+		 	AND di.isexp = #{isexp}
+		 </if> 
+		 <if test="isLink !=null">
+		 	AND dti.is_link=#{isLink}
+		 </if>
+		  
+	</select>
+	
+	<select id="getSiteCodeLevel" parameterType="HashMap" resultType="int">
+		 select level from database_tree_info where 1 = 1 
+		 <if test="siteCode !=null">
+		 	AND site_code = #{siteCode}
+		 </if>
+		 <if test="isBigdata !=null">
+		 	AND is_bigdata = #{isBigdata}
+		 </if> 
+		 <if test="dependType !=null">
+		 	AND depend_type = #{dependType}
+		 </if> 
+	</select>
+	
+	
+	<select id="queryUpOrgSiteCode" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.DatabaseTreeInfo">
+		SELECT t4.code ,t4.level,CONCAT(IFNULL(t3.site_code,''),',',IFNULL(t2.site_code,''),',',IFNULL(t1.site_code,'')) site_code from database_tree_info t1 
+			right join database_tree_info t2  on t2.parent_id = t1.id  
+			right join database_tree_info t3  on t3.parent_id = t2.id  
+			right join database_tree_info t4  on t4.parent_id = t3.id  
+			where t4.site_code = #{siteCode}
+	</select>
+</mapper>

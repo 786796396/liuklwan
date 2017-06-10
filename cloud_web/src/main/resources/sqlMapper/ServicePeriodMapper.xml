@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.ServicePeriodDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.ServicePeriod" id="resultMap"/>
+
+	<sql id="whereRelation">
+	 <where>
+	     1=1
+		<if test="siteCode !=null">
+				 and s.site_code = #{siteCode}
+		</if>
+		<if test="siteCodeRTb !=null">
+				 and r.site_code = #{siteCodeRTb}
+		</if>
+		<if test="spotCheckScheduleId !=null">
+				and s.spot_check_schedule_id = #{spotCheckScheduleId}
+		</if>
+		<if test="status !=null ">
+				and s.status =#{status}
+		</if>
+		<if test="comboI !=null ">
+				and s.combo_id =#{comboI}
+		</if>
+		<if test="startDateTime !=null ">
+			 <![CDATA[ and s.start_date >= #{startDateTime}]]>  
+		</if>
+		<if test="statasArray !=null">
+				and s.status in
+				<foreach collection="statasArray" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+		</if>
+		<if test="contractInfoId !=null ">
+				and s.contract_info_id =#{contractInfoId}
+		</if>
+		</where>
+	</sql>
+	<sql id="where">
+		<where>
+			1=1
+			<if test="spotCheckScheduleId !=null">
+				and spot_check_schedule_id = #{spotCheckScheduleId}
+			</if>
+			<if test="id !=null">
+				and id=#{id}
+			</if>
+			<if test="contractInfoId != null">
+				and contract_info_id = ${contractInfoId}
+			</if>
+			<if test="nowTime !=null ">
+				and (#{nowTime} BETWEEN start_date and end_date)
+			</if>
+			<if test="status !=null ">
+				and status =#{status}
+			</if>
+			<if test="comboIdArr !=null">
+				and combo_id in 
+				<foreach collection="comboIdArr" item="item" open="(" separator="," close=")">
+				     #{item}
+				</foreach>
+			</if>
+			
+			<if test="statasArray !=null">
+				and status in
+				<foreach collection="statasArray" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			
+			<if test="list !=null">
+				and id in
+				<foreach collection="list" item="item" open="(" separator="," close=")">
+					#{item.servicePeriodId}
+				</foreach>
+			</if>
+			
+			<if test="contractList !=null">
+				and contract_info_id in
+				<foreach collection="contractList" item="item" open="(" separator="," close=")">
+					#{item.id}
+				</foreach>
+			</if>
+			
+			<if test="crmProductsList !=null">
+				and contract_info_id in
+				<foreach collection="crmProductsList" item="item" open="(" separator="," close=")">
+					#{item.id}
+				</foreach>
+			</if>
+			
+			<if test="servicePeriodNum !=null ">
+				 and service_period_num like '%${servicePeriodNum}%'
+			</if>
+			
+			<if test="beginTime !=null and endTime !=null">
+				and create_time  BETWEEN #{beginTime}  AND #{endTime}
+			</if>
+			<if test="periodStatus !=null">
+				 and status != #{periodStatus}
+			</if>
+			<if test="comboI !=null">
+				 and combo_id = #{comboI}
+			</if>
+			<if test="siteCode !=null">
+				 and site_code = #{siteCode}
+			</if>
+			
+		</where>
+	</sql>
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.ServicePeriod" useGeneratedKeys="true" keyProperty="id">
+		insert into service_period ( 
+			<if test="startDate != null ">start_date,</if>
+			<if test="endDate != null ">end_date,</if>
+			<if test="comboId != null ">combo_id,</if>
+			<if test="contractInfoId != null ">contract_info_id,</if>
+			<if test="spotCheckScheduleId != null ">spot_check_schedule_id,</if>
+			<if test="webCount != null ">web_count,</if>
+			<if test="status != null ">status,</if>
+			<if test="servicePeriodNum != null ">service_period_num,</if>
+			<if test="siteCode != null ">site_code,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="startDate != null ">#{startDate},</if>
+			<if test="endDate != null ">#{endDate},</if>
+			<if test="comboId != null ">#{comboId},</if>
+			<if test="contractInfoId != null ">#{contractInfoId},</if>
+			<if test="spotCheckScheduleId != null ">#{spotCheckScheduleId},</if>
+			<if test="webCount != null ">#{webCount},</if>
+			<if test="status != null ">#{status},</if>
+			<if test="servicePeriodNum != null ">#{servicePeriodNum},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.ServicePeriod">
+		select * from service_period where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.ServicePeriod">
+		update service_period 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="startDate != null ">start_date = #{startDate},</if>
+				<if test="endDate != null ">end_date = #{endDate},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+				<if test="comboId != null ">combo_id = #{comboId},</if>
+				<if test="contractInfoId != null ">contract_info_id = #{contractInfoId},</if>
+				<if test="spotCheckScheduleId != null ">spot_check_schedule_id = #{spotCheckScheduleId},</if>
+				<if test="webCount != null ">web_count = #{webCount},</if>
+				<if test="status != null ">status = #{status},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from service_period where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap" >
+		select * from service_period
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<!-- 查询周期-->
+	<select id="queryByRelationPeriod" parameterType="HashMap"  resultType="com.ucap.cloud_web.dto.ServicePeriodRequest" >
+			select distinct s.id as id,s.start_date as startDate,s.end_date as endDate from service_period s join relations_period r 
+			on s.id = r.service_period_id 
+		<include refid="whereRelation"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	
+	
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from service_period
+		<include refid="where" />
+	</select>
+	
+	<select id="queryByGroup" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ServicePeriodRequest">
+		SELECT 
+		  COUNT(id) AS periodNum,
+		  contract_info_id as contractInfoId
+		FROM
+		  service_period 
+		<include refid="where"/>
+		group by contract_info_id
+	</select>
+	
+	<select id="queryAdvanceService" parameterType="HashMap" resultMap="resultMap" >
+		SELECT 
+		  sp.* 
+		FROM
+		  contract_info ci 
+		  LEFT JOIN service_period sp 
+		    ON ci.id = sp.contract_info_id 
+		WHERE 1=1
+		<if test="siteCode !=null">
+			AND ci.site_code=#{siteCode}
+		</if>
+		<if test="executeStatus !=null">
+			AND ci.execute_status=#{executeStatus}
+		</if>
+		<if test="contractCodeSpot !=null">
+			AND (ci.contract_code_spot='' or ci.contract_code_spot is null)
+		</if>
+		<if test="comboId !=null">
+			AND sp.combo_id=#{comboId}
+		</if>
+		<if test="status !=null">
+			AND sp.status=#{status}
+		</if>
+		<if test="conList !=null">
+			AND ci.site_code in
+			<foreach collection="conList" item="item" open="(" separator="," close=")">
+					#{item.siteCode}
+			</foreach>
+		</if>
+		ORDER BY ci.create_time,sp.create_time DESC
+	</select>
+
+</mapper>
+

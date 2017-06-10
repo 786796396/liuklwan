@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.DatabaseOrgInfoDao">
+
+	<resultMap type="com.ucap.cloud_web.entity.DatabaseOrgInfo" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			
+			<if test="stieCode != null">
+				and site_code = #{stieCode}
+			</if>
+			<if test="vcode !=null">
+				and vcode = #{vcode}
+			</if>
+			<if test="siteCodeLike != null">
+				and site_code like '${siteCodeLike}%'
+			</if>
+			
+			<if test="endSiteCodeLike != null">
+				and site_code like '%${endSiteCodeLike}' 
+			</if>
+			<if test="noEqualsSiteCode != null">
+				and site_code != #{noEqualsSiteCode}
+			</if>
+			<if test="guideState != null">
+				and guide_state != #{guideState}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.DatabaseOrgInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into database_org_info ( 
+			<if test="id != null ">id,</if>
+			<if test="name != null ">name,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="vcode != null ">vcode,</if>
+			<if test="vcode2 != null ">vcode2,</if>
+			<if test="linkmanEmail !=null ">linkman_email,</if>
+			<if test="guideState !=null ">guide_state,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="name != null ">#{name},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="vcode != null ">#{vcode},</if>
+			<if test="vcode2 != null ">#{vcode2},</if>
+			<if test="linkmanEmail != null ">#{linkmanEmail},</if>
+			<if test="guideState != null ">#{guideState},</if>
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.DatabaseOrgInfo">
+		select * from database_org_info where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.DatabaseOrgInfo">
+		update database_org_info 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="name != null ">name = #{name},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="vcode != null ">vcode = #{vcode},</if>
+				<if test="vcode2 != null ">vcode2 = #{vcode2},</if>
+				<if test="linkmanEmail != null ">linkman_email = #{linkmanEmail},</if>
+				<if test="principalName != null ">principal_name = #{principalName},</if>
+				<if test="principalEmail != null ">principal_email = #{principalEmail},</if>
+				<if test="principalPhone != null ">principal_phone = #{principalPhone},</if>
+				<if test="linkmanName != null ">linkman_name = #{linkmanName},</if>
+				<if test="linkmanEmail != null ">linkman_email = #{linkmanEmail},</if>
+				<if test="linkmanPhone != null ">linkman_phone = #{linkmanPhone},</if>
+				<if test="linkmanName != null ">linkman_name_two = #{linkmanNametwo},</if>
+				<if test="linkmanEmail != null ">linkman_email_two = #{linkmanEmailtwo},</if>
+				<if test="linkmanPhone != null ">linkman_phone_two = #{linkmanPhonetwo},</if>			
+				<if test="linkmanName != null ">linkman_name_three = #{linkmanNamethree},</if>
+				<if test="linkmanEmail != null ">linkman_email_three = #{linkmanEmailthree},</if>
+				<if test="linkmanPhone != null ">linkman_phone_three = #{linkmanPhonethree},</if>	
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="guideState != null ">guide_state = #{guideState},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from database_org_info where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from database_org_info
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from database_org_info
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

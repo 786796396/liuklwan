@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.ContractInfoDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.ContractInfo" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="isSearchTb !=null">
+				and is_search_tb =#{isSearchTb}
+			</if>
+			<if test="orgFlag !=null">
+				and length(site_code)=6
+			</if>
+			<if test="tbFlag !=null">
+				and length(site_code)=10
+			</if>
+			<if test="typeFlag !=null and typeFlag==1">
+				and (contract_code_spot is null or contract_code_spot='') 
+			</if>
+			<if test="customerInfoId != null">
+				and customer_info_id = ${customerInfoId}
+			</if>
+			<if test="siteCode !=null">
+				and site_code =#{siteCode}
+			</if>
+			<if test="nowTime != null">
+				and #{nowTime} BETWEEN contract_begin_time and contract_end_time
+			</if>
+			<if test="idsOrgSiteCode != null">
+			 	and site_code in
+            	<foreach collection="idsOrgSiteCode" item="term" index="index" open="(" separator="," close=")">
+       					#{term.orgSiteCode}
+				</foreach>
+			</if>
+			<if test="contractCodeSpot !=null">
+				and contract_code_spot= #{contractCodeSpot}
+			</if>
+			<if test="contractCodeSpotLike !=null">
+				and contract_code_spot like '%' #{contractCodeSpotLike}
+			</if>
+			<if test="executeStatus !=null">
+				and execute_status =#{executeStatus}
+			</if>
+			<if test="executeStatusArr !=null ">
+				and execute_status in
+            	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+       				#{term}
+				</foreach>
+			</if>
+			<if test="databaseTreeList !=null">
+				and site_code in 
+				<foreach collection="databaseTreeList" item="item" open="(" separator="," close=")">
+					#{item.orgSiteCode}
+				</foreach>
+			</if>
+			
+			<if test="siteCodeLike !=null">
+				and site_code like '${siteCodeLike}%'
+			</if>
+			<if test="siteCodeStr !=null">
+				and site_code in ${siteCodeStr}
+			</if>
+			
+			<if test="startDate !=null">
+				<if test="endDate !=null">
+					and contract_begin_time BETWEEN #{startDate} AND #{endDate}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.ContractInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into contract_info ( 
+			<if test="id != null ">id,</if>
+			<if test="customerInfoId != null ">customer_info_id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="customerName !=null">customer_name</if>
+			<if test="contractCode != null ">contract_code,</if>
+			<if test="contractCodeTemp != null ">contract_code_temp,</if>
+			<if test="contractCodeSpot != null ">contract_code_spot,</if>
+			<if test="contractName != null ">contract_name,</if>
+			<if test="checkCount != null ">check_count,</if>
+			<if test="completeCount != null ">complete_count,</if>
+			<if test="sellName != null ">sell_name,</if>
+			<if test="contractBeginTime != null ">contract_begin_time,</if>
+			<if test="contractEndTime != null ">contract_end_time,</if>
+			<if test="executeStatus != null ">execute_status,</if>
+			<if test="isCorrect != null ">is_correct,</if>
+			<if test="isSearchTb != null ">is_search_tb,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="customerInfoId != null ">#{customerInfoId},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="customerName !=null">#{customerName}</if>
+			<if test="contractCode != null ">#{contractCode},</if>
+			<if test="contractCodeTemp != null ">#{contractCodeTemp},</if>
+			<if test="contractCodeSpot != null ">#{contractCodeSpot},</if>
+			<if test="contractName != null ">#{contractName},</if>
+			<if test="checkCount != null ">#{checkCount},</if>
+			<if test="completeCount != null ">#{completeCount},</if>
+			<if test="sellName != null ">#{sellName},</if>
+			<if test="contractBeginTime != null ">#{contractBeginTime},</if>
+			<if test="contractEndTime != null ">#{contractEndTime},</if>
+			<if test="executeStatus != null ">#{executeStatus},</if>
+			<if test="isCorrect != null ">#{isCorrect},</if>
+			<if test="isSearchTb != null ">#{isSearchTb},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.ContractInfo">
+		select * from contract_info where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.ContractInfo">
+		update contract_info 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="customerInfoId != null ">customer_info_id = #{customerInfoId},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="customerName !=null">customer_name=#{customerName}</if>
+				<if test="contractCode != null ">contract_code = #{contractCode},</if>
+				<if test="contractCodeTemp != null ">contract_code_temp = #{contractCodeTemp},</if>
+				<if test="contractCodeSpot != null ">contract_code_spot = #{contractCodeSpot},</if>
+				<if test="contractName != null ">contract_name = #{contractName},</if>
+				<if test="checkCount != null ">check_count = #{checkCount},</if>
+				<if test="completeCount != null ">complete_count = #{completeCount},</if>
+				<if test="contractBeginTime != null ">contract_begin_time = #{contractBeginTime},</if>
+				<if test="contractEndTime != null ">contract_end_time = #{contractEndTime},</if>
+				<if test="sellName != null ">sell_name = #{sellName},</if>
+				<if test="executeStatus != null ">execute_status = #{executeStatus},</if>
+				<if test="isCorrect != null ">is_correct = #{isCorrect},</if>
+				<if test="isSearchTb != null ">is_search_tb = #{isSearchTb},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				modify_time = now()
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from contract_info where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from contract_info
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from contract_info
+		<include refid="where" />
+	</select>
+	
+	
+	<select id="queryContractByMap" parameterType="HashMap" resultMap="resultMap">
+		select * from contract_info
+		<include refid="where"/>
+		group by site_code
+	</select>
+	
+	<select id="queryListByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ContractInfoRequest">
+		SELECT 
+		  ci.site_code AS siteCode,
+		  sp.id AS servicePeriodId
+		FROM
+		  contract_info ci 
+		  LEFT JOIN service_period sp 
+		    ON ci.id = sp.contract_info_id 
+		WHERE 1 = 1 
+		<if test="servicePdId !=null" >
+			AND sp.id=#{servicePdId}
+		</if>
+		<if test="orgFlag !=null">
+			AND LENGTH(ci.site_code) = 6 
+		</if>
+		<if test="tbFlag !=null">
+			AND LENGTH(ci.site_code) = 10 
+		</if>
+		<if test="executeStatus !=null">
+			AND ci.execute_status = #{executeStatus}
+		</if>
+		<if test="typeFlag !=null and typeFlag == 1 ">
+			AND (ci.contract_code_spot is null or ci.contract_code_spot='') 
+	    </if>
+		 <if test="scanDate !=null">
+			AND DATE(#{scanDate})  BETWEEN sp.start_date AND sp.end_date 
+		</if>
+		  
+	</select>
+	
+	
+	<select id="queryByParentCon" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.ContractInfo">
+		select c.* from database_tree_info d 
+			join database_tree_info dd on d.parent_id = dd.id
+			join contract_info c on dd.site_code = c.site_code
+		where d.is_link = 1 and dd.is_link = 1
+			and d.site_code = #{siteCode}
+			<if test="isSearchTb !=null">
+				and c.is_search_tb =#{isSearchTb}
+			</if>
+			<if test="executeStatus !=null">
+				and c.execute_status =#{executeStatus}
+			</if>
+			<if test="typeFlag !=null and typeFlag==1">
+				and ( c.contract_code_spot is null or c.contract_code_spot='') 
+			</if>
+			<if test="executeStatusArr !=null ">
+				and c.execute_status in
+            	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+       				#{term}
+				</foreach>
+			</if>
+	</select>
+	
+	<select id="queryOrgContractBySite" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.ContractInfo">
+		SELECT 
+		  ci.* 
+		FROM
+		  contract_info ci 
+		  LEFT JOIN database_tree_info dti 
+		    ON ci.site_code = dti.org_site_code 
+		WHERE 1 = 1 
+		<if test="siteCode !=null">
+			AND dti.site_code = #{siteCode}
+		</if>
+		<if test="executeStatus !=null">
+		 	AND ci.execute_status = #{executeStatus}
+		</if>
+		<if test="isSearchTb !=null">
+		   AND ci.is_search_tb = #{isSearchTb}
+		</if>
+		<if test="typeFlag !=null">
+		   	AND (
+			    contract_code_spot IS NULL 
+			    OR contract_code_spot = ''
+			  )
+		 </if>
+		 order by create_time desc
+	</select>
+</mapper>

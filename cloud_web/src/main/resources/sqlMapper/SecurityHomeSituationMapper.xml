@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.SecurityHomeSituationDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.SecurityHomeSituation" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			<if test="siteCode != null ">
+				and site_code=#{siteCode}
+			</if>
+			<if test="scanDate != null">
+				and scan_date=#{scanDate}
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.SecurityHomeSituation" useGeneratedKeys="true" keyProperty="id">
+		insert into security_home_situation ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="servicePeriodId != null ">service_period_id,</if>
+			<if test="modifyDate != null ">modify_date,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			<if test="userId != null ">user_id,</if>
+			create_time,
+			modify_time,
+			<if test="delFlag != null ">del_flag,</if>
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="servicePeriodId != null ">#{servicePeriodId},</if>
+			<if test="modifyDate != null ">#{modifyDate},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			<if test="userId != null ">#{userId},</if>
+			now(),
+			now(),
+			<if test="delFlag != null ">#{delFlag},</if>
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.SecurityHomeSituation">
+		select * from security_home_situation where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.SecurityHomeSituation">
+		update security_home_situation 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="servicePeriodId != null ">service_period_id = #{servicePeriodId},</if>
+				<if test="modifyDate != null ">modify_date = #{modifyDate},</if>
+				<if test="scanDate != null ">scan_date = #{scanDate},</if>
+				<if test="userId != null ">user_id = #{userId},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+				<if test="delFlag != null ">del_flag = #{delFlag},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from security_home_situation where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from security_home_situation
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from security_home_situation
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.EarlyDetailTempDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.EarlyDetailTemp" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			
+			<if test="siteCode !=null">
+				and site_code=#{siteCode}
+			</if>
+			<if test="contractInfoId !=null">
+				and contract_info_id=#{contractInfoId}
+			</if>
+			<if test="type !=null">
+				and type=#{type}
+			</if>
+			<if test="sendStatus !=null">
+				and send_status=#{sendStatus}
+			</if>
+			<if test="notErrorCode !=null">
+				and error_code !=#{notErrorCode}	
+			</if>
+			<if test="scanDate !=null">
+				AND last_scan_time LIKE CONCAT(#{scanDate},'%')
+			</if>
+			
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.EarlyDetailTemp" useGeneratedKeys="true" keyProperty="id">
+		insert into early_detail_temp ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="contractInfoId != null ">contract_info_id,</if>
+			<if test="type != null ">type,</if>
+			<if test="scanTime != null ">scan_time,</if>
+			<if test="errorCode != null ">error_code,</if>
+			<if test="errorDescribe != null ">error_describe,</if>
+			<if test="url != null ">url,</if>
+			<if test="sendStatus != null ">send_status,</if>
+			<if test="orgTbStatus != null ">org_tb_status,</if>
+			<if test="queue != null ">queue,</if>
+			<if test="lastScanTime != null ">last_scan_time,</if>
+			create_time,
+			continued_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="contractInfoId != null ">#{contractInfoId},</if>
+			<if test="type != null ">#{type},</if>
+			<if test="scanTime != null ">#{scanTime},</if>
+			<if test="errorCode != null ">#{errorCode},</if>
+			<if test="errorDescribe != null ">#{errorDescribe},</if>
+			<if test="url != null ">#{url},</if>
+			<if test="sendStatus != null ">#{sendStatus},</if>
+			<if test="orgTbStatus != null ">#{orgTbStatus},</if>
+			<if test="queue != null ">#{queue},</if>
+			<if test="lastScanTime != null ">#{lastScanTime},</if>
+			now(),
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.EarlyDetailTemp">
+		select * from early_detail_temp where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.EarlyDetailTemp">
+		update early_detail_temp 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="contractInfoId != null ">contract_info_id = #{contractInfoId},</if>
+				<if test="type != null ">type = #{type},</if>
+				<if test="scanTime != null ">scan_time = #{scanTime},</if>
+				<if test="errorCode != null ">error_code = #{errorCode},</if>
+				<if test="errorDescribe != null ">error_describe = #{errorDescribe},</if>
+				<if test="url != null ">url = #{url},</if>
+				<if test="sendStatus != null ">send_status = #{sendStatus},</if>
+				<if test="orgTbStatus != null ">org_tb_status = #{orgTbStatus},</if>
+				<if test="queue != null ">queue = #{queue},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="continuedTime != null ">continued_time = #{continuedTime},</if>
+				<if test="lastScanTime != null ">last_scan_time=#{lastScanTime},</if>
+				modify_time = now()
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from early_detail_temp where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from early_detail_temp
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from early_detail_temp
+		<include refid="where" />
+	</select>
+	
+	<select id="querySiteEarlyInfo" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.EarlyDetailTemp">
+		SELECT 
+		  ed.*,
+		  di.email principalEmail,
+		  di.email_2 linkmanEmail,
+		  di.telephone principalPhone,
+		  di.telephone_2 linkmanPhone,
+		  
+		  di.linkman_phone_two ,
+		  di.linkman_email_two,
+		  di.linkman_phone_three,
+		  di.linkman_email_three,
+		  di.name siteCodeName
+		FROM early_detail_temp ed 
+		LEFT JOIN database_info di  ON ed.site_code = di.site_code 
+		WHERE 1=1
+			<if test="siteCode !=null">
+				and ed.site_code=#{siteCode}
+			</if>
+			<if test="type !=null">
+				and ed.type=#{type}
+			</if>
+			<if test="contractInfoId !=null">
+				and ed.contract_info_id=#{contractInfoId}
+			</if>
+			<if test="sendStatus !=null">
+				and ed.send_status=#{sendStatus}
+			</if>
+	</select>
+	
+	
+	<select id="queryEarlyTempByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.EarlyDetailTempRequest">
+		SELECT 
+		  di.site_code AS siteCode,
+		  di.name AS siteName,
+		  edt.last_scan_time AS lastScanTime 
+		FROM
+		  early_detail_temp edt,
+		  database_tree_info dti,
+		  database_info di 
+		WHERE edt.site_code = dti.site_code 
+		  AND dti.site_code = di.site_code 
+		  <if test="orgSiteCode !=null">
+		  		AND dti.org_site_code = #{orgSiteCode}
+		  </if>
+		  <if test="isLink !=null">
+		  		AND dti.is_link = #{isLink}
+		  </if>
+		  <if test="layerType !=null">
+		  		 AND dti.layer_type = #{layerType}
+		  </if>
+		 <if test="isexp !=null">
+		 		AND di.isexp = #{isexp}
+		 </if>
+		 <if test="type !=null">
+		 		AND edt.type =#{type}
+		 </if>
+		 <if test="errorCode !=null and nowDate !=null">
+		 		AND (edt.error_code !=#{errorCode}  or (edt.error_code=#{errorCode} and edt.continued_time like CONCAT(#{nowDate},'%')))
+		 </if>
+		  <if test="scanDate !=null">
+		  		AND edt.last_scan_time LIKE CONCAT(#{scanDate},'%')
+		  </if>
+		GROUP BY dti.site_code
+		<if test="begin !=null and end !=null">
+			limit #{begin},#{end}
+		</if>
+	</select>
+	
+	<select id="queryEarlyTempByMapCount" parameterType="HashMap" resultType="int">
+	
+	SELECT COUNT(*) FROM (
+		SELECT 
+		  di.site_code AS siteCode,
+		  di.name AS siteName,
+		  edt.last_scan_time AS lastScanTime 
+		FROM
+		  early_detail_temp edt,
+		  database_tree_info dti,
+		  database_info di 
+		WHERE edt.site_code = dti.site_code 
+		  AND dti.site_code = di.site_code 
+		  <if test="orgSiteCode !=null">
+		  		AND dti.org_site_code = #{orgSiteCode}
+		  </if>
+		  <if test="isLink !=null">
+		  		AND dti.is_link = #{isLink}
+		  </if>
+		  <if test="layerType !=null">
+		  		 AND dti.layer_type = #{layerType}
+		  </if>
+		 <if test="isexp !=null">
+		 		AND di.isexp = #{isexp}
+		 </if>
+		 <if test="type !=null">
+		 		AND edt.type =#{type}
+		 </if>
+		 <if test="errorCode !=null and nowDate !=null">
+		 		AND (edt.error_code !=#{errorCode}  or (edt.error_code=#{errorCode} and edt.continued_time like CONCAT(#{nowDate},'%')))
+		 </if>
+		  <if test="scanDate !=null">
+		  		AND edt.last_scan_time LIKE CONCAT(#{scanDate},'%')
+		  </if>
+		GROUP BY dti.site_code
+	) AS a
+	</select>
+	<select id="queryEarlyTempByMapCountTb" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.EarlyDetailTempRequest">
+		SELECT 
+		  di.site_code AS siteCode,
+		  di.name AS siteName
+		FROM
+		  early_detail_temp edt,
+		  database_info di 
+		WHERE edt.site_code = di.site_code 
+		  <if test="siteCode !=null">
+		  		AND di.site_code = #{siteCode}
+		  </if>
+		 <if test="isexp !=null">
+		 		AND di.isexp = #{isexp}
+		 </if>
+		 <if test="type !=null">
+		 		AND edt.type =#{type}
+		 </if>
+		 <if test="errorCode !=null and nowDate !=null">
+		 		AND (edt.error_code !=#{errorCode} or (edt.error_code=200 and edt.last_scan_time LIKE CONCAT(#{nowDate},'%'))) 
+		 </if>
+		  <if test="scanDate !=null">
+		  		AND edt.last_scan_time LIKE CONCAT(#{scanDate},'%')
+		  </if>
+		GROUP BY di.site_code
+	</select>
+	
+</mapper>

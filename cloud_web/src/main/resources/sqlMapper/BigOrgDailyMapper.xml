@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.BigOrgDailyDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.BigOrgDaily" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="taskid != null ">
+				and taskid= #{taskid}
+			</if>
+			<if test="countday != null ">
+			    and countday =#{countday}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.BigOrgDaily" useGeneratedKeys="true" keyProperty="id">
+		insert into big_org_daily ( 
+			<if test="id != null ">id,</if>
+			<if test="taskid != null ">taskid,</if>
+			<if test="sitenum != null ">sitenum,</if>
+			<if test="countyear != null ">countyear,</if>
+			<if test="countmonth != null ">countmonth,</if>
+			<if test="countday != null ">countday,</if>
+			<if test="linkerrsitenum != null ">linkerrsitenum,</if>
+			<if test="linkerrsitenum7 != null ">linkerrsitenum7,</if>
+			<if test="linkerrsitenum14 != null ">linkerrsitenum14,</if>
+			<if test="linkerrsitenum30 != null ">linkerrsitenum30,</if>
+			<if test="linkerrsiteprop != null ">linkerrsiteprop,</if>
+			<if test="linkerrsiteprop7 != null ">linkerrsiteprop7,</if>
+			<if test="linkerrsiteprop14 != null ">linkerrsiteprop14,</if>
+			<if test="linkerrsiteprop30 != null ">linkerrsiteprop30,</if>
+			<if test="indexdeadnum != null ">indexdeadnum,</if>
+			<if test="indexdeadnum7 != null ">indexdeadnum7,</if>
+			<if test="indexdeadnum14 != null ">indexdeadnum14,</if>
+			<if test="indexdeadnum30 != null ">indexdeadnum30,</if>
+			<if test="indexdeadprop != null ">indexdeadprop,</if>
+			<if test="indexdeadprop7 != null ">indexdeadprop7,</if>
+			<if test="indexdeadprop14 != null ">indexdeadprop14,</if>
+			<if test="indexdeadprop30 != null ">indexdeadprop30,</if>
+			<if test="indexdeadsitenum != null ">indexdeadsitenum,</if>
+			<if test="indexdeadsiteprop != null ">indexdeadsiteprop,</if>
+			<if test="indexdeadsiteprop7 != null ">indexdeadsiteprop7,</if>
+			<if test="indexdeadsiteprop14 != null ">indexdeadsiteprop14,</if>
+			<if test="indexdeadsiteprop30 != null ">indexdeadsiteprop30,</if>
+			<if test="updatesitenum != null ">updatesitenum,</if>
+			<if test="updatesitenum7 != null ">updatesitenum7,</if>
+			<if test="updatesitenum14 != null ">updatesitenum14,</if>
+			<if test="updatesitenum30 != null ">updatesitenum30,</if>
+			<if test="updatesiteprop != null ">updatesiteprop,</if>
+			<if test="updatesiteprop7 != null ">updatesiteprop7,</if>
+			<if test="updatesiteprop14 != null ">updatesiteprop14,</if>
+			<if test="updatesiteprop30 != null ">updatesiteprop30,</if>
+			<if test="noupdatesitenum != null ">noupdatesitenum,</if>
+			<if test="noupdatesitenum7 != null ">noupdatesitenum7,</if>
+			<if test="noupdatesitenum14 != null ">noupdatesitenum14,</if>
+			<if test="noupdatesitenum30 != null ">noupdatesitenum30,</if>
+			<if test="noupdatesiteprop != null ">noupdatesiteprop,</if>
+			<if test="noupdatesiteprop7 != null ">noupdatesiteprop7,</if>
+			<if test="noupdatesiteprop14 != null ">noupdatesiteprop14,</if>
+			<if test="noupdatesiteprop30 != null ">noupdatesiteprop30,</if>
+			<if test="updatenum != null ">updatenum,</if>
+			<if test="updatenum7 != null ">updatenum7,</if>
+			<if test="updatenum14 != null ">updatenum14,</if>
+			<if test="updatenum30 != null ">updatenum30,</if>
+			<if test="aveupdatenum != null ">aveupdatenum,</if>
+			<if test="aveupdatenum7 != null ">aveupdatenum7,</if>
+			<if test="aveupdatenum14 != null ">aveupdatenum14,</if>
+			<if test="aveupdatenum30 != null ">aveupdatenum30,</if>
+			<if test="aveindexlinknum != null ">aveindexlinknum,</if>
+			<if test="aveindexlinknum7 != null ">aveindexlinknum7,</if>
+			<if test="aveindexlinknum14 != null ">aveindexlinknum14,</if>
+			<if test="aveindexlinknum30 != null ">aveindexlinknum30,</if>
+			<if test="aveindexloadtime != null ">aveindexloadtime,</if>
+			<if test="aveindexloadtime7 != null ">aveindexloadtime7,</if>
+			<if test="aveindexloadtime14 != null ">aveindexloadtime14,</if>
+			<if test="aveindexloadtime30 != null ">aveindexloadtime30,</if>
+			<if test="aveindexsize != null ">aveindexsize,</if>
+			<if test="aveindexsize7 != null ">aveindexsize7,</if>
+			<if test="aveindexsize14 != null ">aveindexsize14,</if>
+			<if test="aveindexsize30 != null ">aveindexsize30,</if>
+			<if test="indexdeadtotalnum != null ">indexdeadtotalnum,</if>
+			<if test="problemsitenum != null ">problemsitenum,</if>
+			<if test="linkerrnum != null ">linkerrnum,</if>
+			<if test="linkerrnum7 != null ">linkerrnum7,</if>
+			<if test="linkerrnum14 != null ">linkerrnum14,</if>
+			<if test="linkerrnum30 != null ">linkerrnum30,</if>
+			<if test="linktotalnum != null ">linktotalnum,</if>
+			<if test="linktotalnum7 != null ">linktotalnum7,</if>
+			<if test="linktotalnum14 != null ">linktotalnum14,</if>
+			<if test="linktotalnum30 != null ">linktotalnum30,</if>
+			<if test="healthindex != null ">healthindex,</if>
+			<if test="healthindex7 != null ">healthindex7,</if>
+			<if test="healthindex14 != null ">healthindex14,</if>
+			<if test="healthindex30 != null ">healthindex30,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="taskid != null ">#{taskid},</if>
+			<if test="sitenum != null ">#{sitenum},</if>
+			<if test="countyear != null ">#{countyear},</if>
+			<if test="countmonth != null ">#{countmonth},</if>
+			<if test="countday != null ">#{countday},</if>
+			<if test="linkerrsitenum != null ">#{linkerrsitenum},</if>
+			<if test="linkerrsitenum7 != null ">#{linkerrsitenum7},</if>
+			<if test="linkerrsitenum14 != null ">#{linkerrsitenum14},</if>
+			<if test="linkerrsitenum30 != null ">#{linkerrsitenum30},</if>
+			<if test="linkerrsiteprop != null ">#{linkerrsiteprop},</if>
+			<if test="linkerrsiteprop7 != null ">#{linkerrsiteprop7},</if>
+			<if test="linkerrsiteprop14 != null ">#{linkerrsiteprop14},</if>
+			<if test="linkerrsiteprop30 != null ">#{linkerrsiteprop30},</if>
+			<if test="indexdeadnum != null ">#{indexdeadnum},</if>
+			<if test="indexdeadnum7 != null ">#{indexdeadnum7},</if>
+			<if test="indexdeadnum14 != null ">#{indexdeadnum14},</if>
+			<if test="indexdeadnum30 != null ">#{indexdeadnum30},</if>
+			<if test="indexdeadprop != null ">#{indexdeadprop},</if>
+			<if test="indexdeadprop7 != null ">#{indexdeadprop7},</if>
+			<if test="indexdeadprop14 != null ">#{indexdeadprop14},</if>
+			<if test="indexdeadprop30 != null ">#{indexdeadprop30},</if>
+			<if test="indexdeadsitenum != null ">#{indexdeadsitenum},</if>
+			<if test="indexdeadsiteprop != null ">#{indexdeadsiteprop},</if>
+			<if test="indexdeadsiteprop7 != null ">#{indexdeadsiteprop7},</if>
+			<if test="indexdeadsiteprop14 != null ">#{indexdeadsiteprop14},</if>
+			<if test="indexdeadsiteprop30 != null ">#{indexdeadsiteprop30},</if>
+			<if test="updatesitenum != null ">#{updatesitenum},</if>
+			<if test="updatesitenum7 != null ">#{updatesitenum7},</if>
+			<if test="updatesitenum14 != null ">#{updatesitenum14},</if>
+			<if test="updatesitenum30 != null ">#{updatesitenum30},</if>
+			<if test="updatesiteprop != null ">#{updatesiteprop},</if>
+			<if test="updatesiteprop7 != null ">#{updatesiteprop7},</if>
+			<if test="updatesiteprop14 != null ">#{updatesiteprop14},</if>
+			<if test="updatesiteprop30 != null ">#{updatesiteprop30},</if>
+			<if test="noupdatesitenum != null ">#{noupdatesitenum},</if>
+			<if test="noupdatesitenum7 != null ">#{noupdatesitenum7},</if>
+			<if test="noupdatesitenum14 != null ">#{noupdatesitenum14},</if>
+			<if test="noupdatesitenum30 != null ">#{noupdatesitenum30},</if>
+			<if test="noupdatesiteprop != null ">#{noupdatesiteprop},</if>
+			<if test="noupdatesiteprop7 != null ">#{noupdatesiteprop7},</if>
+			<if test="noupdatesiteprop14 != null ">#{noupdatesiteprop14},</if>
+			<if test="noupdatesiteprop30 != null ">#{noupdatesiteprop30},</if>
+			<if test="updatenum != null ">#{updatenum},</if>
+			<if test="updatenum7 != null ">#{updatenum7},</if>
+			<if test="updatenum14 != null ">#{updatenum14},</if>
+			<if test="updatenum30 != null ">#{updatenum30},</if>
+			<if test="aveupdatenum != null ">#{aveupdatenum},</if>
+			<if test="aveupdatenum7 != null ">#{aveupdatenum7},</if>
+			<if test="aveupdatenum14 != null ">#{aveupdatenum14},</if>
+			<if test="aveupdatenum30 != null ">#{aveupdatenum30},</if>
+			<if test="aveindexlinknum != null ">#{aveindexlinknum},</if>
+			<if test="aveindexlinknum7 != null ">#{aveindexlinknum7},</if>
+			<if test="aveindexlinknum14 != null ">#{aveindexlinknum14},</if>
+			<if test="aveindexlinknum30 != null ">#{aveindexlinknum30},</if>
+			<if test="aveindexloadtime != null ">#{aveindexloadtime},</if>
+			<if test="aveindexloadtime7 != null ">#{aveindexloadtime7},</if>
+			<if test="aveindexloadtime14 != null ">#{aveindexloadtime14},</if>
+			<if test="aveindexloadtime30 != null ">#{aveindexloadtime30},</if>
+			<if test="aveindexsize != null ">#{aveindexsize},</if>
+			<if test="aveindexsize7 != null ">#{aveindexsize7},</if>
+			<if test="aveindexsize14 != null ">#{aveindexsize14},</if>
+			<if test="aveindexsize30 != null ">#{aveindexsize30},</if>
+			<if test="indexdeadtotalnum != null ">#{indexdeadtotalnum},</if>
+			<if test="problemsitenum != null ">#{problemsitenum},</if>
+			<if test="linkerrnum != null ">#{linkerrnum},</if>
+			<if test="linkerrnum7 != null ">#{linkerrnum7},</if>
+			<if test="linkerrnum14 != null ">#{linkerrnum14},</if>
+			<if test="linkerrnum30 != null ">#{linkerrnum30},</if>
+			<if test="linktotalnum != null ">#{linktotalnum},</if>
+			<if test="linktotalnum7 != null ">#{linktotalnum7},</if>
+			<if test="linktotalnum14 != null ">#{linktotalnum14},</if>
+			<if test="linktotalnum30 != null ">#{linktotalnum30},</if>
+			<if test="healthindex != null ">#{healthindex},</if>
+			<if test="healthindex7 != null ">#{healthindex7},</if>
+			<if test="healthindex14 != null ">#{healthindex14},</if>
+			<if test="healthindex30 != null ">#{healthindex30},</if>
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.BigOrgDaily">
+		select * from big_org_daily where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.BigOrgDaily">
+		update big_org_daily 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="taskid != null ">taskid = #{taskid},</if>
+				<if test="sitenum != null ">sitenum = #{sitenum},</if>
+				<if test="countyear != null ">countyear = #{countyear},</if>
+				<if test="countmonth != null ">countmonth = #{countmonth},</if>
+				<if test="countday != null ">countday = #{countday},</if>
+				<if test="linkerrsitenum != null ">linkerrsitenum = #{linkerrsitenum},</if>
+				<if test="linkerrsitenum7 != null ">linkerrsitenum7 = #{linkerrsitenum7},</if>
+				<if test="linkerrsitenum14 != null ">linkerrsitenum14 = #{linkerrsitenum14},</if>
+				<if test="linkerrsitenum30 != null ">linkerrsitenum30 = #{linkerrsitenum30},</if>
+				<if test="linkerrsiteprop != null ">linkerrsiteprop = #{linkerrsiteprop},</if>
+				<if test="linkerrsiteprop7 != null ">linkerrsiteprop7 = #{linkerrsiteprop7},</if>
+				<if test="linkerrsiteprop14 != null ">linkerrsiteprop14 = #{linkerrsiteprop14},</if>
+				<if test="linkerrsiteprop30 != null ">linkerrsiteprop30 = #{linkerrsiteprop30},</if>
+				<if test="indexdeadnum != null ">indexdeadnum = #{indexdeadnum},</if>
+				<if test="indexdeadnum7 != null ">indexdeadnum7 = #{indexdeadnum7},</if>
+				<if test="indexdeadnum14 != null ">indexdeadnum14 = #{indexdeadnum14},</if>
+				<if test="indexdeadnum30 != null ">indexdeadnum30 = #{indexdeadnum30},</if>
+				<if test="indexdeadprop != null ">indexdeadprop = #{indexdeadprop},</if>
+				<if test="indexdeadprop7 != null ">indexdeadprop7 = #{indexdeadprop7},</if>
+				<if test="indexdeadprop14 != null ">indexdeadprop14 = #{indexdeadprop14},</if>
+				<if test="indexdeadprop30 != null ">indexdeadprop30 = #{indexdeadprop30},</if>
+				<if test="indexdeadsitenum != null ">indexdeadsitenum = #{indexdeadsitenum},</if>
+				<if test="indexdeadsiteprop != null ">indexdeadsiteprop = #{indexdeadsiteprop},</if>
+				<if test="indexdeadsiteprop7 != null ">indexdeadsiteprop7 = #{indexdeadsiteprop7},</if>
+				<if test="indexdeadsiteprop14 != null ">indexdeadsiteprop14 = #{indexdeadsiteprop14},</if>
+				<if test="indexdeadsiteprop30 != null ">indexdeadsiteprop30 = #{indexdeadsiteprop30},</if>
+				<if test="updatesitenum != null ">updatesitenum = #{updatesitenum},</if>
+				<if test="updatesitenum7 != null ">updatesitenum7 = #{updatesitenum7},</if>
+				<if test="updatesitenum14 != null ">updatesitenum14 = #{updatesitenum14},</if>
+				<if test="updatesitenum30 != null ">updatesitenum30 = #{updatesitenum30},</if>
+				<if test="updatesiteprop != null ">updatesiteprop = #{updatesiteprop},</if>
+				<if test="updatesiteprop7 != null ">updatesiteprop7 = #{updatesiteprop7},</if>
+				<if test="updatesiteprop14 != null ">updatesiteprop14 = #{updatesiteprop14},</if>
+				<if test="updatesiteprop30 != null ">updatesiteprop30 = #{updatesiteprop30},</if>
+				<if test="noupdatesitenum != null ">noupdatesitenum = #{noupdatesitenum},</if>
+				<if test="noupdatesitenum7 != null ">noupdatesitenum7 = #{noupdatesitenum7},</if>
+				<if test="noupdatesitenum14 != null ">noupdatesitenum14 = #{noupdatesitenum14},</if>
+				<if test="noupdatesitenum30 != null ">noupdatesitenum30 = #{noupdatesitenum30},</if>
+				<if test="noupdatesiteprop != null ">noupdatesiteprop = #{noupdatesiteprop},</if>
+				<if test="noupdatesiteprop7 != null ">noupdatesiteprop7 = #{noupdatesiteprop7},</if>
+				<if test="noupdatesiteprop14 != null ">noupdatesiteprop14 = #{noupdatesiteprop14},</if>
+				<if test="noupdatesiteprop30 != null ">noupdatesiteprop30 = #{noupdatesiteprop30},</if>
+				<if test="updatenum != null ">updatenum = #{updatenum},</if>
+				<if test="updatenum7 != null ">updatenum7 = #{updatenum7},</if>
+				<if test="updatenum14 != null ">updatenum14 = #{updatenum14},</if>
+				<if test="updatenum30 != null ">updatenum30 = #{updatenum30},</if>
+				<if test="aveupdatenum != null ">aveupdatenum = #{aveupdatenum},</if>
+				<if test="aveupdatenum7 != null ">aveupdatenum7 = #{aveupdatenum7},</if>
+				<if test="aveupdatenum14 != null ">aveupdatenum14 = #{aveupdatenum14},</if>
+				<if test="aveupdatenum30 != null ">aveupdatenum30 = #{aveupdatenum30},</if>
+				<if test="aveindexlinknum != null ">aveindexlinknum = #{aveindexlinknum},</if>
+				<if test="aveindexlinknum7 != null ">aveindexlinknum7 = #{aveindexlinknum7},</if>
+				<if test="aveindexlinknum14 != null ">aveindexlinknum14 = #{aveindexlinknum14},</if>
+				<if test="aveindexlinknum30 != null ">aveindexlinknum30 = #{aveindexlinknum30},</if>
+				<if test="aveindexloadtime != null ">aveindexloadtime = #{aveindexloadtime},</if>
+				<if test="aveindexloadtime7 != null ">aveindexloadtime7 = #{aveindexloadtime7},</if>
+				<if test="aveindexloadtime14 != null ">aveindexloadtime14 = #{aveindexloadtime14},</if>
+				<if test="aveindexloadtime30 != null ">aveindexloadtime30 = #{aveindexloadtime30},</if>
+				<if test="aveindexsize != null ">aveindexsize = #{aveindexsize},</if>
+				<if test="aveindexsize7 != null ">aveindexsize7 = #{aveindexsize7},</if>
+				<if test="aveindexsize14 != null ">aveindexsize14 = #{aveindexsize14},</if>
+				<if test="aveindexsize30 != null ">aveindexsize30 = #{aveindexsize30},</if>
+				<if test="indexdeadtotalnum != null ">indexdeadtotalnum = #{indexdeadtotalnum},</if>
+				<if test="problemsitenum != null ">problemsitenum = #{problemsitenum},</if>
+				<if test="linkerrnum != null ">linkerrnum = #{linkerrnum},</if>
+				<if test="linkerrnum7 != null ">linkerrnum7 = #{linkerrnum7},</if>
+				<if test="linkerrnum14 != null ">linkerrnum14 = #{linkerrnum14},</if>
+				<if test="linkerrnum30 != null ">linkerrnum30 = #{linkerrnum30},</if>
+				<if test="linktotalnum != null ">linktotalnum = #{linktotalnum},</if>
+				<if test="linktotalnum7 != null ">linktotalnum7 = #{linktotalnum7},</if>
+				<if test="linktotalnum14 != null ">linktotalnum14 = #{linktotalnum14},</if>
+				<if test="linktotalnum30 != null ">linktotalnum30 = #{linktotalnum30},</if>
+				<if test="healthindex != null ">healthindex = #{healthindex},</if>
+				<if test="healthindex7 != null ">healthindex7 = #{healthindex7},</if>
+				<if test="healthindex14 != null ">healthindex14 = #{healthindex14},</if>
+				<if test="healthindex30 != null ">healthindex30 = #{healthindex30},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from big_org_daily where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from big_org_daily
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from big_org_daily
+		<include refid="where" />
+	</select>
+	
+	<select id="getOrgData" parameterType="HashMap" resultType="com.ucap.cloud_web.dtoResponse.BigOrgDailyResponse">
+		select b.*,org.name,d.code
+		<if test="orderVal !=null and orderVal!='null'">
+			,${orderVal} as orderVal 
+		</if>
+		from database_tree_info d 
+			join big_org_daily b  
+			on d.site_code = b.taskid 
+			join database_org_info org  on org.site_code = b.taskid 
+		<where>
+		<if test="orgSiteCode != null "> 
+			and d.org_site_code = #{orgSiteCode}
+		</if>
+		<if test="parentId != null">
+			and d.parent_id = #{parentId}
+		</if>
+		<if test="countDay != null "> 
+			and b.countday = #{countDay}
+		</if>
+		<if test="isBm != null "> 
+			and d.is_bm = #{isBm}
+		</if>
+		<if test="orgSiteCode != null "> 
+			and d.org_site_code = #{orgSiteCode}
+		</if>
+		<if test="siteCodeNot != null "> 
+			and d.site_code != #{siteCodeNot}
+		</if>
+		
+			and LENGTH(d.site_code) = 6
+			and d.is_bigdata=1
+		</where>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="startIndex != null and pageSize != null">
+			limit ${startIndex}, ${pageSize}
+		</if>
+	</select>
+</mapper>

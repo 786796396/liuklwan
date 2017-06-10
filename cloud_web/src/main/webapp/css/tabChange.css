@@ -1,0 +1,55 @@
+/*tab切换s*/
+.five_tab_part{ margin-top: 15px;}
+.every_block>div{height:42px; width: 172px; text-align: center; line-height: 44px; font-size: 16px; color:#8a8c9a; border:1px solid #e1e1e1; border-bottom:none; margin-right:6px; background: #fff; cursor:pointer; font-family:'Microsoft Yahei';}
+.every_block div.on{ background: #20c05c; border:1px solid #20c05c; color:#fff;}
+.green_line{ width: 100%; border: 1px solid #20c05c; position:relative; top:-1px;}
+.five_tp_content{ margin-top:15px; __sssborder: 1px solid red;}
+.five_tp_content .every_tab{ display: none; border: 1px solid #dddddd; background: #fff;}
+.five_tp_content .every_tabs{ display: none;}
+.five_tp_content .every_tab.on{ display:block; }
+.five_tp_content .every_tabs.on{ display: block;}
+/*tab切换e*/
+
+/*下级整改通知弹框s*/
+.five_tp_top .msg{
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    width: 22px;
+    height: 22px;
+    display: none;
+}
+.five_tp_top .msg .ms-wen-con{
+    position: absolute;
+    top: -20px;
+    left: 35px;
+    width: 323px;
+    height: 62px;
+    padding:0;
+    border: 1px solid #cecfd3;
+}
+.five_tp_top .msg .ms-icon-wen{
+   __position: static;
+   top:-9px;
+}
+.five_tp_top .msg .ms-icon-wen i{
+   border:1px solid #fff;
+   color:#fff;
+}
+.five_tp_top .ztm-con{
+    padding:6px 15px 8px 27px;
+    font: normal 12px/24px 'Microsoft Yahei';
+    color: #7f7f7f;
+    text-align:left;
+}
+.ms-wen-con .angle-left{
+    position: absolute;
+    width: 10px;
+    height: 13px;
+    display: inline-block;
+    left: -10px;
+    top:50%;
+    margin-top:-6px;
+    background: url("../images/angle-left.png") no-repeat center center;
+}
+/*下级整改通知弹框e*/

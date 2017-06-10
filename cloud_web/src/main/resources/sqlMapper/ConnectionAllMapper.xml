@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.ConnectionAllDao">
+<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+	<resultMap type="com.ucap.cloud_web.entity.ConnectionAll" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode != null">
+				and site_code like '${siteCode}%'
+			</if>
+			<if test="siteCodeEqual != null">
+				and site_code =#{siteCodeEqual}
+			</if>
+			<if test="scanDate != null">
+				and scan_date=#{scanDate}
+			</if>
+			<if test="type != null">
+				and type=#{type}
+			</if>
+			<if test="url != null">
+				and url=#{url}
+			</if>
+			<if test="errorNum !=null">
+				<![CDATA[ and error_num > #{errorNum} ]]>  
+			</if>
+			<if test="startDate != null">
+				<![CDATA[ and scan_date>=#{startDate} ]]>   
+			</if>
+			<if test="endDate != null">
+				<![CDATA[ and scan_date<=#{endDate} ]]>  
+			</if>
+			<if test="term != null">
+				and (site_code like #{term} OR name like #{term} OR url like #{term})
+			</if>
+			<if test="databaseList != null">
+			 	and site_code in
+            	<foreach collection="databaseList" item="term" open="(" separator="," close=")">
+       					#{term.siteCode}
+				</foreach>
+			</if>
+			<if test="ids != null">
+			 	and site_code in
+            	<foreach collection="ids" item="term" open="(" separator="," close=")">
+       					#{term.siteCode}
+				</foreach>
+			</if>
+			<if test="dataLinkList != null">
+			 	and site_code in
+            	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+       					#{term.siteCode}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+	<sql id="whereCondition">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				and site_code =#{siteCode}  
+				and scan_date BETWEEN DATE_SUB(NOW(),INTERVAL 12 MONTH) AND NOW()
+			</if>
+			<if test="type !=null">
+				and type=#{type}
+			</if>
+		</where>
+	</sql>
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.ConnectionAll" useGeneratedKeys="true" keyProperty="id">
+		insert into connection_all ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			<if test="connectionSum != null ">connection_sum,</if>
+			<if test="successNum != null ">success_num,</if>
+			<if test="successProportion != null ">success_proportion,</if>
+			<if test="errorNum != null ">error_num,</if>
+			<if test="errorProportion != null ">error_proportion,</if>
+			<if test="name != null ">name,</if>
+			<if test="type != null ">type,</if>
+			<if test="url != null ">url,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			<if test="connectionSum != null ">#{connectionSum},</if>
+			<if test="successNum != null ">#{successNum},</if>
+			<if test="successProportion != null ">#{successProportion},</if>
+			<if test="errorNum != null ">#{errorNum},</if>
+			<if test="errorProportion != null ">#{errorProportion},</if>
+			<if test="name != null ">#{name},</if>
+			<if test="type != null ">#{type},</if>
+			<if test="url != null ">#{url},</if>
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.ConnectionAll">
+		select * from connection_all where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.ConnectionAll">
+		update connection_all 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="scanDate != null ">scan_date = #{scanDate},</if>
+				<if test="connectionSum != null ">connection_sum = #{connectionSum},</if>
+				<if test="successNum != null ">success_num = #{successNum},</if>
+				<if test="successProportion != null ">success_proportion = #{successProportion},</if>
+				<if test="errorNum != null ">error_num = #{errorNum},</if>
+				<if test="errorProportion != null ">error_proportion = #{errorProportion},</if>
+				<if test="name != null ">name = #{name},</if>
+				<if test="type != null ">type = #{type},</if>
+				<if test="url != null ">url = #{url},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from connection_all where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from connection_all
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from connection_all
+		<include refid="where" />
+	</select>
+	<!--add by sunjq 计算连通性表总次数  -->
+	<select id="queryConnectionSum" parameterType="HashMap" resultType="int">
+	
+		select COALESCE(SUM(connection_sum),0) from connection_all
+		<include refid="where" />
+	</select>
+	<select id="queryErrorNumSum" parameterType="HashMap" resultType="int">
+		select COALESCE(SUM(error_num),0) from connection_all
+		<include refid="where" />
+	</select>
+	<!-- end add  -->
+	
+	<!-- 将参数封装到map中查询连通性统计表 -->
+	<select id="queryByMap" parameterType="HashMap" resultMap="resultMap">
+		SELECT SUM(error_num) AS error_num, SUBSTRING(scan_date,1,7) AS scan_date FROM  connection_all 
+		<include refid="whereCondition" />
+		GROUP BY SUBSTRING(scan_date,1,7)
+	</select>
+	
+	<select id="getHomeBar" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+		SELECT 
+		  scan_date,
+		  SUM(
+		    CASE
+		      WHEN TYPE = '1' 
+		      THEN error_num 
+		      ELSE 0
+		    END
+		  ) AS homeNum,
+		  SUM(
+		    CASE
+		      WHEN TYPE = '2' 
+		      THEN error_num 
+		      ELSE 0
+		    END
+		  ) AS buseNum,
+		  SUM(
+		    CASE
+		      WHEN TYPE = '3' 
+		      THEN error_num 
+		      ELSE 0 
+		    END
+		  ) AS channelNum 
+		FROM
+		  connection_all 
+		<include refid="where"/>
+		group by scan_date
+		order by scan_date asc
+	</select>
+	<select id="getHomeSum" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+		SELECT 
+		  a.site_code AS siteCode,
+		  a.error_num AS errorNum,
+		  a.connection_sum AS connectionSum,
+		  b.name AS siteName,
+		  b.director as director,
+		  b.url AS homePageUrl,
+		  b.jump_url AS jumpPageUrl,
+		  b.isorganizational as isorganizational	
+		FROM
+		  connection_all a,
+		  database_info b 
+		WHERE a.site_code = b.site_code 
+		  AND a.type = 1 
+		<if test="scanDate!=null">
+		and a.scan_date=#{scanDate}
+		</if>
+		<if test="ids != null">
+			 	and a.site_code in
+            	<foreach collection="ids" item="term" open="(" separator="," close=")">
+       					#{term.siteCode}
+				</foreach>
+		</if>
+         group by a.site_code
+         <if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+	</select>
+	<select id="getOtherSum" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+		SELECT 
+		  a.site_code AS siteCode,
+		  COUNT(*) AS countSum,
+		  SUM(a.error_num) AS errorNum,
+		  SUM(a.connection_sum) AS connectionSum,
+		  b.name AS siteName,
+		  b.director as director,
+		  b.url AS homePageUrl,
+		  b.jump_url AS jumpPageUrl 
+		FROM
+		  connection_all a,
+		  database_info b 
+		WHERE a.site_code = b.site_code
+		<if test="type!=null">
+		and a.type=#{type}
+		</if>
+		<if test="scanDate!=null">
+		and a.scan_date=#{scanDate}
+		</if>
+		<if test="ids != null">
+			 	and a.site_code in
+            	<foreach collection="ids" item="term" open="(" separator="," close=")">
+       					#{term.siteCode}
+				</foreach>
+			</if>
+         group by a.site_code
+         <if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+	</select>
+	
+	
+	<select id="getConnectionAllInfo" parameterType="com.ucap.cloud_web.dto.ConnectionAllRequest" resultMap="resultMap">
+	select b.site_code as site_code,b.scan_date as scan_date,sum(b.connection_sum) as connection_sum,
+	sum(b.success_num) as success_num,sum(b.success_proportion) as success_proportion,sum(b.error_num) as error_num,sum(b.error_proportion) as error_proportion,
+		b.name as name,b.url as url,a.channel_name as channel_name
+		from channel_point a left join connection_all b 
+		on a.site_code = b.site_code  
+		where (a.channel_url = b.url or a.jump_page_url = b.url )
+<!-- 		and a.status = '1' -->
+	<if test="type != null">
+		and	b.type = #{type}
+	</if>
+	<if test="siteCode != null">
+		and b.site_code= #{siteCode}
+	</if>
+	<if test="scanDate !=null">
+		and b.scan_date= #{scanDate}
+	</if>
+		group by b.url
+		order by error_proportion DESC
+	</select>
+	<!-- add by sunjq -->
+	<select id="queryBetweenDate" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+		select sum(connection_sum) as connection_sum,
+			sum(success_num) as success_num,sum(error_num) as error_num
+		from connection_all
+		where 1=1 
+	<if test="type != null">
+		and	type = #{type}
+	</if>
+	<if test="siteCode != null">
+		and site_code= #{siteCode}
+	</if>
+		and (scan_date BETWEEN #{startDate} AND #{endDate})
+	</select>
+	<select id="getSumInfoGroupByName" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+		select sum(connection_sum) as connection_sum,
+			sum(success_num) as success_num,sum(error_num) as error_num
+		from connection_all
+		where 1=1 
+	<if test="type != null">
+		and	type = #{type}
+	</if>
+	<if test="siteCode != null">
+		and site_code= #{siteCode}
+	</if>
+		and (scan_date BETWEEN ${startDate} AND ${endDate})
+		group by name
+	</select>
+	<!-- end add -->
+	
+	<!-- 连续几天连通比例超过指定数值  cuicx -->
+	<select id="queryNotConnByMap" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+		SELECT count(*) as total,site_code as siteCode,url as url
+	      FROM connection_all
+		where 1=1
+		<if test="siteCode !=null ">
+			and site_code =#{siteCode}
+		</if>
+		<if test="startDate !=null and endDate !=null">
+			and (scan_date BETWEEN #{startDate} and #{endDate})
+		</if>
+		<if test="type !=null">
+			and type =#{type}
+		</if>
+		<if test="errorProportion !=null">
+			<![CDATA[ and error_proportion > #{errorProportion} ]]>   
+		</if>
+		<if test="type !=null and type ==1">
+		 	group by site_code
+		</if>
+		<if test="type !=null and type ==3">
+		 	group by url
+		</if>
+		HAVING total=5
+	</select>
+	
+	<!--首页连不通比例超过3% -->
+	<select id="queryHomePer" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.ConnectionAll">
+		SELECT 
+		  ca.site_code,
+		  ca.url,
+		  FORMAT(
+		    (
+		      IFNULL(SUM(ca.error_num), 0) / IFNULL(SUM(ca.connection_sum), 1)*100
+		    ),
+		    2
+		  ) AS errorProportion 
+		FROM
+		  connection_all ca
+		  LEFT JOIN database_info di ON ca.site_code=di.site_code
+		WHERE 1=1
+		<if test="beginDate !=null and endDate !=null">
+			<![CDATA[ and ca.scan_date BETWEEN #{beginDate} and #{endDate}]]>
+		</if>
+		<if test="type !=null">
+			and ca.type=#{type}
+		</if>
+		<if test="siteCode !=null">
+			and ca.site_code=#{siteCode}
+		</if>
+		<if test="isScan !=null">
+			and di.is_scan=#{isScan}
+		</if>
+		<if test="isCost !=null">
+			and di.iscost=#{isCost}
+		</if>
+		<if test="dataLinkList != null">
+		 	and ca.site_code in
+           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+      					#{term.siteCode}
+			</foreach>
+		</if>
+		GROUP BY ca.site_code 
+		<if test="errorProportion !=null">
+			HAVING errorProportion > #{errorProportion}
+		</if>
+	</select>
+		
+	<select id="queryPerSeven" parameterType="HashMap" resultType="com.ucap.cloud_web.entity.ConnectionAll">
+		SELECT connection_sum connectionSumType,sum(connection_sum) connectionSum,sum(success_num) successNum,count(*) sumTypeCount FROM connection_all  
+		where site_code  = #{siteCode}  and type  = 1 
+		and scan_date BETWEEN #{beforeSeven} and #{yesterDayStr} 
+<!-- 		and status = 1 -->
+		group by connection_sum
+	</select>
+	
+	
+	<select id="queryConnAvgByMap" parameterType="HashMap" resultType="java.lang.Double">
+		SELECT 
+		  FORMAT((IFNULL(SUM(ca.error_num), 0)) / (IFNULL(SUM(ca.connection_sum), 1)) * 100,2) AS connAvg 
+		FROM
+		  connection_all ca,database_info di
+		WHERE ca.site_code=di.site_code
+		
+		  <if test="scanDate !=null">
+		  		AND ca.scan_date=#{scanDate}
+		  </if>
+		  <if test="type !=null">
+		  		AND ca.TYPE = #{type} 
+		  </if>
+		  <if test="isScan !=null">
+		  		AND di.is_scan =#{isScan}
+		  </if>
+		  <if test="dataLinkList != null">
+			 	and ca.site_code in
+	           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+	      			#{term.siteCode}
+				</foreach>
+		  </if>
+	</select>
+	
+	<select id="queryConnCountByMap" parameterType="HashMap" resultType="int">
+	
+		SELECT 
+		  COUNT(*) 
+		FROM
+		  (SELECT 
+		    *
+		  FROM
+		    connection_all ca 
+		  WHERE 1 = 1 
+		  <if test="type !=null">
+			AND ca.TYPE = #{type}
+		  </if>
+		  <if test="notConnFlag !=null">
+			AND ca.error_num > 0
+		  </if>
+		  <if test="scanDate !=null">
+		  	AND ca.scan_date = #{scanDate}
+		  </if>
+		  <if test="dataLinkList != null">
+			 	and ca.site_code in
+	           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+	      			#{term}
+				</foreach>
+		  </if>
+		   GROUP BY ca.site_code) AS cal
+
+	</select>
+	
+	<select id="queryConnCountByMap2" parameterType="HashMap" resultType="int">
+		SELECT 
+		  IFNULL(SUM(ca.error_num),0) AS errorNum 
+		FROM
+		  connection_all ca
+		WHERE 1=1
+		  <if test="type !=null">
+			AND ca.TYPE = #{type}
+		  </if>
+		  <if test="notConnFlag !=null">
+			AND ca.error_num > 0
+		  </if>
+		  <if test="scanDate !=null">
+		  	AND ca.scan_date = #{scanDate}
+		  </if>
+		  <if test="dataLinkList != null">
+			 	and ca.site_code in
+	           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+	      			#{term}
+				</foreach>
+		  </if>
+	</select>
+	
+	<select id="queryHomeDataByMap" parameterType="HashMap" resultType="int">
+		SELECT 
+		  IFNULL(SUM(website_sum), 0) AS homeLinkCount 
+		FROM
+		  link_home_trend lht,
+		  database_info di 
+		WHERE lht.site_code = di.site_code 
+		  <if test="isScan !=null">
+		  	AND di.is_scan=#{isScan}
+		  </if>
+		  <if test="scanDate !=null">
+			 AND lht.scan_date = #{scanDate}
+		  </if>
+		  <if test=""></if>
+	  	  <if test="dataLinkList != null">
+			 AND lht.site_code in
+	           	<foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+	      			#{term.siteCode}
+				</foreach>
+		  </if>
+	</select>
+	
+	<select id="getwebConnectedList" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+	SELECT
+		d.site_code siteCode,
+		d. NAME siteName,
+		d.url AS homePageUrl,
+		d.jump_url AS jumpPageUrl,
+		d.queue,
+		COUNT(ca.id) AS countSum,
+		ca.site_code,
+		IFNULL(sum(ca.connection_sum), 0) connectionSum,
+		IFNULL(sum(ca.success_num), 0) successNum,
+		IFNULL(sum(ca.error_num), 0) errorNum
+	FROM
+		database_info d,
+		connection_all ca,
+		database_tree_info dti
+	WHERE
+		ca.site_code = dti.site_code
+		AND d.site_code = dti.site_code
+		<if test="type != null">
+			and ca.type = #{type}
+		</if>	
+		<if test="startDate != null and endDate != null">
+			and (ca.scan_date between #{startDate} and #{endDate})
+		</if>
+		<if test="orgSiteCode != null">
+			and dti.org_site_code= #{orgSiteCode}
+		</if>
+		<if test="isLink != null">
+			and dti.is_link = #{isLink}
+		</if>
+		<if test="siteType != null">
+			and dti.layer_type = #{siteType}
+		</if>
+		<if test="isExp != null">
+			and d.isexp = #{isExp}
+		</if>
+		<if test="queue != null">
+			and d.queue = #{queue}
+		</if>
+		<if test="scanDate != null">
+			and ca.scan_date = #{scanDate}
+		</if>
+		<if test="error != null">
+			and ca.error_num > ${error}
+		</if>
+		GROUP BY
+			ca.site_code
+		ORDER BY
+			d.isorganizational DESC,
+			errorNum DESC
+		<if test="begin !=null and end !=null">
+			limit #{begin},#{end}
+		</if>		
+	</select>
+	
+	<select id="getwebConnectedList2" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.ConnectionAllRequest">
+	
+		SELECT 
+		  a.siteCode AS siteCode,
+		  a.siteName AS siteName,
+		  COUNT(*) AS channelSum
+		FROM (
+			SELECT
+				d.site_code siteCode,
+				d. NAME siteName,
+				ca.url url
+			FROM
+				database_info d,
+				connection_all ca,
+				database_tree_info dti
+			WHERE
+				ca.site_code = dti.site_code
+				AND d.site_code = dti.site_code
+				<if test="type != null">
+					and ca.type = #{type}
+				</if>	
+				<if test="startDate != null and endDate != null">
+					and (ca.scan_date between #{startDate} and #{endDate})
+				</if>
+				<if test="orgSiteCode != null">
+					and dti.org_site_code= #{orgSiteCode}
+				</if>
+				<if test="isLink != null">
+					and dti.is_link = #{isLink}
+				</if>
+				<if test="siteType != null">
+					and dti.layer_type = #{siteType}
+				</if>
+				<if test="isExp != null">
+					and d.isexp = #{isExp}
+				</if>
+				<if test="queue != null">
+					and d.queue = #{queue}
+				</if>
+				<if test="scanDate != null">
+					and ca.scan_date = #{scanDate}
+				</if>
+				<if test="error != null">
+					and ca.error_num > ${error}
+				</if>
+				GROUP BY
+					ca.site_code,ca.url
+			) AS a
+		GROUP BY a.siteCode 
+	    ORDER BY channelSum DESC 
+		<if test="begin !=null and end !=null">
+			limit #{begin},#{end}
+		</if>
+				
+	</select>
+	
+	<select id="getwebConnectedList2Count" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*) FROM (
+			SELECT 
+			  a.siteCode AS siteCode,
+			  a.siteName AS siteName,
+			  COUNT(*) AS channelNum 
+			FROM (
+				SELECT
+					d.site_code siteCode,
+					d. NAME siteName,
+					ca.url url
+				FROM
+					database_info d,
+					connection_all ca,
+					database_tree_info dti
+				WHERE
+					ca.site_code = dti.site_code
+					AND d.site_code = dti.site_code
+					<if test="type != null">
+						and ca.type = #{type}
+					</if>	
+					<if test="startDate != null and endDate != null">
+						and (ca.scan_date between #{startDate} and #{endDate})
+					</if>
+					<if test="orgSiteCode != null">
+						and dti.org_site_code= #{orgSiteCode}
+					</if>
+					<if test="isLink != null">
+						and dti.is_link = #{isLink}
+					</if>
+					<if test="siteType != null">
+						and dti.layer_type = #{siteType}
+					</if>
+					<if test="isExp != null">
+						and d.isexp = #{isExp}
+					</if>
+					<if test="queue != null">
+						and d.queue = #{queue}
+					</if>
+					<if test="scanDate != null">
+						and ca.scan_date = #{scanDate}
+					</if>
+					<if test="error != null">
+						and ca.error_num > ${error}
+					</if>
+					GROUP BY
+						ca.site_code,ca.url
+				) AS a
+			GROUP BY a.siteCode 
+		    ORDER BY channelNum DESC 
+		) AS b
+	</select>
+	
+</mapper>

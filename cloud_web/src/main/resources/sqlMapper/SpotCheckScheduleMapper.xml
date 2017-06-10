@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.SpotCheckScheduleDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.SpotCheckSchedule" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode != null and siteCode != '' ">
+			    and site_code = #{siteCode}
+			</if>
+			<if test="contractInfoId != null and contractInfoId != ''">
+			    and contract_info_id = #{contractInfoId}
+			</if>
+			<if test="taskName !=null">
+				and task_name like '%${taskName}%'
+			</if>
+			<if test="beginTime !=null and endTime !=null">
+				and create_time  BETWEEN #{beginTime}  AND #{endTime}
+			</if>
+			
+			<if test="batchNum !=null">
+				and batch_num= #{batchNum}
+			</if>
+			<if test="groupNum !=null">
+				and group_num= #{groupNum}
+			</if>
+			<if test="status !=null">
+				and status= #{status}
+			</if>
+			<if test="reportOrgCode !=null">
+				and report_org_code= #{reportOrgCode}
+			</if>
+			
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.SpotCheckSchedule" useGeneratedKeys="true" keyProperty="id">
+		insert into spot_check_schedule ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="contractInfoId != null ">contract_info_id,</if>
+			<if test="batchNum != null ">batch_num,</if>
+			<if test="groupNum != null ">group_num,</if>
+			<if test="taskName != null ">task_name,</if>
+			<if test="startDate != null ">start_date,</if>
+			<if test="endDate != null ">end_date,</if>
+			<if test="status != null ">status,</if>
+			<if test="spotWebsiteNum != null ">spot_website_num,</if>
+			<if test="spotLevel != null ">spot_level,</if>
+			<if test="isorganizational != null ">isorganizational,</if>
+			<if test="reportOrgCode != null ">report_org_code,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="contractInfoId != null ">#{contractInfoId},</if>
+			<if test="batchNum != null ">#{batchNum},</if>
+			<if test="groupNum != null ">#{groupNum},</if>
+			<if test="taskName != null ">#{taskName},</if>
+			<if test="startDate != null ">#{startDate},</if>
+			<if test="endDate != null ">#{endDate},</if>
+			<if test="status != null ">#{status},</if>
+			<if test="spotWebsiteNum != null ">#{spotWebsiteNum},</if>
+			<if test="spotLevel != null ">#{spotLevel},</if>
+			<if test="isorganizational != null ">#{isorganizational},</if>
+			<if test="reportOrgCode != null ">#{reportOrgCode},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.SpotCheckSchedule">
+		select * from spot_check_schedule where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.SpotCheckSchedule">
+		update spot_check_schedule 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="contractInfoId != null ">contract_info_id = #{contractInfoId},</if>
+				<if test="batchNum != null ">batch_num = #{batchNum},</if>
+				<if test="groupNum != null ">group_num = #{groupNum},</if>
+				<if test="taskName != null ">task_name = #{taskName},</if>
+				<if test="startDate != null ">start_date = #{startDate},</if>
+				<if test="endDate != null ">end_date = #{endDate},</if>
+				<if test="status != null ">status = #{status},</if>
+				<if test="spotWebsiteNum != null ">spot_website_num = #{spotWebsiteNum},</if>
+				<if test="spotLevel != null ">spot_level = #{spotLevel},</if>
+				<if test="isorganizational != null ">isorganizational = #{isorganizational},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+				<if test="reportOrgCode != null ">report_org_code = #{reportOrgCode},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from spot_check_schedule where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from spot_check_schedule
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from spot_check_schedule
+		<include refid="where" />
+	</select>
+	<!-- 批次查询 -->
+	<select id="queryBatch" parameterType="HashMap" resultMap="resultMap">
+		select batch_num ,max(group_num) + 1 as group_num from spot_check_schedule
+		<include refid="where"/>
+		group by batch_num order by batch_num desc
+	</select>
+<!-- 	查询抽查汇报数据集合 -->
+	<select id="spotCheckReportUpList" parameterType="HashMap" resultMap="resultMap">
+		SELECT * FROM (
+			SELECT 
+			sc.id id,
+			sc.site_code site_code,
+			sc.contract_info_id,
+			sc.batch_num batch_num,
+			sc.group_num group_num,
+			sc.task_name task_name,
+			sc.start_date start_date,
+			sc.end_date end_date,
+			sc.status STATUS,
+			sc.spot_website_num spot_website_num,
+			sc.report_org_code report_org_code,
+			sc.modify_time modify_time,
+			re.affix_url affix_url,
+			re.affix_name affix_name,
+			re.type TYPE,
+			re.id upId
+			FROM spot_check_schedule sc
+			JOIN spot_security_report re ON sc.id   =  re.spot_check_schedule_id
+			WHERE  re.type='1'
+			<if test="reportOrgCode !=null">
+				and sc.report_org_code= #{reportOrgCode}
+			</if>
+			UNION ALL
+			SELECT 
+			rt.spot_check_schedule_id id,
+			rt.site_code site_code,
+			NULL AS contract_info_id,
+			NULL AS batch_num,
+			NULL AS group_num,
+			rt.task_name task_name,
+			rt.start_date start_date,
+			rt.end_date end_date,
+			rt.status STATUS,
+			rt.spot_website_num spot_website_num,
+			rt.report_org_code report_org_code,
+			rt.modify_time modify_time,
+			rt.affix_url affix_url,
+			rt.affix_name affix_name,
+			rt.type TYPE,
+			rt.id upId
+			FROM  spot_security_report rt 
+			WHERE 
+			rt.type="2"
+			<if test="reportOrgCode !=null">
+				and rt.report_org_code= #{reportOrgCode}
+			</if>
+			) t 
+		WHERE 
+		1=1
+		<if test="taskName != null ">
+			and t.task_name like CONCAT('%',#{taskName},'%') OR  t.site_code like CONCAT(#{taskName},'%')
+		</if>
+		ORDER BY t.modify_time DESC
+	</select>
+</mapper>

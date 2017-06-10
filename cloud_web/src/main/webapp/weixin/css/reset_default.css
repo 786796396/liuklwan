@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* CSS Document */
+.container{ padding:0px; width:100%;}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #fff;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #2db85b;
+  background-color: #fff;
+   border-bottom:4px solid #2db85b;
+   border-radius:0px;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #2db85b;
+  outline: 0;
+}
+/*----------------------nav-justified-----------------------*/
+.nav-tabs.nav-justified > li {
+  display: table-cell;
+  width: auto;
+}
+.nav-tabs.nav-justified > li > a {
+  margin-bottom: 0px;
+}
+
+.nav-tabs.nav-justified > li > a {
+  border-bottom: 1px solid #ddd;
+  border-radius: 4px 4px 0 0;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+  border-bottom-color: #fff;
+}
+.nav-justified > li {
+	display:inline-block;
+  width: 45%;
+}
+.nav-justified > li:first-child{ margin-left:5%;}
+.nav-justified > li > a {
+  margin-bottom: 0px;
+}
+/*----------------------placeholder-----------------------*/
+::-webkit-input-placeholder { /* WebKit browsers */
+	line-height:100%;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    line-height:100%;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    line-height:100%;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    line-height:100%;
+}

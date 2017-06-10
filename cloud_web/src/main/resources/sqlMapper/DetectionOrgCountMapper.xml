@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.DetectionOrgCountDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.DetectionOrgCount" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode != null ">
+				and site_code=#{siteCode}
+			</if>
+			<if test="scanDate != null ">
+				and scan_date =#{scanDate}
+			</if>
+			<if test="startDate != null and endDate != null">
+				and (scan_date BETWEEN #{startDate} AND #{endDate})
+			</if>
+			<if test=" type != null">
+				and type= #{type}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.DetectionOrgCount" useGeneratedKeys="true" keyProperty="id">
+		insert into detection_org_count ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="siteName != null ">site_name,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			<if test="type != null ">type,</if>
+			<if test="typeSite != null ">type_site,</if>
+			<if test="indexCount != null ">index_count,</if>
+			<if test="indexCountAvg != null ">index_count_avg,</if>
+			<if test="indexCountYester != null ">index_count_yester,</if>
+			<if test="leadAvgRate != null ">lead_avg_rate,</if>
+			<if test="leadYesterday != null ">lead_yesterday,</if>
+			<if test="leadYesterdayRate != null ">lead_yesterday_rate,</if>
+			<if test="connNum != null ">conn_num,</if>
+			<if test="connChannel != null ">conn_channel,</if>
+			<if test="connChannelSite != null ">conn_channel_site,</if>
+			<if test="connHome != null ">conn_home,</if>
+			<if test="connHomeSite != null ">conn_home_site,</if>
+			<if test="connBusiness != null ">conn_business,</if>
+			<if test="connBusinessSite != null ">conn_business_site,</if>
+			<if test="linkNum != null ">link_num,</if>
+			<if test="linkAll != null ">link_all,</if>
+			<if test="linkHome != null ">link_home,</if>
+			<if test="linkHomeSite != null ">link_home_site,</if>
+			<if test="contGuaranteNum != null ">cont_guarante_num,</if>
+			<if test="securityHome != null ">security_home,</if>
+			<if test="securityHomeSite != null ">security_home_site,</if>
+			<if test="securityChannel != null ">security_channel,</if>
+			<if test="securityChannelSite != null ">security_channel_site,</if>
+			<if test="securityBlank != null ">security_blank,</if>
+			<if test="securityService != null ">security_service,</if>
+			<if test="securityResponse != null ">security_response,</if>
+			<if test="securityBasic != null ">security_basic,</if>
+			<if test="securityFatalError != null ">security_fatal_error,</if>
+			<if test="contCorrectNum != null ">cont_correct_num,</if>
+			<if test="contCorrectSite != null ">cont_correct_site,</if>
+			<if test="websiteSafe != null ">website_safe,</if>
+			<if test="contUpdate != null ">cont_update,</if>
+			<if test="updateHome != null ">update_home,</if>
+			<if test="updateHomeSite != null ">update_home_site,</if>
+			<if test="updateChannel != null ">update_channel,</if>
+			<if test="updateChannelSite != null ">update_channel_site,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="siteName != null ">#{siteName},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			<if test="type != null ">#{type},</if>
+			<if test="typeSite != null ">#{typeSite},</if>
+			<if test="indexCount != null ">#{indexCount},</if>
+			<if test="indexCountAvg != null ">#{indexCountAvg},</if>
+			<if test="indexCountYester != null ">#{indexCountYester},</if>
+			<if test="leadAvgRate != null ">#{leadAvgRate},</if>
+			<if test="leadYesterday != null ">#{leadYesterday},</if>
+			<if test="leadYesterdayRate != null ">#{leadYesterdayRate},</if>
+			<if test="connNum != null ">#{connNum},</if>
+			<if test="connChannel != null ">#{connChannel},</if>
+			<if test="connChannelSite != null ">#{connChannelSite},</if>
+			<if test="connHome != null ">#{connHome},</if>
+			<if test="connHomeSite != null ">#{connHomeSite},</if>
+			<if test="connBusiness != null ">#{connBusiness},</if>
+			<if test="connBusinessSite != null ">#{connBusinessSite},</if>
+			<if test="linkNum != null ">#{linkNum},</if>
+			<if test="linkAll != null ">#{linkAll},</if>
+			<if test="linkHome != null ">#{linkHome},</if>
+			<if test="linkHomeSite != null ">#{linkHomeSite},</if>
+			<if test="contGuaranteNum != null ">#{contGuaranteNum},</if>
+			<if test="securityHome != null ">#{securityHome},</if>
+			<if test="securityHomeSite != null ">#{securityHomeSite},</if>
+			<if test="securityChannel != null ">#{securityChannel},</if>
+			<if test="securityChannelSite != null ">#{securityChannelSite},</if>
+			<if test="securityBlank != null ">#{securityBlank},</if>
+			<if test="securityService != null ">#{securityService},</if>
+			<if test="securityResponse != null ">#{securityResponse},</if>
+			<if test="securityBasic != null ">#{securityBasic},</if>
+			<if test="securityFatalError != null ">#{securityFatalError},</if>
+			<if test="contCorrectNum != null ">#{contCorrectNum},</if>
+			<if test="contCorrectSite != null ">#{contCorrectSite},</if>
+			<if test="websiteSafe != null ">#{websiteSafe},</if>
+			<if test="contUpdate != null ">#{contUpdate},</if>
+			<if test="updateHome != null ">#{updateHome},</if>
+			<if test="updateHomeSite != null ">#{updateHomeSite},</if>
+			<if test="updateChannel != null ">#{updateChannel},</if>
+			<if test="updateChannelSite != null ">#{updateChannelSite},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.DetectionOrgCount">
+		select * from detection_org_count where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.DetectionOrgCount">
+		update detection_org_count 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="siteName != null ">site_name = #{siteName},</if>
+				<if test="scanDate != null ">scan_date = #{scanDate},</if>
+				<if test="type != null ">type = #{type},</if>
+				<if test="typeSite != null ">type_site = #{typeSite},</if>
+				<if test="indexCount != null ">index_count = #{indexCount},</if>
+				<if test="indexCountAvg != null ">index_count_avg = #{indexCountAvg},</if>
+				<if test="indexCountYester != null ">index_count_yester = #{indexCountYester},</if>
+				<if test="leadAvgRate != null ">lead_avg_rate = #{leadAvgRate},</if>
+				<if test="leadYesterday != null ">lead_yesterday = #{leadYesterday},</if>
+				<if test="leadYesterdayRate != null ">lead_yesterday_rate = #{leadYesterdayRate},</if>
+				<if test="connNum != null ">conn_num = #{connNum},</if>
+				<if test="connChannel != null ">conn_channel = #{connChannel},</if>
+				<if test="connChannelSite != null ">conn_channel_site = #{connChannelSite},</if>
+				<if test="connHome != null ">conn_home = #{connHome},</if>
+				<if test="connHomeSite != null ">conn_home_site = #{connHomeSite},</if>
+				<if test="connBusiness != null ">conn_business = #{connBusiness},</if>
+				<if test="connBusinessSite != null ">conn_business_site = #{connBusinessSite},</if>
+				<if test="linkNum != null ">link_num = #{linkNum},</if>
+				<if test="linkAll != null ">link_all = #{linkAll},</if>
+				<if test="linkHome != null ">link_home = #{linkHome},</if>
+				<if test="linkHomeSite != null ">link_home_site = #{linkHomeSite},</if>
+				<if test="contGuaranteNum != null ">cont_guarante_num = #{contGuaranteNum},</if>
+				<if test="securityHome != null ">security_home = #{securityHome},</if>
+				<if test="securityHomeSite != null ">security_home_site = #{securityHomeSite},</if>
+				<if test="securityChannel != null ">security_channel = #{securityChannel},</if>
+				<if test="securityChannelSite != null ">security_channel_site = #{securityChannelSite},</if>
+				<if test="securityBlank != null ">security_blank = #{securityBlank},</if>
+				<if test="securityService != null ">security_service = #{securityService},</if>
+				<if test="securityResponse != null ">security_response = #{securityResponse},</if>
+				<if test="securityBasic != null ">security_basic = #{securityBasic},</if>
+				<if test="securityFatalError != null ">security_fatal_error = #{securityFatalError},</if>
+				<if test="contCorrectNum != null ">cont_correct_num = #{contCorrectNum},</if>
+				<if test="contCorrectSite != null ">cont_correct_site = #{contCorrectSite},</if>
+				<if test="websiteSafe != null ">website_safe = #{websiteSafe},</if>
+				<if test="contUpdate != null ">cont_update = #{contUpdate},</if>
+				<if test="updateHome != null ">update_home = #{updateHome},</if>
+				<if test="updateHomeSite != null ">update_home_site = #{updateHomeSite},</if>
+				<if test="updateChannel != null ">update_channel = #{updateChannel},</if>
+				<if test="updateChannelSite != null ">update_channel_site = #{updateChannelSite},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from detection_org_count where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from detection_org_count
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from detection_org_count
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

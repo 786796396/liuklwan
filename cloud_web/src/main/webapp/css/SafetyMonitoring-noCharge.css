@@ -1,0 +1,123 @@
+.safeM-content{
+    position: relative;
+    top: -1px;
+    padding:6px 59px 50px 53px;
+    border:1px solid #eceeee;
+    background: #fff;
+}
+.topline-54d469{
+    position: relative;
+    z-index: 11;
+    display: block;
+    width:100%;
+    height: 3px;
+    background: #54d469;
+}
+.h4-tit{
+    font: normal 23px 'Microsoft Yahei';
+    color: #34495e;
+    padding:23px 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0;
+}
+.item-box .each-item {
+    width: 17%;
+    text-align: center;
+}
+.item-box .spe-item{
+    margin-right:3.75%;
+}
+.each-item i{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin:36px 0 30px 0;
+    vertical-align: middle;
+}
+.each-item h5{
+    font: normal 15px/15px 'Microsoft Yahei';
+    margin-bottom:16px;
+    color: #000;
+}
+.each-item p{
+    width: 154px;
+    margin: 0 auto;
+    font: normal 14px/27px 'Microsoft Yahei';
+    color: #969696;
+    text-align: left;
+}
+.each-item .safe-f-icon{
+   background: url("../images/Safetymonitoring/Safety-monitoring.png") no-repeat 0 0 ;
+}
+.each-item .safe-s-icon{
+    background: url("../images/Safetymonitoring/Safety-monitoring.png") no-repeat -71px 0 ;
+}
+.each-item .safe-t-icon{
+    background: url("../images/Safetymonitoring/Safety-monitoring.png") no-repeat 0 -156px;
+}
+.each-item .safe-fo-icon{
+    background: url("../images/Safetymonitoring/Safety-monitoring.png") no-repeat  0 -230px;
+}
+.each-item .safe-fi-icon{
+    background: url("../images/Safetymonitoring/Safety-monitoring.png") no-repeat  0 -78px;
+}
+.applybuy-btn-box{
+    padding:60px 0 50px 0;
+    border-bottom:1px solid #e5e5e5;
+}
+.applybuy-btn-box a:hover{ text-decoration: none;}
+.applybuy-btn{
+    position: relative;
+    width: 180px;
+    height: 48px;
+    margin: 0 auto;
+    color: #fff;
+    background: #ed5565;
+    font: normal 16px/48px 'Microsoft Yahei';
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    __cursor: pointer;
+}
+.applybuy-btn span{ padding-left: 77px;}
+.applybuy-btn .shpping-car{
+    position: absolute;
+    top: 15px;
+    left: 34px;
+    width: 20px;
+    height: 18px;
+    background: url("../images/Safetymonitoring/Safety-monitoring.png") no-repeat -162px 0;
+}
+.f14-000{
+    font: normal 14px/14px 'Microsoft Yahei';
+}
+.lk-tit{
+    margin:48px 0 23px 0;
+}
+.safe-contact-way{
+    padding:21px 27px 17px 54px;
+    border:1px solid #e4e5e9;
+    background: #fafbfe;
+}
+.safe-contact-way .txt{
+    margin-top: 11px;
+}
+.safe-contact-way .txt p{
+    font: normal 14px/40px 'SimSun';
+    color: #585b64;
+}
+.safe-contact-way .txt p span{
+    font-weight: bold;
+    margin-right:18px;
+}
+.qr-code img{
+    border: 1px solid #e4e5e7;
+    width: 154px;
+    height: 154px;
+}
+.qr-code p{
+    text-align: center;
+    font: normal 14px/14px 'Simsun';
+    margin-top: 6px;
+    color: #585b64;
+}

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="plugins/jquery.js"></script>
+<script type="text/javascript" src="plugins/common.js"></script>
+<script type="text/javascript">
+	//var baseUrl = "yfxApiTest_.action";
+	//1、获取签名
+	function getSignTest() {
+		postAjax("yfxApiTest_getSignTest.action", getFormParams("getSignform"), function(rsp) {
+			$("#signResult").html("结果："+rsp);
+		});
+	}
+	//显示错误消息
+	function showFailMsg(rsp) {
+		try {
+			var json = $.parseJSON(rsp);
+			if(json.status=="fail"){
+				alert(unescape(json.error_msg.replace(/\u/g, "%u")));
+			}
+		} catch (e) {
+			// TODO: handle exception
+		}
+	}
+	//获取js统计代码
+	function getCodeTest() {
+		postAjax("yfxApiTest_getCodeTest.action", getFormParams("getCodeform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#codeResult").html("结果："+rsp);
+		});
+	}
+	
+	//添加组织单位帐号
+	function addOrgInfoTest() {
+		postAjax("yfxApiTest_addOrgInfoTest.action", getFormParams("addOrgInfoform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#addOrgResult").html("结果："+rsp);
+		});
+	}
+	//编辑组织单位帐号
+	function editOrgInfoTest() {
+		postAjax("yfxApiTest_editOrgInfoTest.action", getFormParams("editOrgInfoform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#editOrgResult").html("结果："+rsp);
+		});
+	}
+
+	//删除组织单位帐号
+	function delOrgInfoTest() {
+		postAjax("yfxApiTest_delOrgInfoTest.action", getFormParams("delOrgInfoform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#delOrgResult").html("结果："+rsp);
+		});
+	}
+	//添加站点
+	function addSiteTest() {
+		postAjax("yfxApiTest_addSiteInfoTest.action", getFormParams("addSiteform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#addSiteResult").html("结果："+rsp);
+		});
+	}
+	//编辑站点
+	function editSiteTest() {
+		postAjax("yfxApiTest_editSiteInfoTest.action", getFormParams("editSiteform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#editSiteResult").html("结果："+rsp);
+		});
+	}
+	
+	//删除站点
+	function delSiteTest() {
+		postAjax("yfxApiTest_delSiteInfoTest.action", getFormParams("delSiteform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#delSiteResult").html("结果："+rsp);
+		});
+	}
+	
+	//解除站点上级
+	function removeSitePidTest() {
+		postAjax("yfxApiTest_removeSitePidTest.action", getFormParams("removeSitePidform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#removeSitePidResult").html("结果："+rsp);
+		});
+	}
+	
+	//添加站点上级
+	function addSitePidTest() {
+		postAjax("yfxApiTest_addSitePidTest.action", getFormParams("addSitePidform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#addSitePidResult").html("结果："+rsp);
+		});
+	}
+	
+	//登录 
+	function loginTest() {
+		postAjax("yfxApiTest_loginTest.action", getFormParams("loginform"), function(rsp) {
+			showFailMsg(rsp);
+			$("#loginResult").html("结果："+rsp);
+		});
+	}
+	
+	// post 请求封装
+	function postAjax(url, parm, callBack) {
+		$.ajax({
+			type : 'post', dataType : "json", url : url, data : parm, cache : false, async : true, success : function(msg) {
+				callBack(msg);
+			}
+		});
+	}
+</script>
+<style type="text/css">
+
+	*{margin:0;padding:0; line-height:100%;}
+	body{ font-size:13px; margin:0; font-family:'Microsoft Yahei';}
+	html,body{height:100%;margin:0;padding:0;}
+	form{width: 92%;border: 1px #e4e4e4 solid;padding: 5px;margin-bottom: 15px;}
+	.main{margin:0 auto;width: 1000px;}
+	tr{height: 35px;}
+	th{width: 120px;text-align: right;color: #555;}
+	.span{color:#305686;font-weight: bold;margin:30px 0 10px;display: block; font-size: 15px;}
+	.txt-result{color:#999;font-weight: bold;display: block;width: 745px;height: 55px;}
+	.btn-submit{color: #fff;cursor: pointer; background-color: #305686;border: 0px none;border-radius: 5px;font-size: 16px;line-height: 18px;font-family: '微软雅黑';text-align: center;text-decoration: none;display: block;padding: 7px 29px;margin: 20px 0 20px 400px;}
+</style>
+</head>
+<body>
+	<div class="main">
+		<!-- 获取签名 start -->
+		<div class="">
+			<span class="span">获取签名</span>
+			<form id="getSignform">
+				<table>
+					<tr>
+						<th>token:</th>
+						<td><input type="text" id="token" name="token"/> *</td>
+					</tr>
+					<tr>
+						<th>action:</th>
+						<td><input type="text" id="action" name="action"/> *</td>
+					</tr>
+					<tr>
+						<th>mod:</th>
+						<td><input type="text" id="mod" name="mod"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="signResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="getSignTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 获取签名 end --> 
+		<!-- 获取js统计代码 start -->
+		<div>
+			<span class="span">1、获取js统计代码</span>
+			<form id="getCodeform">
+				<table>
+					<tr>
+						<th>填报单位帐号:</th>
+						<td><input type="text" id="saccounts" name="saccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="codeResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="getCodeTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 获取js统计代码 end -->
+		
+		<!-- 添加组织单位帐号 start -->
+		<div>
+			<span class="span">2、添加组织单位帐号</span>
+			<form id="addOrgInfoform">
+				<table>
+					<tr>
+						<th>单位名称:</th>
+						<td><input type="text" id="organization" name="organization"/> *</td>
+					</tr>
+					<tr>
+						<th>组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="addOrgResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="addOrgInfoTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 添加组织单位帐号 end -->
+		<!-- 编辑组织单位帐号 start -->
+		<div>
+			<span class="span">3、编辑组织单位帐号</span>
+			<form id="editOrgInfoform">
+				<table>
+					<tr>
+						<th>单位名称:</th>
+						<td><input type="text" id="organization" name="organization"/></td>
+					</tr>
+					<tr>
+						<th>组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>组织单位密码:</th>
+						<td><input type="text" id="spassword" name="spassword"/></td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="editOrgResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="editOrgInfoTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 编辑组织单位帐号 end -->
+		
+		<!-- 删除组织单位帐号 start -->
+		<div>
+			<span class="span">4、删除组织单位帐号</span>
+			<form id="delOrgInfoform">
+				<table>
+					<tr>
+						<th>组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>要保留的填报单位账号:</th>
+						<td><input type="text" id="save" name="save"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="delOrgResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="delOrgInfoTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 删除组织单位帐号 end -->
+		
+		<!-- 添加填报单位帐号 start -->
+		<div>
+			<span class="span">5、添加填报单位帐号</span>
+			<form id="addSiteform">
+				<table>
+					<tr>
+						<th>站点名称:</th>
+						<td><input type="text" id="sitename" name="sitename"/> *</td>
+					</tr>
+					<tr>
+						<th>填报单位账号:</th>
+						<td><input type="text" id="saccounts" name="saccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>填报单位密码:</th>
+						<td><input type="text" id="spassword" name="spassword"/> *</td>
+					</tr>
+					<tr>
+						<th>站点地址，http://开:</th>
+						<td><input type="text" id="siteurl" name="siteurl"/> *</td>
+					</tr>
+					<tr>
+						<th>上级组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="addSiteResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="addSiteTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 添加填报单位帐号 end -->
+		
+		<!-- 编辑填报单位帐号 start -->
+		<div>
+			<span class="span">6、编辑填报单位帐号</span>
+			<form id="editSiteform">
+				<table>
+					<tr>
+						<th>站点名称:</th>
+						<td><input type="text" id="sitename" name="sitename"/></td>
+					</tr>
+					<tr>
+						<th>填报单位账号:</th>
+						<td><input type="text" id="saccounts" name="saccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>填报单位密码:</th>
+						<td><input type="text" id="spassword" name="spassword"/></td>
+					</tr>
+					<tr>
+						<th>站点地址，http://开:</th>
+						<td><input type="text" id="siteurl" name="siteurl"/></td>
+					</tr>
+					<tr>
+						<th>上级组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="editSiteResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="editSiteTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 编辑填报单位帐号 end -->
+		
+		<!-- 删除填报单位帐号 start -->
+		<div>
+			<span class="span">7、删除填报单位帐号</span>
+			<form id="delSiteform">
+				<table>
+					<tr>
+						<th>填报单位账号:</th>
+						<td><input type="text" id="saccounts" name="saccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>上级组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="delSiteResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="delSiteTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 删除填报单位帐号 end -->
+		
+		<!-- 填报单位添加上级组织单位 start -->
+		<div>
+			<span class="span">8、填报单位添加上级组织单位</span>
+			<form id="addSitePidform">
+				<table>
+					<tr>
+						<th>填报单位账号:</th>
+						<td><input type="text" id="saccounts" name="saccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>上级组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="addSitePidResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="addSitePidTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 填报单位添加上级组织单位 end -->
+		
+		<!-- 解除组织单位和填报单位的关系 start -->
+		<div>
+			<span class="span">9、解除组织单位和填报单位的关系</span>
+			<form id="removeSitePidform">
+				<table>
+					<tr>
+						<th>填报单位账号:</th>
+						<td><input type="text" id="saccounts" name="saccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>上级组织单位帐号:</th>
+						<td><input type="text" id="faccounts" name="faccounts"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="removeSitePidResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="removeSitePidTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 解除组织单位和填报单位的关系 end -->
+		
+		<!-- 登录易分析平台 start -->
+		<div>
+			<span class="span">10、登录易分析平台</span>
+			<form id="loginform">
+				<table>
+					<tr>
+						<th>账号:</th>
+						<td><input type="text" id="username" name="username"/> *</td>
+					</tr>
+					<tr>
+						<th>密码:</th>
+						<td><input type="text" id="password" name="password"/> *</td>
+					</tr>
+					<tr>
+						<th>返回结果:</th>
+						<td><textarea id="loginResult" class="txt-result"></textarea></td>
+					</tr>
+				</table>
+				<input class="btn-submit" type="button" onclick="loginTest();" value="提交"/>
+			</form>
+		</div>
+		<!-- 登录易分析平台 end -->
+	</div>
+</body>
+</html>

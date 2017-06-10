@@ -1,0 +1,89 @@
+.risk-index-part{
+    height: 3.4rem;
+    border-bottom:1px solid #1bbb6e;
+}
+.des-tips{
+    padding:.2rem .26rem .18rem .26rem;
+}
+.des-tips p{
+    width: 100%;
+    color: #fff;
+    font: normal 0.22rem/.34rem 'Microsoft Yahei';
+}
+/* 圆环s */
+.chart-body{
+    position: relative;
+    width: 3.17rem;
+    height: 3.17rem;
+    margin:0 auto;
+}
+.chart-body canvas{
+    /*width: 100%; height: 100%;*/
+    margin-top:.23rem;
+}
+.chart-body .chart-gauge{
+   /* width: 3.75rem;
+    height: 3.75rem;*/
+}
+.chart-body .chart-info{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3.17rem;
+    height: 3.17rem;
+}
+/* 圆环e */
+
+/* 风险值信息s */
+.chart-info{
+    color: #fff;
+    text-align: center;
+}
+.risk-index-numb{
+    margin-top:1.35rem;
+    font: normal .84rem/.84rem 'Microsoft Yahei';
+}
+.index-sort{
+    margin:.64rem auto 0;
+    color: #fff;
+    text-align: center;
+    font: normal .24rem/.24rem 'Microsoft Yahei';
+}
+/* 风险值信息e */
+.safety-zz .wrap-ul li{
+    padding: 0;
+    border: none;
+}
+.safety-zz p{
+    padding:.35rem .26rem .28rem .26rem;
+    border-bottom:1px solid #e4e4e4;
+    color: #40464c;
+    font: normal .24rem/.24rem 'Microsoft Yahei';
+}
+.safety-zz p img{
+    margin-top:.08rem;
+    margin-left: .28rem;
+}
+.safety-zz .spread{
+    background: #e6fff3;
+}
+.safety-zz .spread li{
+    padding:.2rem .68rem .2rem .6rem;
+    background: #e6fff3;
+    border-bottom: 1px solid #aee4ca;
+}
+.spread li.last-item{
+    border-bottom: none;
+}
+.spread span i{
+    font: normal .15rem/.15rem 'Microsoft Yahei';
+}
+.spread span.numbs{
+    font: normal .24rem/.47rem 'Microsoft Yahei';
+}
+.spread span i{
+    display: block;
+    margin-bottom: .1rem;
+}
+
+

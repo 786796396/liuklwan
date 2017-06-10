@@ -1,0 +1,259 @@
+.hp-head{
+    position: relative;
+    width: 100%;
+    height: 5.31rem;
+    background: #01b35d;
+}
+.top-block{
+    width:100%;
+    height: .9rem;
+}
+.health-index-part{
+    height: 3.61rem;
+    border-bottom:1px solid #1bbb6e;
+}
+.des-tips p{
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font: normal 0.26rem/.78rem 'Microsoft Yahei';
+}
+.detect{
+    padding-bottom: .53rem;
+}
+.detect .title{
+    padding-top:.5rem;
+    padding-bottom:.46rem;
+    color: #000;
+    text-align: center;
+    font: bold .3rem/.3rem 'Microsoft Yahei';
+}
+/*.every-line{ width:100%;}
+.every-line .half-part{
+    width:50%;
+}*/
+.every-item{ margin-left:.27rem;}
+.every-item h5{
+    margin-bottom:.25rem;
+    color: #000;
+    text-align: left;
+    font: normal .26rem/.26rem 'Microsoft Yahei';
+}
+.every-item p{
+    margin-bottom:.12rem;
+    color: #888;
+    text-align: left;
+    font: normal .22rem/.22rem 'Microsoft Yahei';
+}
+
+/* 圆环s */
+.chart-body{
+    position: relative;
+    width: 3.72rem;
+    height: 3.48rem;
+    margin:0 auto;
+    padding-bottom:.14rem;
+}
+.chart-body canvas{
+    width: 100%; height: 100%;
+    /*margin-top:.9rem;*/
+}
+.chart-body .chart-gauge{
+   /* width: 3.75rem;
+    height: 3.75rem;*/
+}
+.chart-body .chart-info{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3.72rem;
+    height: 3.48rem;
+}
+/* 圆环e */
+
+/* 健康指数信息s */
+.chart-info{
+    color: #fff;
+    text-align: center;
+}
+.health-index-tit{
+    margin-top:1rem;
+    font: normal .36rem/.36rem 'Microsoft Yahei';
+}
+.health-index-numb{
+    margin-top:.35rem;
+    font: bold .52rem/.52rem 'Microsoft Yahei';
+}
+.site-count{
+    margin-top:.4rem;
+    font: normal .26rem/.26rem 'Microsoft Yahei';
+}
+.index-sort{
+    width: 1.28rem;
+    height: .35rem;
+    margin:.4rem auto 0;
+    background: #ccf0df;
+    color: #01b35d;
+    text-align: center;
+    font: normal .22rem/.35rem 'Microsoft Yahei';
+    border-radius: .14rem;
+}
+/* 健康指数信息e */
+
+/* 下拉 s*/
+.select-box{
+    position: relative;
+    width:2.22rem;
+    height: .9rem;
+    margin:0 auto;
+    text-align: center;
+    font:normal .22rem/.22rem 'Microsoft Yahei';
+}
+.select-box i{
+    position: absolute;
+    top:.45rem;
+    right: .37rem;
+    width: 12px;
+    height: 6px;
+    background: url("../images/icon-set.png") no-repeat -1px -567px;
+}
+.select-box ul{
+    position: absolute;
+    left:0;
+    top: .7rem;
+    z-index: 11;
+    width: 100%;
+    background: #fff;
+    border:1px solid #d0d0d0;
+    border-radius: 4px;
+    display: none;
+
+}
+.select-box ul li{
+    height: .74rem;
+    color: #717174;
+    text-align: center;
+    font: normal .26rem/.74rem 'Microsoft Yahei';
+    border-bottom:1px solid #e5e5e5;
+    /* display: none;*/
+}
+.select-box ul li.last-item{
+    border-bottom:none;
+}
+.select-box span{
+    color: #fff;
+    font: normal .26rem/.9rem 'Microsoft Yahei';
+}
+/* 下拉 e*/
+
+/* 日常检测/深度检测图标s */
+/*.hp-item-icon{
+    display: block;
+    width: 32px;
+    height:32px;
+    margin-left: .26rem;
+    background-image: url("../images/icon-set.png");
+    background-repeat: no-repeat;
+}
+.daily-first{
+    background-position: 0 0;
+}
+.daily-second{
+    background-position: -32px 0;
+}
+.daily-third{
+    background-position: -64px 0;
+}
+.daily-fourth{
+    background-position: -96px 0;
+}
+.depth-first{
+    background-position: -128px 0;
+}
+.depth-second{
+    background-position: -160px 0;
+}
+.depth-third{
+    background-position: -192px 0;
+}
+.depth-fourth{
+    background-position: -224px 0;
+}
+.depth-fifth{
+    background-position: -256px 0;
+}
+.depth-sixth{
+    background-position: -288px 0;
+}
+.depth-seventh{
+    background-position: -320px 0;
+}
+.depth-eighth{
+    background-position: -352px 0;
+}
+.depth-ninth{
+    background-position: 0 -32px;
+}
+.depth-tenth{
+    background-position: -32px -32px;
+}
+.depth-eleventh{
+    background-position: -64px -32px;
+}*/
+/* 日常检测/深度检测图标e */
+
+.hp-item-icon{
+    display: block;
+    width: .33rem;
+    height:.33rem;
+    margin-left: .26rem;
+    background-image: url("../images/64px.png");
+    background-repeat: no-repeat;
+    background-size: 8rem 5rem;
+}
+.daily-first{
+    background-position: 0 0;
+}
+.daily-second{
+    background-position: -1rem 0;
+}
+.daily-third{
+    background-position: -2rem 0;
+}
+.daily-fourth{
+    background-position: -3rem 0;
+}
+.depth-first{
+    background-position: 0 -1rem;
+}
+.depth-second{
+    background-position: -1rem -1rem;
+}
+.depth-third{
+    background-position: -2rem -1rem;
+}
+.depth-fourth{
+    background-position: -3rem -1rem;
+}
+.depth-fifth{
+    background-position: -4rem -1rem;
+}
+.depth-sixth{
+    background-position: -5rem -1rem;
+}
+.depth-seventh{
+    background-position: 0 -2rem;
+}
+.depth-eighth{
+    background-position: -1rem -2rem;
+}
+.depth-ninth{
+    background-position: -2rem -2rem;
+}
+.depth-tenth{
+    background-position: -3rem -2rem;
+}
+.depth-eleventh{
+    background-position: -4rem -2rem;
+}
+

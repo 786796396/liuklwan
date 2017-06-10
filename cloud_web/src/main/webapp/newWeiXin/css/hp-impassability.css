@@ -1,0 +1,75 @@
+.hp-impassab-tit{
+    width: 2.69rem;
+    margin: 0 auto;
+}
+.tab-box{
+    height: 1.2rem;
+    background: #009d51 ;
+}
+.tab-box p{
+    margin-top: .14rem;
+    margin-bottom:.28rem;
+    color: #a3d2b6;
+    text-align: center;
+    font: normal .22rem/.22rem 'Microsoft Yahei';
+}
+.tab-box p.num{
+    margin-top: .28rem;
+    margin-bottom:0;
+    font: normal .26rem/.26rem 'Microsoft Yahei';
+}
+.tab-box .active p{
+    color: #fff;
+}
+.tab-box .half-part {
+    position: relative;
+}
+/* 向上三角s */
+.active .triangle_border_up{
+    position:absolute;
+    display: block;
+    bottom:-.08rem;
+    left: 0;
+    right: 0;
+    width:0;
+    height:0;
+    margin: 0 auto;
+    border-width:0 .2rem .2rem;
+    border-style:solid;
+    border-color:transparent transparent #fff;/*透明 透明  灰*/
+}
+/* 向上三角e */
+
+.tab-content{ display: none;}
+.tab-content.active{
+    display: block;
+}
+/* 左侧数字部分s */
+.nums-part{
+    width: .8rem;
+}
+.green-num{
+    display: block;
+    width: .37rem;
+    height: .37rem;
+    margin:.5rem 0 0 .26rem;
+    color: #fff;
+    text-align: center;
+    font: normal .2rem/.37rem 'Microsoft Yahei';
+    border-radius: 100%;
+    background: #01b35d;
+}
+/* 左侧数字部分e */
+
+/* 右侧描述s */
+.describs .top-part{
+    border-bottom:1px solid #e5e5e5;
+    padding:.3rem 0 .28rem 0;
+}
+.describs .bottom-part{
+    padding:.1rem 0 .2rem 0;
+}
+.bottom-part p{
+    line-height: .33rem;
+}
+/* 右侧描述e */

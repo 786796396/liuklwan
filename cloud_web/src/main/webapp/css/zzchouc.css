@@ -1,0 +1,201 @@
+
+.page-content .title_box .title{ padding-top:10px;  font-size: 24px; color: #000; margin-right:24px;}
+.title_box span{ font-size: 16px; margin-top:25px; color: #787878;}
+.fl{ float: left;}
+.fr{ float: right;}
+.center_content{ border: 1px solid #ded8ef; margin-top: 10px;}
+.center_content .tab_head{ height: 44px; border: 1px solid #ded8ef; background: #603cba; padding-left:33px;}
+.tab_head div{ color: #ffffff;}
+.tab_head div a{ color:#ffffff;}
+.tab_head .batch{ margin-top:15px; font-size: 16px; margin-right:7px;}
+.tab_head .group{ margin-top:19px; font-size: 12px; margin-right:13px;}
+.tab_head .number{ margin-top:19px; font-size: 13px; margin-right:180px;}
+.tab_head .state{ margin-top:18px; font-size: 14px;}
+.tab_head .green{ width: 104px; height: 30px; margin-top: 8px; background: #3ac42d; border-radius: 2px;}
+.tab_head .report{ margin-right:20px;position: relative;}
+.tab_head .add{ margin-right:16px;position: relative;}
+.tab_head .all{ margin-right:17px; position: relative;}
+.tab_head span{ display: inline-block; margin-left:35px; font-size: 14px; font-family: "微软雅黑"; height: 30px; line-height: 30px;}
+.icon_add{ background: url("../images/icon_group.png") no-repeat 0 -21px; width: 16px; height: 16px; display: inline-block; margin-top:7px; margin-left: 10px; position:absolute;}
+.icon_report{ background: url("../images/icon_group.png") no-repeat 0 -42px; width: 16px; height: 16px; display: inline-block; margin-top:7px; margin-left: 10px; position:absolute;}
+.icon_all{ background: url("../images/icon_group.png") no-repeat 0 0; width: 16px; height: 16px; display: inline-block; margin-top:7px; margin-left: 10px; position:absolute;}
+.tab_taskname{ height: 58px; border-bottom: 1px solid #ded8ef; background: #faf5ff; padding-left: 33px; line-height: 58px; padding-right:20px;}
+.tab_taskname span{ display: inline-block;}
+.task_name .name{ font-size: 14px; color: #68687a; margin-top:20px; font-weight: bold;}
+.task_name .city{ font-size: 12px; color: #68687a; margin-top:22px;}
+.time_period .time{ font-size: 14px; color: #68687a; margin-top:20px; font-weight: bold;}
+.time_period .data{ font-size: 12px; color: #68687a; margin-top:22px;}
+.search{ padding:0 20px 0 33px; height: 66px;border-bottom: 1px solid #f3f5f6; overflow: hidden;}
+.search div{ width: 570px;margin-top:14px;border: 1px solid #dddddd;}
+.search input{ width: 560px; border: 0; padding:8px 0 8px 10px; margin: 0;  font-size: 13px;}
+.search .search_icon{ background: url("../images/common/search_gray.png") no-repeat right center; display: inline-block; width:21px; height: 21px; position: absolute; top:7px; right: 12px; cursor: pointer;}
+.table_part{ padding: 0 33px 0 25px;}
+.table_part .tab th{ font-size: 14px; font-family: "微软雅黑"; color: #354052; vertical-align: middle; vertical-align: middle;}
+.tab_icon1{ background: rgba(0, 0, 0, 0) url("../images/tab_angle.png") no-repeat scroll 0 0;cursor: pointer;display: inline-block; height: 15px;position: absolute;right: 40px;top: 9px; width: 9px;}
+.tab_icon2{ background: rgba(0, 0, 0, 0) url("../images/tab_angle.png") no-repeat scroll 0 0;cursor: pointer;display: inline-block; height: 15px;position: absolute;right: 10px;top: 9px; width: 9px;}
+.tab_icon3{ background: rgba(0, 0, 0, 0) url("../images/tab_angle.png") no-repeat scroll 0 0;cursor: pointer;display: inline-block; height: 15px;position: absolute;right:12px;top: 9px; width: 9px;}
+.tab td{ font-size: 12px; vertical-align: middle; line-height: 28px;}
+.tab td.font_701999{ color: #701999;}
+.tab_firts .th_center{ text-align: center;}
+.yulan{ background: url("../images/icon_group.png") no-repeat 0 -147px; width: 25px; height: 18px; display: inline-block; title:"查看详情";}
+.download{ background: url("../images/icon_group.png") no-repeat 0 -69px; width: 25px; height: 18px; display: inline-block; }
+.yulan:hover{ background: url("../images/icon_group.png") no-repeat 0 -123px; width: 25px; height: 18px; display: inline-block; cursor: pointer; }
+.download:hover{ background: url("../images/icon_group.png") no-repeat 0 -94px; width: 25px; height: 18px; display: inline-block; cursor: pointer;}
+/**全面监测预览下载start**/
+.download-active{ background: url("../images/icon_group.png") no-repeat 0 -94px; width: 25px; height: 18px; display: inline-block; cursor: pointer;}
+.yulan-active{ background: url("../images/icon_group.png") no-repeat 0 -123px; width: 25px; height: 18px; display: inline-block; cursor: pointer; margin-right:10px;}
+.yulan-qmjc{ background: url("../images/icon_group.png") no-repeat 0 -147px; width: 25px; height: 18px; display: inline-block; title:"查看详情";}
+.download-qmjc{ background: url("../images/icon_group.png") no-repeat 0 -69px; width: 25px; height: 18px; display: inline-block; }
+/**全面监测预览下载end**/
+input[type=checkbox] {
+    visibility: hidden;
+}
+.check_box{ width: 20px; height: 20px; position: relative; }
+.check_box label{ width: 20px; height:20px; position: absolute; top: 0; left: 0; ___background: #1abc9c; cursor: pointer; border-radius: 4px; border: 1px solid #b3b3b3;}
+.check_box label:after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    background: transparent;
+    top: 4px;
+   	left: 4px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.check_box input[type=checkbox]:checked + label:after{
+    opacity: 1;
+}
+.star{ background:url("../images/star.jpg") no-repeat; width: 16px; height: 16px; display: inline-block; position: absolute; top:-3px; left: -20px;}
+.wz-name{ position: relative;}
+.sbString{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;display:block; }
+.page-content a{ color:#08c; }
+
+
+.pass{ width:50px; height:30px; text-align:center; line-height:30px; background:#ccc; color:#fff; border-radius:3px;}
+.unpass{ width:50px; height:30px; text-align:center; line-height:30px; background:#ccc; color:#fff; border-radius:3px;} 
+.pass.on{ width:50px; height:30px; text-align:center; line-height:30px; background:#09f; color:#fff; border-radius:3px; cursor:pointer;}
+.unpass.on{ width:50px; height:30px; text-align:center; line-height:30px; background:#09f; color:#fff; border-radius:3px; cursor:pointer;}
+
+.pass.on{ width:50px; height:30px; text-align:center; line-height:30px; background:#09f; color:#fff; border-radius:3px;cursor: pointer;}
+.unpass.on{ width:50px; height:30px; text-align:center; line-height:30px; background:#09f; color:#fff; border-radius:3px;cursor: pointer}
+.tzzg-green{ width:74px; height:24px; background:#4cb050; color:#fff; font-size:12px; line-height:24px; text-align:center; margin-left:26px; padding:7px 13px; cursor:pointer;}
+.ckfk-yellow{width:74px; height:24px; background:#ff9700; color:#fff; font-size:12px; line-height:24px; text-align:center; margin-left:26px; padding:7px 13px; cursor:pointer;}
+.ckfk-gray{ width:74px; height:24px; background:#d9d9d9; color:#fff; font-size:12px; line-height:24px; text-align:center; margin-left:26px; padding:7px 13px; cursor:pointer; color: #383b4d;}
+#myModalNotice .fade{ opatity:1; transition:opacity .2s linear;}
+
+/** 整改通知下发 **/
+#myModalNotice{top:4%;}
+.zg{height: 40px; background: #2dcc70; color: #fff; line-height:40px;}
+.zg .zg-x{ background: url("../images/zg-icon.png") no-repeat -16px -14px; width: 36px;  height: 36px;  position: absolute; right: 10px; top: 6px; margin-top: 10px; opacity: 1;}
+.zg-title{ margin-left: 30px; font-size: 18px; line-height:40px;height: 35px; margin-top:0;}
+
+.zfs-fz{ font-family: 微软雅黑; font-size: 16px; color:#383b4d; margin-left: 30px; margin-right: 45px; border-bottom: 1px solid #e5e5e5; __margin-top: 9px; height: 59px; line-height: 59px;}
+
+.zfs-report_d{ height: 110px; border-bottom:1px solid #e5e5e5; margin-left: 30px; margin-right: 45px;}
+.zfs-p2{ float: left;}
+.zfs-pb{ font-weight: bold; margin-left: 34px; margin-top: 20px; margin-bottom: 20px; font-size: 14px;  font-family: 微软雅黑; __width: 175px; __height: 34px; __border: 1px solid #c0c0c0; line-height: 34px; __text-align: center;}
+.zfs-pn{ margin-left: 34px; font-size: 14px; font-family: 微软雅黑;}
+.zfs-d_part{ float: right; margin-top: 35px; margin-right: 6px; background: #2dcc70; color:#fff; width: 124px;  height: 34px; line-height: 34px; position: relative; cursor: pointer;}
+.zfs-d_part2{ float: right; margin-top: 35px; margin-right: 6px; background: #00acee; color:#fff; width: 124px;  height: 34px; line-height: 34px; position: relative; cursor: pointer;}
+.zfs-d_part .zfs-d-icon{ display: inline-block; width: 16px; height: 16px; background:url("../images/zg-icon.png") no-repeat -22px -81px; position: absolute; top: 8px; left: 18px;}
+.zfs-d_part2 .zfs-d-icon{ display: inline-block; width: 16px; height: 10px; background:url("../images/icon-g.png") no-repeat 0px -1px; position: absolute; top: 12px; left: 18px;}
+.zfs-d_text{ display: inline-block; margin-left: 42px;}
+.zfs-time-part{ color: #354052;  margin-left: 36px; margin-bottom: 30px; height:36px; line-height:36px;}
+.zfs-time-part div{ position: relative; width:175px; display: inline-block; border: 1px solid #ddd; height:34px;}
+.zfs-time-part i{ position: absolute; top:10px; right: 11px; width: 15px;  height: 15px; background: url("../images/icon-g.png") no-repeat 0 -13px;}
+.zfs-time-part input { border:1px solid #c0c0c0;  background: rgba(255,255,255,0);  position: relative;  width: 175px;  margin-bottom: 0px;  height: 34px; border-radius:0;}
+.time-part span{ color: #f91a1a; margin: 0 15px 0 15px;}
+.zfs-time-part .ui-datepicker-trigger{ position:relative; right:27px;}
+.zfs-time-part input.datepicker-input + img {cursor: pointer; left:155px; position: relative; top:10px; top:-14px;}
+.zfs-please-change{ margin-left: 30px; margin-right: 45px; margin-top: 20px; margin-bottom: 0px; font-size: 14px; font-family: 微软雅黑; padding-bottom:15px;}
+.zfs-em{ __height: 170px; width:100%; border: 1px solid #c9dcce; background: #f1fdf6; __margin-left: 36px;}
+.zfs-em p{ font-size: 14px; color: #354052; font-family: 微软雅黑; font-weight: bold;}
+.zfs-requir span{ font-weight: normal; margin-left: 22px;}
+.zfs-mail span{ margin-left:10px; display:inline-block;}
+.zfs-requir{ margin: 20px 0 20px 26px; position: relative; height: 50px;}
+.zfs-requir .p{ position: absolute; left: 0; top: 7px;}
+.zfs-requir .texta{margin-left: 100px; height:100%;}
+.zfs-requir textarea{ outline: none; width: 80%; height: 100%; border-radius:0;}
+.zfs-mail{ margin: 20px 0 22px 26px;}
+
+.zfs-mail input{ opacity: 0;  cursor: pointer;  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  filter: alpha(opacity=0);  }
+.zfs-mail .box{ display:inline-block; margin-right: 38px; color: #354052;}
+.zfs-mail .box1{width: 20px;  height: 20px; /*float: left;*/  /*padding-top: 3px;*/  cursor: pointer;  text-align: center; /*margin-right: 10px;*/ background-image: url(../images/blue.png);  background-repeat: no-repeat;  background-position: -1px -1px;  display: inline-block;  margin-top:3px;  }
+.zfs-mail .box2{ display: inline-block;}
+.zfs-mail .on_check{  background-position: -49px -1px; }
+label{ margin-left:10px;}
+.marginl26{ margin-left: 26px;}
+.marginb10{ margin-bottom:10px;}
+/** 整改通知反馈 **/
+.em p{ font-size: 16px; color: #354052; font-family: 微软雅黑; font-weight: bold;}
+.mail span,.requir span{ font-weight: normal; margin-left: 22px;}
+.tfk-content .tfk-website{font-family: 微软雅黑; font-size: 14px; color:#354052; margin-left: 30px; margin-right: 45px; border-bottom: 1px solid #e5e5e5; margin-top: 9px; }
+.tfk-website .name{ margin-top: 20px; margin-bottom: 20px;}
+.name span,.zhuban span,.time span, .yao span{ font-weight: normal; margin-left: 22px;}
+.tfk-website .zhuban{ margin-bottom: 20px; }
+.tfk-time{ margin-left: 30px; margin-right: 45px; border-bottom: 1px solid #e5e5e5;font-family: 微软雅黑; font-size: 14px; color:#354052; }
+.tfk-time span{color: #92979e;}
+.tfk-time .time{ margin-top: 24px; margin-bottom: 20px;}
+.tfk-time .yao{ margin-bottom:20px;}
+.tfk-info .ques{ margin-top:20px; height: 38px; line-height: 38px; margin-bottom: 20px;}
+.tfk-info{ margin-left: 30px; margin-right: 45px; font-family: 微软雅黑; font-size: 14px; color:#354052;}
+.tfk-info .ques input{ width:90px; height:34px; outline: none; margin-left: 22px; border-radius: 0;}
+.txt{ position: relative; __height: 100px;}
+.txt .p{ position: absolute; left: 0; top: 7px;}
+.txt .texta{margin-left: 85px;}
+.txt textarea{ outline: none; width: 80%; height: 100%; border-radius:0;}
+.baogao input{ margin-left: 22px;}
+.baogao .upload{ font-size: 12px;}
+/** 整改通知查看 **/
+#myModalNoticeSee{ top:4%;}
+.report_d{ height: 124px; border-bottom:1px solid #e5e5e5; margin-left: 30px; margin-right: 45px;}
+.p2{ float: left;}
+.pb{ font-weight: bold; margin-left: 34px; margin-top: 20px; margin-bottom: 20px; font-size: 14px;  font-family: 微软雅黑; }
+.pn{ margin-left: 34px; font-size: 14px; font-family: 微软雅黑;}
+.d_part{ float: right; margin-top: 35px; margin-right: 6px; background: #2dcc70; color:#fff; width: 124px; height: 34px; line-height: 34px; position: relative; cursor: pointer;}
+.d-icon{ display: inline-block; width: 16px; height: 16px; background:url("../images/zg-icon.png") no-repeat -22px -81px; position: absolute; top: 8px; left: 18px;}
+.d_text{ display: inline-block; margin-left: 42px;}
+.time-part{ color: #354052;  margin-left: 36px;}
+.time-part span{ color: #f91a1a; margin: 0 15px 0 15px;}
+.please-change{ margin-left: 30px; margin-right: 45px; margin-top: 20px; margin-bottom: 20px; font-size: 14px; font-family: 微软雅黑;}
+.em{ __height: 120px; width:100%; border: 1px solid #c9dcce; background: #f1fdf6; margin-left: 36px;}
+.em p{ font-size: 14px; color: #354052; font-family: 微软雅黑; font-weight: bold;}
+.mail span,.requir span{ font-weight: normal; margin-left: 22px;}
+.mail,.requir{ margin: 20px 0 20px 24px;}
+.zg-close{ width: 124px; height: 34px; border: 1px solid #cbcbcb; color: #000000; font-family:'Conv_Lato-Bol', Sans-Serif; margin-top:20px;}
+
+/** 整改通知反馈查看 **/
+.em p{ font-size: 14px; color: #354052; font-family: 微软雅黑; font-weight: bold;}
+.mail span,.requir span{ font-weight: normal; margin-left: 22px;}
+.zck-content .zck-website{font-family: 微软雅黑; font-size: 14px; color:#354052; margin-left: 30px; margin-right: 45px; border-bottom: 1px solid #e5e5e5; margin-top: 9px; }
+.zck-website .name{ margin-top: 20px; margin-bottom: 20px;}
+.name span,.zhuban span,.time span, .yao span,.qixian span{ font-weight: normal; margin-left: 22px;}
+.zck-website .zhuban{ margin-bottom: 20px; }
+.zck-time{ margin-left: 30px; margin-right: 45px; border-bottom: 1px solid #e5e5e5;font-family: 微软雅黑; font-size: 14px; color:#354052; }
+.zck-time span{color: #92979e;}
+.zck-time p{ margin-bottom: 20px;}
+.zck-time .mail{margin-left:0;}
+.zck-time .time{ margin-top: 20px; }
+.zck-time .qixian{ margin-bottom: 20px;}
+.zck-time .mail span{ margin-right: 10px;}
+.zck-info{ margin-left: 30px; margin-right: 45px; font-family: 微软雅黑; font-size: 14px; color:#354052;}
+.zck-info span{ margin-left: 22px; color: #92979e;}
+.zck-info .feedback{ margin-top: 20px; margin-bottom: 20px;}
+.zck-info .report a{ color: #1063e9; margin-left: 22px; text-decoration: underline; cursor: pointer;}
+
+#myModalNoticeShow{ top:4%;}
+#myModalNoticeUp{ top:4%;}
+
+/*2016.7.8 下载报告布局调整添加样式 */
+.already_fk{ color:#3fd8ff; font-size:12px; display: inline-block; line-height: 40px; font-size: 14px;font-weight: bold; cursor: pointer;}
+.not_yet_fk{ color:#4a4b4b; font-size:12px; display: inline-block; line-height: 40px; font-size: 14px;font-weight: bold; }
+

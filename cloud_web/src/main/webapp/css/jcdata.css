@@ -1,0 +1,61 @@
+.page-right{ margin-left:225px; border: 1px solid #fff; background: #fff; padding-bottom: 30px;margin-top:114px}
+/*以下样式已替换*/
+.jkzs{ margin:4px 30px 4px 30px; border:1px solid #f5f5f5; background: #f5f5f5; height: 80px;}
+.bor{ border-right: 1px solid #e3e3e3; height: 60px;text-align: center;}
+.jkzs>div{height: 30px; margin-top:25px;}
+.jkzs>div>span{ height: 30px; line-height: 30px; font-family: 'Arial Normal', 'Arial'; font-size: 14px;}
+.health-index{ padding: 0 12px 0 12px;}
+.site{ margin: 0 12px 0 12px;}
+.page{ margin: 0 12px 0 12px;}
+.ques{ margin: 0 0 0 12px;}
+.jkzs>div>span.fred-s{ font-size: 20px; font-weight: bold;font-family: 'Arial Negreta', 'Arial'; color: #f00;}
+.freds-s{ font-size:12px; font-weight: normal; font-family: 'Arial Negreta', 'Arial'; color: #f00; position: relative; padding: 0 0 0 8px;}
+.jkzs>div>span.fgreen-s{ font-size: 20px; color: #009900;}
+/*以上样式已替换*/
+.jkzs-y{margin:4px 30px 4px 30px; border:1px solid #f5f5f5; background: #f5f5f5; height: 80px; padding: 0 10px 0 10px; overflow: hidden;}
+.bor-y{ border-right: 1px solid #e3e3e3; height: 60px;text-align: center; vertical-align: top; margin: 0 10px 0 10px;}
+.jkzs-y>div{height: 30px; margin-top:25px; display: inline-block;}
+.jkzs-y>div>span{ height: 30px; line-height: 30px; font-family: 'Arial Normal', 'Arial'; font-size: 14px;}
+.health-index-y{ __padding: 0 12px 0 12px; __margin: 0 10px 0 10px;}
+.site-y{ __padding: 0 12px 0 12px; __margin: 0 10px 0 10px;}
+.page-y{__padding: 0 12px 0 12px; __margin: 0 10px 0 10px;}
+.ques-y{__padding: 0 0 0 12px; __margin: 0 10px 0 10px;}
+.jkzs-y>div>span.fred-s{ font-size: 20px; font-weight: bold;font-family: 'Arial Negreta', 'Arial'; color: #f00;}
+.freds-s{ font-size:12px; font-weight: normal; font-family: 'Arial Negreta', 'Arial'; color: #f00; position: relative; padding: 0 0 0 8px;}
+.jkzs-y>div>span.fgreen-s{ font-size: 20px; color: #009900;}
+
+
+.day-data{margin: 34px 30px 20px 30px; height: 22px;font-family: 'Arial Normal', 'Arial'; font-size: 18px; line-height: 22px;}
+.day-data div{ height: 22px; line-height: 22px;}
+.solid{ border-bottom: 1px solid #d7d7d7; margin: 0px 30px 0 30px;}
+.tab-top{margin: 24px 30px 10px 30px;}
+.tab-top .tab-change span{ display:inline-block; width: 100px; border: 1px solid #B9BFD2; border-radius: 3px; color:#666; height: 36px;  line-height: 36px; text-align: center; font-family: "微软雅黑"; font-size: 16px;
+    cursor: pointer;}
+.tab-top .tab-change span.on{ color: #fff; background: #576475; font-weight: bold; }
+.tab_list_report{ width: 68px;height: 28px; background: #1c9722; color: #fff; text-align: center; line-height: 28px; border-radius: 3px; margin-top:6px; margin-left:10px; cursor: pointer;}
+.sel{width: 109px; height: 30px; font-family: 'Arial Normal', 'Arial'; font-size: 14px; text-decoration: none;
+    color: #999; margin-right:12px; background: #fff;}
+.search_btn{ position:absolute; right: 0; top: 0; border: 1px solid #ccc; height: 30px; padding: 3px; color: #a7a7a7; background-color: #f2f2f2;}
+.search_box{ position: relative; margin-top:6px;}
+.select_box{ margin-top:6px;}
+.table-box{margin: 0px 30px 0px 30px;}
+.table-box table thead tr{ background: #f2f2f2;}
+.table-box table thead th{ position: relative;}
+table{ width: 100%;}
+table tr{border-bottom: 1px solid #d7d7d7; width: 100%;}
+table tr th{ padding: 10px 9px 10px 0px; text-align: center; font-family: "微软雅黑"; font-weight: bold;}
+table tr td{ padding: 12px 9px 12px 0px; text-align: center; font-family: "微软雅黑";}
+.jian{ width: 9px; height: 15px; display:inline-block; background: url("../images/jiant.png") no-repeat; position: absolute; right: 0; top:15px;}
+.table1{ display: none;}
+.table1.on{ display: block;}
+.icon_red{ display: inline-block; width: 17px; height:24px;background: url("../images/red_top-icon3.png") no-repeat; background-size:100%; position: absolute; left: 2px; bottom: 0;}
+.sel{ display:none;}
+.sel.on{ display:block; }
+.table-box .bigData-tab th,.table-box .bigData-tab td{ vertical-align:middle;}
+.table-box .bigData-tab2 th,.table-box .bigData-tab2 td{ vertical-align:middle;}
+.table-box .bigData-tab .tab_angle{ right:0px;}
+.table-box .bigData-tab2 .tab_angle{ right:0px;}
+.table-box .bigData-tab td{ text-align:center;}
+.search_text{ padding-left:20px; width:200px;}
+.search_box i{position:absolute; right: 4px; top: 7px; display: inline-block; width: 16px; height: 16px; background: url("../images/common/search_black.png") no-repeat; }
+#content table{border-collapse:separate;}

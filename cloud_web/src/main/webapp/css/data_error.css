@@ -1,0 +1,12 @@
+body{ width: 100%; height: 100%; background: #f5f5f5;}
+*{ margin: 0; padding: 0;}
+.error-content{ margin:16px 23px 27px 28px; __background: #dfdfdf; position: relative;}
+.error-content i{ display: inline-block; width: 100%; height: 100%; background: url("../images/error_bg.jpg") repeat center center; position: absolute; top: 0; left: 0; z-index: 10;}
+.error-content .content_box{ position: absolute; width: 500px; height: 273px; left: 50%; margin-left: -250px; top:50%; margin-top: -120px; __border: 1px solid red;  z-index: 11; background: #fff; box-shadow:-6px 0 10px #b1b1b1,6px 0 10px #b1b1b1,0 6px 6px #b1b1b1;}
+.img_part{ width: 220px; margin: 0 auto; margin-top: 80px; height:40px; overflow:hidden;}
+.img_part span{ color: #f58744; font-size: 34px; height:40px; line-height:47px; display:inline-block; float:right;}
+.img_part img{ position: relative; top:0px; float:left;}
+.content_box div{ width: 100%; height: 16px; text-align: center; font-size: 16px; color: #595959; font-family: 冬青黑体简体中文;}
+.txt1{margin-top: 35px;}
+.txt2{ margin-top: 18px;}
+.colo-03a00b{ color: #03a00b;}

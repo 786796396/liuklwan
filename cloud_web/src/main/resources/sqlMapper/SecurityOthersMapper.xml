@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.SecurityOthersDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.SecurityOthers" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode != null ">
+				and site_code=#{siteCode}
+			</if>
+			<if test="servicePeriodId != null ">
+				and service_period_id=#{servicePeriodId}
+			</if>
+			<if test="startDate != null and endDate !=null">
+				AND (scan_date BETWEEN #{startDate} and #{endDate})
+			</if>
+			and del_flag=0
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.SecurityOthers" useGeneratedKeys="true" keyProperty="id">
+		insert into security_others ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="servicePeriodId != null ">service_period_id,</if>
+			<if test="name != null ">name,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			<if test="url != null ">url,</if>
+			<if test="imgUrl != null ">img_url,</if>
+			<if test="problemDesc != null ">problem_desc,</if>
+			<if test="userId != null ">user_id,</if>
+			<if test="webVersion != null ">web_version,</if>
+			<if test="delFlag != null ">del_flag,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="servicePeriodId != null ">#{servicePeriodId},</if>
+			<if test="name != null ">#{name},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			<if test="url != null ">#{url},</if>
+			<if test="imgUrl != null ">#{imgUrl},</if>
+			<if test="problemDesc != null ">#{problemDesc},</if>
+			<if test="userId != null ">#{userId},</if>
+			<if test="webVersion != null ">#{webVersion},</if>
+			<if test="delFlag != null ">#{delFlag},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.SecurityOthers">
+		select * from security_others where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.SecurityOthers">
+		update security_others 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="servicePeriodId != null ">service_period_id = #{servicePeriodId},</if>
+				<if test="name != null ">name = #{name},</if>
+				<if test="scanDate != null ">scan_date = #{scanDate},</if>
+				<if test="url != null ">url = #{url},</if>
+				<if test="imgUrl != null ">img_url = #{imgUrl},</if>
+				<if test="problemDesc != null ">problem_desc = #{problemDesc},</if>
+				<if test="userId != null ">user_id = #{userId},</if>
+				<if test="webVersion != null ">web_version = #{webVersion},</if>
+				<if test="delFlag != null ">del_flag = #{delFlag},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from security_others where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from security_others
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from security_others
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

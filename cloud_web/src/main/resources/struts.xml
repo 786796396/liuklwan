@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.multipart.maxSize" value="100000000" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- session拦截器 -->
+		<!--  -->
+		<interceptors>
+			<interceptor name="sessionInterceptor" class="com.ucap.cloud_web.interceptor.SessionInterceptor"></interceptor>
+			<interceptor-stack name="sessionStack">
+				<interceptor-ref name="sessionInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="sessionStack"></default-interceptor-ref>
+
+		
+		<global-results>
+			<result name="all">/error.jsp</result>
+			<result name="login" type="redirect">/users_index.action</result>
+			<result name="loginOrg" type="redirect">/connectionHomeDetail_indexOrg.action</result>
+			<result name="loginFill" type="redirect">/fillUnit_gailan.action</result>
+			<result name="logOut" type="redirect">/users_login.action</result>
+			<!-- <result name="logsOut" type="redirect">/users_logins.action</result> -->
+			<result name="logsOut" type="redirect">http://jg.kaipuyun.cn</result>
+			<result name="freePage">/common/empty.jsp</result>
+			<result name="bigDataError">/jsp/bigDataAnalysis/bigDataError.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="all" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		
+		<action name="*_*" class="{1}Action" method="{2}">
+			<result name="success">/jsp/{1}/{2}.jsp</result>
+			<result name="weixin">/weixin/jsp/{1}/{2}.jsp</result>
+			<result name="newWeiXin">/newWeiXin/jsp/{1}/{2}.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
+
+	</package>
+</struts>

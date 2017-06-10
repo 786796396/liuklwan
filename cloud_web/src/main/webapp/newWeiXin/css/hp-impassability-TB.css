@@ -1,0 +1,16 @@
+
+.details-info{
+    color: #40464c;
+    padding-bottom: .1rem;
+}
+.details-info p{
+    padding:0 .27rem 0 .27rem;
+    border-bottom:1px solid #eeeeec;
+}
+.details-info p.last-item{
+    border-bottom: none;
+}
+.details-info p span{
+    font: normal .24rem/.85rem 'Microsoft Yahei';
+}
+

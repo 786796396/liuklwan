@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0022)http://jg.kaipuyun.cn/ -->
+<!DOCTYPE html><HTML lang="zh-CN"><HEAD>
+<META charset="utf-8">
+<META content="IE=edge" http-equiv="X-UA-Compatible">
+<META name="viewport" content="width=device-width, initial-scale=1">
+<TITLE>开普云监管</TITLE>
+<META name="others" content="页面生成时间 2016-03-09 11:27:41"><LINK rel="stylesheet" 
+href="开普云监管_files/bootstrap.min.css"><LINK rel="stylesheet" href="开普云监管_files/public.css">
+<LINK rel="stylesheet" href="开普云监管_files/index.css"><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesn't work if you view the page via file:// --><!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<META name="GENERATOR" content="MSHTML 9.00.8112.16737">
+<link rel="stylesheet" type="text/css" href="../../css/cloud-login/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/cloud-login/login.css"/>
+<script type="text/javascript" src="../../js/cloud-login/jquery.js"></script>
+<script type="text/javascript" src="../../js/cloud-login/bootstrap.js"></script>
+<script type="text/javascript" src="../../js/cloud-login/jquery.animateNumber.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid banner">
+      <div class="row">
+        <div class="col-md-6 col-xs-12 col-sm-6 banner_left"><img src="../../images/banner_l.png" src="login-css/banner_l.png" alt="" class="img-responsive">
+          <div class="tj_list">
+            <h2><font>2105.92</font><i>138.30  +0.56%</i><span>良</span></h2>
+            <h4>昨日全国政府网站健康指数</h4>
+            <p><font>监测站点</font><span class="span1">85,737</span></p>
+            <p><font>监测页面</font><span id="pageNum" class="span1" _val="444485">444485</span>&nbsp;&nbsp;&nbsp;&nbsp;<font>发现问题</font><span id="questionNum" class="span2" _val="85">85</span></p>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12 col-sm-4 pull-right loginbox">
+          <div class="login">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a aria-expanded="true" href="#home" data-toggle="tab">组织单位<span>(主管)</span></a> </li>
+              <li class=""><a aria-expanded="false" href="#ios" data-toggle="tab" class=" text-right">填报单位<span>(主办)</span></a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+                <form id="loginForm" action="users_login.action" method="post">
+                  <div class="login-input-box">
+                    <input id="userName" class="login_input1 ph-input form-control" name="userName" placeholder="用户名" _pad="30" type="text">
+                  </div>
+                  <div class="error-msg" id="userNameError"></div>
+                  <div class="login-input-box">
+                    <input id="password" class="login_input1 ph-input form-control" name="passWord" maxlength="18" placeholder="密码" _pad="30" type="password">
+                  </div>
+                  <div class="error-msg" id="passWordError"></div>
+                </form>
+                <div class="zhuangtai"> <span class="dlzt">
+                  <input value="" type="checkbox">
+                  记住登录状态</span> <span class="jym"><a href="#">忘记校验码？</a></span> </div>
+                <div class="dlk">
+                  <input name="" value="立即登录" type="button">
+                </div>
+              </div>
+              <div class="tab-pane fade" id="ios">
+                <form id="loginForm" action="users_login.action" method="post">
+                  <div class="login-input-box">
+                    <input id="userName" class="login_input1 ph-input form-control" name="userName" placeholder="网站标识码" _pad="30" type="text">
+                  </div>
+                  <div class="error-msg" id="userNameError"></div>
+                  <div class="login-input-box">
+                    <input id="password" class="login_input1 ph-input form-control" name="passWord" maxlength="18" placeholder="校验码" _pad="30" type="password">
+                  </div>
+                  <div class="error-msg" id="passWordError"></div>
+                </form>
+                <div class="zhuangtai"> <span class="dlzt">
+                  <input value="" type="checkbox">
+                  记住登录状态</span> <span class="jym"><a href="#">忘记校验码？</a></span> </div>
+                <div class="dlk">
+                  <input name="" value="立即登录" type="button">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+		$(function(){
+			var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
+			randomNumF("pageNum",1000,10,30);
+			randomNumF("questionNum",2000,2,8);
+			function randomNumF(id,time,minNum,maxNum){
+				setInterval(function(){
+					var idNum=$("#"+id).attr("_val");
+					var calculateNum=maxNum-minNum;
+					var randomNum=Math.floor(Math.random()*calculateNum+minNum);
+					var randomNumEnd=parseInt(idNum)+randomNum;
+					$("#"+id).attr("_val",randomNumEnd);
+					$("#"+id).animateNumber({
+						number: randomNumEnd,
+						numberStep: comma_separator_number_step
+					});
+					
+					idNum=idNum+randomNum;
+				},time);
+			}
+
+		});
+	</script>
+</body>
+</html>

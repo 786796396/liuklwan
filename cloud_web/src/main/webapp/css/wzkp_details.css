@@ -1,0 +1,184 @@
+
+.fl{ float: left;}
+.fr{ float:right;}
+.main_title{ margin-right:15px; font: normal 21px/21px 'Microsoft YaHei','微软雅黑'; color: #545454;}
+.subtitle{ font: normal 15px/15px 'Microsoft YaHei','微软雅黑'; color: #787878;}
+.batch_group-part{ width: 100%; height: 44px; margin:14px 0 10px 0; background: #603cba; border: 1px solid #d3d4dc; color: #fff;}
+.batch_group-part div{ margin-top: 17px; font:normal 12px 'Microsoft YaHei','微软雅黑';}
+.batch_group-part .batch{ margin:13px 7px 0 33px; font:normal 16px 'Microsoft YaHei','微软雅黑';}
+.batch_group-part .group{ margin-right:12px;}
+.batch_group-part .total{ margin-right:35px;}
+.batch_group-part .task_num{ margin-right: 35px;}
+.batch_group-part .period{ margin-right: 27px;}
+.data_show-part{ border: 1px solid #d3dae0; background: #fff;}
+.data_show-content{ padding: 13px 0 40px 0;}
+.show-part-top .search_box{ position: relative; width:165px; height:28px;border: 1px solid #ddd; margin-right:9px; margin-left:9px;}
+.show-part-top .search_box input{ width: 133px; height:28px; padding:0 0 0 10px; margin: 0; border: none; outline:none; font:normal 12px  'Microsoft YaHei','微软雅黑';}
+.show-part-top .search_box input:focus{border:none; outline:none; border-radius:0; -webkit-border-radius:0; box-shadow:none; -webkit-box-shadow: none; -moz-box-shadow: none;}
+.show-part-top .search_box i{ position: absolute; display: inline-block; width: 16px; height: 16px;  background: url("../images/DailyM_icon.png") no-repeat -57px -67px; top: 6px; right: 6px; cursor: pointer;}
+
+.show-part-table table{ width:100%;}
+.show-part-table table thead th{  position:relative; border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:12px 12px 12px 12px;  font:normal 12px 'Microsoft YaHei','微软雅黑'; color:#000;}
+.show-part-table table tbody td{ padding:12px 12px 12px 12px; text-align:center;border-top: 1px solid #ddd; color: #6d6f83; font:normal 12px 'Microsoft YaHei','微软雅黑'; }
+.show-part-table table tbody td a{ font:normal 12px 'Microsoft YaHei','微软雅黑'; text-decoration: none; color:#6d6f83;}
+.show-part-table table tbody td a:hover{ text-decoration: none;}
+.show-part-table table tbody td.name{ text-align: left;}
+.show-part-table table tbody td.name span{ color: #603cba;}
+.show-part-table table thead th .tab_angle{ top:25px; right:3px;}
+.chekbox_plr5{padding:12px 5px;}
+.checkboxs_box{ font:normal 12px 'Microsoft YaHei','微软雅黑'; color: #565656;}
+.checkboxs_box .finish{ margin-right:35px;}
+.kp .show-part-top .icheckbox_square-blue{background-position: -24px -24px; margin-right:12px; top:-2px;}
+.kp .show-part-top .icheckbox_square-blue.checked{background-position: 0 -24px;}
+
+.btns_box>div{ width: 104px; height: 30px; background: #3ac42d; color: #fff; text-align: center; font:normal 14px/30px  'Microsoft YaHei','微软雅黑'; border-radius: 4px; cursor: pointer;}
+.btns_box  .all-export{ margin-right: 11px; }
+.btns_box .unabi{ background:#ccc; cursor:initial;}
+.btns_box .more-operate{position:relative;margin-right:11px; border:1px solid #dddddd; background:#fff; color:#7f7f7f;}
+.more-p-content{position:absolute; top:32px; right:-4px;z-index:12; width:129px; height:71px; background:#fff url(../images/more-operate.png) no-repeat left top;}
+.more-p-content ul{ width:123px; margin:7px 0 7px 1px ; padding:6px 0 0 0;}
+.more-p-content li{ width:122px; height:27px; color:#64676a; text-align:center; font:normal 12px/27px 'Microsoft YaHei';}
+.more-p-content li:hover{ background:#e3ebf4;}
+
+.show-part-table{ margin-top: 16px;}
+.show-part-table table{ width:100%;}
+.w50px{ width: 50px;}
+
+.summary_td i{ display: inline-block; width: 4px; height: 13px; background: url("../images/webSiteList/green_m.png") no-repeat center center; position: relative; top: 2px; margin-left: 30px;}
+.summary_tr td b{  width:64px; height: 22px; display:inline-block; color: #fff; font:normal 12px/22px 'Microsoft YaHei','微软雅黑'; background: #f99800; border-radius: 10px;}
+.show-part-table table tbody td a.colo_1ca8dd_ul{ color: #1ca8dd; text-decoration: underline; cursor:pointer;}
+.show-part-table table tbody td a.colo_1ca8dd{color: #1ca8dd; }
+.show-part-table table tbody td a.colo_1ca8dd_tn{color: #1ca8dd; text-decoration: none;cursor:pointer;}
+.gzzg-gray{width: 50px;height: 24px;__background: #d9d9d9;color: #d9d9d9;font-size: 12px;line-height: 24px;text-align: center;
+padding: 2px;color: #383b4d;display: inline-block;}
+
+.gzzg-green{width: 50px;height: 24px;__background: #4cb050;color: #4cb050;font-size: 12px;line-height: 24px;text-align: center;
+padding: 2px;cursor: pointer;display: inline-block;}
+.gzzg-yellow{width: 50px;height: 24px; __background: #ff9700;color: #ff9700;font-size: 12px;line-height: 24px;text-align: center;
+padding: 2px;display: inline-block;}
+.gzzg-blue{width: 50px;height: 24px; __background: #ff9700;color: #1ca8dd;font-size: 12px;line-height: 24px;text-align: center;
+padding: 2px;display: inline-block; cursor:pointer;}
+#table-SSHX td .span_t{ display:inline-block; padding:3px 0; height:22px; line-height:22px;}
+#spot_check_schedule_tbody_id .add-zd{ cursor:auto;}
+
+/*��ʾmodal*/
+.t_p-head{
+    height:45px;
+    background: #2dcc70;
+    color: #fff;
+}
+.t_p-content>div{
+    margin-bottom: 22px;
+    margin-left: 30px;
+}
+.t_p-head .green_head_closeicon{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 14px;
+    margin-right: 4px;
+    background: url("../images/zg-icon.png") no-repeat -16px -14px;
+    opacity: 1;
+}
+.t_p-head h4{
+    margin: 0;
+    margin-left:26px;
+    font:normal 20px/45px 'Microsoft YaHei','΢���ź�';
+}
+.t_p-footer{
+    border-top: 1px solid #e4e4e4;
+    padding: 14px 0;
+    background: #fafafa;
+}
+.t_p-footer .cancel{
+    margin-right: 63px;
+    margin-left: 24px;
+    background: #fff;
+    color: #7b8292;
+    border: 1px solid #e3e6ed;
+}
+.t_p-footer .ensure{
+    border: 1px solid #1bbd5f;
+    background: #2dcc70;
+    color: #fff;
+}
+.t_p-footer .cancel,
+.t_p-footer .ensure{
+    padding: 10px 31px 10px 42px;
+    font: normal 14px/14px 'Microsoft YaHei','΢���ź�';
+    letter-spacing: 11px;
+    cursor: pointer;
+}
+.t_p-content{
+    margin:32px 0 32px 37px;
+    color: #565e68;
+}
+.t_p-content .tip_txt{
+    font:normal 16px/16px 'Microsoft YaHei','΢���ź�';
+    margin-bottom:28px;
+}
+.t_p-content .time-limit_part{
+    margin: 0;
+    margin-bottom:28px;
+}
+.t_p-content .time-limit_part span{
+    font:normal 16px/31px 'Microsoft YaHei','΢���ź�';
+}
+.time-limit_part .time-inp{
+    width: 139px;
+    height: 29px;
+    border: 1px solid #c1c2c1;
+}
+.time-limit_part .time-inp input{
+    width: 113px;
+    height: 29px;
+    border: none;
+    outline:none;
+    margin: 0 0 0 10px;
+    padding: 0 ;
+    font:normal 13px 'Microsoft YaHei','΢���ź�';
+}
+.time-limit_part .time-inp input:focus{
+    border:none;
+    outline:none;
+    border-radius:0;
+    -webkit-border-radius:0;
+    box-shadow:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+}
+.time-limit_part i{
+    width: 34px;
+    text-align: center;
+    font:normal 12px/29px 'Microsoft YaHei','΢���ź�';
+    color:#565e68;
+}
+.allowed_part{
+    color: #565e68;
+    font: normal 12px '����';
+}
+.allowed_part .icheckbox_square-blue{
+    background-position:-24px -25px;
+    margin-right: 6px;
+}
+.allowed_part .icheckbox_square-blue.checked{
+    background-position:0 -25px;
+}
+.allowed_part input{
+    margin-right: 8px;
+}
+
+
+/*全面检测   增加的5个select框：css*/
+.chart_se{width: 48px; height: 28px; border: 1px solid #dddddd; line-height: 28px; text-align: center; padding-right: 29px; position: relative; color: #828282; font-size: 12px; margin-right: 10px; padding-left:15px;}
+.chart_se i{ position: absolute; top: 12px; right: 8px; background: url("../images/DailyM_icon.png") no-repeat -35px -67px; display: inline-block; width: 10px; height: 5px;}
+.chart_se ul{ position: absolute; top: 23px; left:-1px; border: 1px solid #dddddd; width: 92px; margin: 0; background: #fff; display: none; z-index:200; __height:90px;}
+.chart_se ul li{height: 30px; line-height: 30px; text-align: center; color:#000;}
+.chart_se ul li:hover{ background: #20c05c; color:#fff; cursor: pointer;}
+
+
+
+/*图标*/
+.down_7-4{ display:inline-block; width:7px; height:4px; background:url(../images/down_7-4.png) no-repeat; vertical-align:middle; margin-left:7px;}

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.LinkHomeTrendDao">
+<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+	<resultMap type="com.ucap.cloud_web.entity.LinkHomeTrend" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				and site_code like '${siteCode}%'
+			</if>
+			<if test="scanDate !=null ">
+				and scan_date=#{scanDate}
+			</if>
+			<if test="begeinScanDate !=null and  begeinScanDate !=''">
+    			<![CDATA[   and scan_date >= #{begeinScanDate}  ]]>
+    		</if>
+    		<if test="endScanDate !=null and endScanDate !=''">
+   				 <![CDATA[  and scan_date <= #{endScanDate}    ]]>
+    		</if>
+			<if test="ids != null">
+			 	and site_code in
+            	<foreach collection="ids" item="term" open="(" separator="," close=")">
+       					#{term.siteCode}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+	<sql id="whereCondition">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				and site_code =#{siteCode}  
+				and scan_date BETWEEN DATE_SUB(NOW(),INTERVAL 12 MONTH) AND NOW()
+			</if>
+		</where>
+	</sql>
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.LinkHomeTrend" useGeneratedKeys="true" keyProperty="id">
+		insert into link_home_trend ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			<if test="websiteSum != null ">website_sum,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			<if test="websiteSum != null ">#{websiteSum},</if>
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.LinkHomeTrend">
+		select * from link_home_trend where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.LinkHomeTrend">
+		update link_home_trend 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="scanDate != null ">scan_date = #{scanDate},</if>
+				<if test="websiteSum != null ">website_sum = #{websiteSum},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from link_home_trend where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from link_home_trend
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from link_home_trend
+		<include refid="where" />
+	</select>
+	<!-- 将参数封装到map中查询首页链接可用性表 -->
+	<select id="queryByMap" parameterType="HashMap" resultMap="resultMap">
+		SELECT SUM(website_sum) AS website_sum, SUBSTRING(scan_date,1,7) AS scan_date FROM  link_home_trend 
+		<include refid="whereCondition" />
+		GROUP BY SUBSTRING(scan_date,1,7)
+	</select>
+	<select id="getHomeLine" parameterType="HashMap" resultMap="resultMap">
+		select site_code,scan_date,sum(website_sum) as website_sum from link_home_trend
+		<include refid="where" />
+		group by scan_date
+	</select>
+	<select id="getHomeSum" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.LinkHomeTrendRequest">
+		SELECT 
+		  a.site_code AS siteCode,
+		  a.website_sum AS websiteSum,
+		  b.name AS siteName,
+		  b.url AS homePageUrl,
+		  b.director as director,
+		  b.jump_url AS jumpPageUrl
+		FROM
+		  link_home_trend a,
+		  database_info b 
+		WHERE a.site_code = b.site_code 
+		<if test="scanDate!=null">
+			and a.scan_date=#{scanDate}
+		</if>
+		<if test="ids != null">
+			 and a.site_code in
+            <foreach collection="ids" item="term" open="(" separator="," close=")">
+       			#{term.siteCode}
+			</foreach>
+		</if>
+		group by a.site_code
+		<if test="queryOrderList != null">
+			order by 
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+	</select>
+	
+	<select id="queryHomeDataByMap" parameterType="HashMap" resultType="int">
+		SELECT 
+		  IFNULL(SUM(website_sum), 0) AS homeLinkCount 
+		FROM
+		  link_home_trend lht,
+		  database_info di 
+		WHERE lht.site_code = di.site_code 
+		<if test="isScan !=null">
+			AND di.is_scan = #{isScan}
+		</if>
+		<if test="scanDate !=null">
+			AND lht.scan_date = #{scanDate}
+		</if>
+		 <if test="dataLinkList !=null">
+	 		and lht.site_code in
+	        <foreach collection="dataLinkList" item="term" open="(" separator="," close=")">
+	      		#{term.siteCode}
+			</foreach>
+		 </if>
+	</select>
+	<select id="getHomeOrgList" parameterType="HashMap" resultType="com.ucap.cloud_web.dto.LinkHomeTrendRequest">
+		SELECT
+			di.site_code,
+			di. NAME AS siteName,
+			di.url AS homePageUrl,
+			di.jump_url AS jumpPageUrl,
+			SUM(m.indexdeadnum) websiteSum,
+			IFNULL(sum(m.indexlinknum), 0) AS indexlinknum
+		FROM
+			database_tree_info dti,
+			m_taskdetail m,
+			database_info di
+		WHERE dti.site_code = m.sitecode
+		AND dti.site_code = di.site_code
+		<if test="bigStartDate != null and bigEndDate != null">
+			and (m.countday between #{bigStartDate} and #{bigEndDate})
+		</if>
+		<if test="orgSiteCode != null">
+			and dti.org_site_code= #{orgSiteCode}
+		</if>
+		<if test="isLink != null">
+			and dti.is_link = #{isLink}
+		</if>
+		<if test="siteType != null">
+			and dti.layer_type = #{siteType}
+		</if>
+		<if test="isExp != null">
+			and di.isexp = #{isExp}
+		</if>
+		GROUP BY
+			m.sitecode
+		ORDER BY
+			websiteSum DESC;
+	</select>
+	
+	<select id="queryTotalOrgByMapCount"  parameterType="HashMap" resultType="int">
+		SELECT COUNT(*) FROM (
+			SELECT 
+			  di.site_code AS siteCode,
+			  di.name AS siteName,
+			  lht.website_sum AS websiteSum
+			FROM
+			  database_tree_info dti,
+			  database_info di,
+			  link_home_trend lht 
+			WHERE dti.site_code = di.site_code 
+			  AND di.site_code = lht.site_code 
+			  <if test="orgSiteCode !=null">
+			 	 AND dti.org_site_code =#{orgSiteCode} 
+			  </if>
+			  <if test="checkType !=null">
+			  	 AND dti.layer_type =#{checkType}
+			  </if>
+			  <if test="isLink !=null">
+			 	 AND dti.is_link = #{isLink}
+			  </if>
+			  <if test="isexp !=null">
+			  	 AND di.isexp = #{isexp}
+			  </if>
+			  <if test="scanDate !=null">
+			  	AND lht.scan_date =#{scanDate}
+			  </if>
+			  <if test="linkNum !=null">
+			  	AND lht.website_sum >#{linkNum}
+			  </if>
+			  group by di.site_code
+		) as a  
+	</select>
+	<select id="queryTotalOrgByMap"  parameterType="HashMap" resultType="com.ucap.cloud_web.dto.LinkHomeTrendRequest">
+		SELECT 
+		  di.site_code AS siteCode,
+		  di.name AS siteName,
+		  lht.website_sum AS websiteSum
+		FROM
+		  database_tree_info dti,
+		  database_info di,
+		  link_home_trend lht 
+		WHERE dti.site_code = di.site_code 
+		  AND di.site_code = lht.site_code 
+		  <if test="orgSiteCode !=null">
+		 	 AND dti.org_site_code =#{orgSiteCode} 
+		  </if>
+		  <if test="checkType !=null">
+		  	 AND dti.layer_type =#{checkType}
+		  </if>
+		  <if test="isLink !=null">
+		 	 AND dti.is_link = #{isLink}
+		  </if>
+		  <if test="isexp !=null">
+		  	 AND di.isexp = #{isexp}
+		  </if>
+		  <if test="scanDate !=null">
+		  	AND lht.scan_date =#{scanDate}
+		  </if>
+		  <if test="linkNum !=null">
+		  	AND lht.website_sum >#{linkNum}
+		  </if>
+		  group by di.site_code
+		  order by lht.website_sum desc
+		  <if test="pageBegin !=null and pageEnd !=null">
+		  	limit #{pageBegin},#{pageEnd}
+		  </if>
+	</select>
+	
+</mapper>

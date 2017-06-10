@@ -1,0 +1,85 @@
+html,body{
+    -webkit-text-size-adjust:none;
+}
+.fl{ float: left;}
+.fr{ float:right;}
+.baobei{ background: #fff;}
+.baobei_top .search_result{ font: normal 14px 'Microsoft YaHei','微软雅黑'; margin-right:44px; margin-top: 5px;}
+.baobei_top .search_result span{ display: inline-block; color: #f20707; margin:0 6px 0 6px;}
+.baobei_top .search_box{ position: relative; width: 201px;height: 28px; margin-right:34px; border: 1px solid #ddd;}
+.baobei_top .search_box input{width: 191px;height: 28px; padding: 0 0 0 10px; margin: 0; border: none; outline: none; font:normal 12px 'Microsoft YaHei','微软雅黑'; box-shadow:none;}
+.baobei_top .search_box input:focus{border: 0;  outline: none;  border-radius: 0;  box-shadow: none;}
+.baobei_top .search_box i{ position: absolute; display: inline-block; width: 16px; height: 16px;  background: url("../images/DailyM_icon.png") no-repeat -57px -67px; top: 6px; right: 5px; cursor: pointer;}
+.baobei_time{ vertical-align: middle;}
+.baobei_time>div{ position: relative;  display:inline-block; width: 179px; height: 28px; border: 1px solid #ddd;}
+.baobei_time>div input{ width: 149px; height: 28px; padding: 0 0 0 10px; margin:0; border: none; outline: none; box-shadow:none;}
+.baobei_time>div input:focus{border: 0;  outline: none;  border-radius: 0;  box-shadow: none; }
+.baobei_time>div i{ position: absolute; display: inline-block; width: 15px; height: 15px; background: url("../images/ril.png") no-repeat center center; top: 6px; right: 8px; cursor: pointer;}
+.baobei_time span{ display: inline-block; margin: 0 7px 0 7px;}
+.baobei_export{padding:9px 27px 10px 27px; line-height: 32px; font: normal 13px 'Microsoft YaHei','微软雅黑'; color: #fff ; __border: 1px solid #bec9d3; background: #2dcc70; position: relative; top: -4px; letter-spacing: 6px; cursor: pointer;}
+.baobei_top span.posi_r_4{ position: relative; top: 4px; font-family: 微软雅黑;}
+.baobei_table_part table{ width: 100%;}
+.baobei_table_part{ margin-top: 15px;}
+.baobei_table_part thead tr{ background: #f4f4f4;}
+.baobei_table_part table th{ border-top: 1px solid #326cab; padding: 10px 0 10px 0; font: bold 12px 'Microsoft YaHei','微软雅黑';}
+.baobei_table_part table td{ border-top: 1px solid #d7dce7;padding: 10px 0 10px 0; font: normal 10px 'Microsoft YaHei','微软雅黑';}
+.baobei_table_part .colo-262626{ color: #262626;}
+.baobei_table_part .reject.blue{color:#1ea9e0; text-decoration: underline; cursor: pointer;}
+.baobei_table_part .reject.gray{color:#999;}
+.baobei_table_part .pass.blue{color:#1ea9e0; text-decoration: underline; cursor: pointer;}
+.baobei_table_part .pass.gray{ color:#999;}
+.baobei_table_part .wait_audit{ color: #f31616;}
+.baobei_table_part .s_reject{color: #6a6f7b;}
+
+
+.baob_t_top{ width: 92px; height: 32px; border: 1px solid #bec9d3; background: #f1f5f9; font: normal 13px/32px 'Microsoft YaHei','微软雅黑'; text-align: center; color: #505152; cursor: pointer;}
+
+
+/*modal*/
+.baob_m_top{ width: 100%; height: 48px; background: #1abc9c;}
+.baob_m_top .green_head_closeicon{ position: absolute; right: 10px;  top: 0;  width: 22px;  height: 22px;  margin-top: 14px;  margin-right: 4px;  background: url("../images/zg-icon.png") no-repeat -16px -14px;  opacity: 1;  }
+.baob_m_top h4{ color: #fff; font-size: 20px; margin:14px 0 0 25px;}
+.baob_m-content .tit{  width: 110px;  margin-right:22px;  margin-top: 9px;  text-align: right;  font: normal 13px 'Microsoft YaHei','微软雅黑';  color: #363636;  }
+.baob_m-content input,.op_w-content textarea{  border: 0;  outline: none;  border-radius: 0;  box-shadow: none;  }
+.baob_m-content input:focus,.op_w-content textarea:focus{  border: 0;  outline: none;  border-radius: 0;  box-shadow: none;  }
+.baob_m-content .content_inp .tit{  margin-top: 3px;  }
+.red-mi{  width: 7px;  height: 7px;  margin-right:11px;  display: inline-block;  background: url("../images/Website_performance_evaluation.png") no-repeat 0 -130px;  }
+.contact_inp .red-mi{  margin-right:6px;  }
+.title_inp{  margin-top: 35px;  }
+.title_inp .right_inp{  width: 307px;  height: 31px;  border: 1px solid #ddd;  }
+.title_inp .right_inp input,.contact_inp .right_inp input{  width:  295px;  height: 31px;  padding:0 0 0 12px;  margin: 0;  }
+.content_inp .right_inp{  width:773px;  height: 162px;  border: 1px solid #ddd;  }
+.content_inp .right_inp textarea{  width:755px;  height: 162px;  padding: 0 0 0 12px;  resize: none;  }
+.phone_num{  margin-right: 63px;  }
+.baob_m-content .note_part{  margin-left: 122px;  font:normal 12px/12px 'Microsoft YaHei','微软雅黑';  color: #fc8831 ;  }
+.baob_m-footer{  padding: 14px 0; border-top: 1px solid #e6e6e6;}
+.baob_m-footer .cancel{  margin-right: 63px;  margin-left: 24px; background: #fff; border: 1px solid #cbcbcb; color: #585858; padding: 10px 31px 10px 42px;  font: normal 13px/13px 'Microsoft YaHei','微软雅黑';  letter-spacing: 11px;  cursor: pointer;}
+.baob_m-footer .ensure{  border: 1px solid #1abc9c; background: #1abc9c; color: #fff; padding: 10px 31px 10px 42px;  font: normal 13px/13px 'Microsoft YaHei','微软雅黑';  letter-spacing: 11px;  cursor: pointer;}
+.content_sel{ margin-top: 17px;}
+.content_sel select{ width: 307px; height: 33px; border: 1px solid #ddd; border-radius: 0;}
+.content_sel select:focus{ outline: none;}
+.contact_inp .right_inp{ width: 716px; height: 116px; border: 1px solid #ddd;}
+.contact_inp .right_inp textarea{ width: 696px; height:96px; border: none; padding:10px; margin: 0;}
+.contact_inp .right_inp textarea:focus{ box-shadow: none;}
+.time_checkbox{ margin-top: 20px;}
+.time_checkbox .right_inp .radio_parts>div{ margin-top: 7px; margin-right:65px;}
+.time_checkbox .right_inp .radio_parts label{ margin: 0;}
+.time_checkbox .right_inp>div .iradio_square-blue { margin-right: 10px;}
+.time_checkbox .right_inp>div.time_p{ margin-top: 20px; margin-bottom: 46px;}
+.time_p div.data{ width: 179px; height: 28px; border: 1px solid #ddd;}
+.time_p div.minutes{ width: 50px; height: 28px; border: 1px solid #ddd; margin: 0 5px 0 5px; __border: none;}
+.time_p .bottom div.minutes{ margin: 0;}
+.time_p div.minutes select:focus{ outline: none;}
+.time_p div.minutes select{ width: 50px; height: 28px; __border: 1px solid #ddd; padding: 0 0 0 10px; border: none;}
+.time_p div.minutes select option{ border: 1px solid red;}
+.time_p div.data input{ width: 169px; padding:0 0 0 10px; height: 28px;}
+.time_p span{ display: inline-block; margin: 7px 15px 0 15px; font: normal 12px 'Microsoft YaHei','微软雅黑';}
+.time_p .bottom span{ margin: 7px 30px 0 30px;}
+.time_p .bottom,.time_p .top{ margin-left: 25px;}
+.time_p{ display: none;}
+.time_p.on{ display: block;}
+
+.baob_m-content .iradio_square-blue{ background-position: -72px -24px;}
+.baob_m-content .iradio_square-blue.checked{ background-position: -50px -24px;}
+
+#tobodyy .info-box{ line-height:29px;}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.TimedTaskLogDao">
+<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/> 
+
+	<resultMap type="com.ucap.cloud_web.entity.TimedTaskLog" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="scanDate != null">
+				and scan_date=#{scanDate}
+			</if>		
+			<if test="type != null">
+				and type=#{type}
+			</if>
+			<if test="status != null">
+				and status=#{status}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.TimedTaskLog" useGeneratedKeys="true" keyProperty="id">
+		insert into timed_task_log ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="beginTime != null ">begin_time,</if>
+			<if test="endTime != null ">end_time,</if>
+			<if test="errMesg != null ">err_mesg,</if>
+			<if test="status != null ">status,</if>
+			<if test="type != null ">type,</if>
+			<if test="scanDate != null ">scan_date,</if>
+			<if test="remark != null ">remark,</if>
+			create_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="beginTime != null ">#{beginTime},</if>
+			<if test="endTime != null ">#{endTime},</if>
+			<if test="errMesg != null ">#{errMesg},</if>
+			<if test="status != null ">#{status},</if>
+			<if test="type != null ">#{type},</if>
+			<if test="scanDate != null ">#{scanDate},</if>
+			<if test="remark != null ">#{remark},</if>
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.TimedTaskLog">
+		select * from timed_task_log where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.TimedTaskLog">
+		update timed_task_log 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="beginTime != null ">begin_time = #{beginTime},</if>
+				<if test="endTime != null ">end_time = #{endTime},</if>
+				<if test="errMesg != null ">err_mesg = #{errMesg},</if>
+				<if test="status != null ">status = #{status},</if>
+				<if test="type != null ">type = #{type},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from timed_task_log where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from timed_task_log
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from timed_task_log
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

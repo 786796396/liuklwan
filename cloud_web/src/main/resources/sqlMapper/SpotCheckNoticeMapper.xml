@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.SpotCheckNoticeDao">
+
+
+	<resultMap type="com.ucap.cloud_web.entity.SpotCheckNotice" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				and site_code =#{siteCode}
+			</if>
+			<if test="servicePeriodId !=null">
+				and service_period_id=#{servicePeriodId}
+			</if>
+			<if test="checkReportResults !=null">
+				and check_report_result!=#{checkReportResults}
+			</if>
+			<if test="checkReportResult !=null">
+				and check_report_result=#{checkReportResult}
+			</if>
+			<if test="isRead != null">
+				and is_read=#{isRead}
+			</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.SpotCheckNotice" useGeneratedKeys="true" keyProperty="id">
+		insert into spot_check_notice ( 
+			<if test="id != null ">id,</if>
+			<if test="director != null ">director,</if>
+			<if test="databaseInfoId != null ">database_info_id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="servicePeriodId != null ">service_period_id,</if>
+			require_time,
+			<if test="endTime != null ">end_time,</if>
+			<if test="noticeRequirement != null">notice_requirement,</if>
+			<if test="noticeResponse != null ">notice_response,</if>
+			<if test="questionNum != null ">question_num,</if>
+			<if test="noticeReportName != null ">notice_report_name,</if>
+			<if test="noticeReportUrl != null ">notice_report_url,</if>
+			<if test="checkReportResult != null ">check_report_result,</if>
+			<if test="email != null ">email,</if>
+			<if test="email2 != null ">email2,</if>
+			<if test="isAllowUpper != null ">is_allow_upper,</if>
+			<if test="orgSiteCode != null ">org_site_code,</if>
+			<if test="upperOrgCode != null ">upper_org_code,</if>
+			<if test="type != null ">type,</if>
+			<if test="isRead != null ">is_read,</if>
+			<if test="emailUpper != null ">email_upper,</if>
+			<if test="email2Upper != null ">email2_upper,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="director != null ">#{director},</if>
+			<if test="databaseInfoId != null ">#{databaseInfoId},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="servicePeriodId != null ">#{servicePeriodId},</if>
+			now(),
+			<if test="endTime != null ">#{endTime},</if>
+			<if test="noticeRequirement != null ">#{noticeRequirement},</if>
+			<if test="noticeResponse != null ">#{noticeResponse},</if>
+			<if test="questionNum != null ">#{questionNum},</if>
+			<if test="noticeReportName != null ">#{noticeReportName},</if>
+			<if test="noticeReportUrl != null ">#{noticeReportUrl},</if>
+			<if test="checkReportResult != null ">#{checkReportResult},</if>
+			<if test="email != null ">#{email},</if>
+			<if test="email2 != null ">#{email2},</if>
+			<if test="isAllowUpper != null ">#{isAllowUpper},</if>
+			<if test="orgSiteCode != null ">#{orgSiteCode},</if>
+			<if test="upperOrgCode != null ">#{upperOrgCode},</if>
+			<if test="type != null ">#{type},</if>
+			<if test="isRead != null ">#{isRead},</if>
+			<if test="emailUpper != null ">#{emailUpper},</if>
+			<if test="email2Upper != null ">#{email2Upper},</if>
+			now(),
+			now()
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.SpotCheckNotice">
+		select * from spot_check_notice where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.SpotCheckNotice">
+		update spot_check_notice 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="director != null ">director = #{director},</if>
+				<if test="databaseInfoId != null ">database_info_id = #{databaseInfoId},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="servicePeriodId != null ">service_period_id = #{servicePeriodId},</if>
+				<if test="requireTime != null ">require_time = #{requireTime},</if>
+				<if test="endTime != null ">end_time = #{endTime},</if>
+				<if test="noticeRequirement != null ">notice_requirement = #{noticeRequirement},</if>
+				<if test="noticeResponse != null ">notice_response = #{noticeResponse},</if>
+				<if test="questionNum != null ">question_num = #{questionNum},</if>
+				<if test="noticeReportName != null ">notice_report_name = #{noticeReportName},</if>
+				<if test="noticeReportUrl != null ">notice_report_url = #{noticeReportUrl},</if>
+				<if test="checkReportResult != null ">check_report_result = #{checkReportResult},</if>
+				<if test="email != null ">email = #{email},</if>
+				<if test="email2 != null ">email2 = #{email2},</if>
+				<if test="type != null ">type = #{type},</if>
+				<if test="isRead != null ">is_read = #{isRead},</if>
+				<if test="emailUpper != null ">email_upper = #{emailUpper},</if>
+				<if test="email2Upper != null ">email2_upper = #{email2Upper},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = now()</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from spot_check_notice where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from spot_check_notice
+		<include refid="where"/>
+		<if test="groupBy != null">
+			group by ${groupBy}
+		</if>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from spot_check_notice
+		<include refid="where" />
+	</select>
+	
+
+</mapper>

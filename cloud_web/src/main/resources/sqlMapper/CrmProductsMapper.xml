@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.CrmProductsDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.CrmProducts" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="isSearchTb != null ">
+				AND is_search_tb = #{isSearchTb}
+			</if>
+			<if test="executeStatus != null ">
+				AND execute_status = #{executeStatus}
+			</if>
+			<if test="notExecuteStatus != null ">
+				AND execute_status != #{notExecuteStatus}
+			</if>
+			<if test="executeStatusArr !=null ">
+				AND execute_status in
+	           	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+	      				#{term}
+				</foreach>
+			</if>
+			<if test="productType != null ">
+				AND product_type = #{productType}
+			</if>
+			<if test="productTypeArr !=null ">
+				AND product_type in
+           	<foreach collection="productTypeArr" item="term" index="index" open="(" separator="," close=")">
+      				#{term}
+			</foreach>
+		</if>
+		</where>
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.CrmProducts" useGeneratedKeys="true" keyProperty="id">
+		insert into crm_products ( 
+			<if test="id != null ">id,</if>
+			<if test="orderId != null ">order_id,</if>
+			<if test="orderCode != null ">order_code,</if>
+			<if test="productId != null ">product_id,</if>
+			<if test="productCode != null ">product_code,</if>
+			<if test="productName != null ">product_name,</if>
+			<if test="productPid != null ">product_pid,</if>
+			<if test="productPname != null ">product_pname,</if>
+			<if test="productType != null ">product_type,</if>
+			<if test="checkCount != null ">check_count,</if>
+			<if test="remaindercount != null ">remaindercount,</if>
+			<if test="monitorCount != null ">monitor_count,</if>
+			<if test="isCorrect != null ">is_correct,</if>
+			<if test="executeStatus != null ">execute_status,</if>
+			<if test="isSearchTb != null ">is_search_tb,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="orderId != null ">#{orderId},</if>
+			<if test="orderCode != null ">#{orderCode},</if>
+			<if test="productId != null ">#{productId},</if>
+			<if test="productCode != null ">#{productCode},</if>
+			<if test="productName != null ">#{productName},</if>
+			<if test="productPid != null ">#{productPid},</if>
+			<if test="productPname != null ">#{productPname},</if>
+			<if test="productType != null ">#{productType},</if>
+			<if test="checkCount != null ">#{checkCount},</if>
+			<if test="remaindercount != null ">#{remaindercount},</if>
+			<if test="monitorCount != null ">#{monitorCount},</if>
+			<if test="isCorrect != null ">#{isCorrect},</if>
+			<if test="executeStatus != null ">#{executeStatus},</if>
+			<if test="isSearchTb != null ">#{isSearchTb},</if>
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.CrmProducts">
+		select * from crm_products where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.CrmProducts">
+		update crm_products 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="orderId != null ">order_id = #{orderId},</if>
+				<if test="orderCode != null ">order_code = #{orderCode},</if>
+				<if test="productId != null ">product_id = #{productId},</if>
+				<if test="productCode != null ">product_code = #{productCode},</if>
+				<if test="productName != null ">product_name = #{productName},</if>
+				<if test="productPid != null ">product_pid = #{productPid},</if>
+				<if test="productPname != null ">product_pname = #{productPname},</if>
+				<if test="productType != null ">product_type = #{productType},</if>
+				<if test="checkCount != null ">check_count = #{checkCount},</if>
+				<if test="remaindercount != null ">remaindercount = #{remaindercount},</if>
+				<if test="monitorCount != null ">monitor_count = #{monitorCount},</if>
+				<if test="isCorrect != null ">is_correct = #{isCorrect},</if>
+				<if test="executeStatus != null ">execute_status = #{executeStatus},</if>
+				<if test="isSearchTb != null ">is_search_tb = #{isSearchTb},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from crm_products where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from crm_products
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from crm_products
+		<include refid="where" />
+	</select>
+	
+	<select id="getCrmProductsList" parameterType="com.ucap.cloud_web.dto.CrmProductsRequest" resultType="com.ucap.cloud_web.dtoResponse.CrmProductsResponse">
+		SELECT
+			cp.*, co.site_code siteCode,
+			co.order_begin_time beginTime,
+			co.order_end_time endTime
+		FROM
+			crm_products cp,
+			crm_order co
+		WHERE
+			cp.order_id = co.id
+		<if test="isSearchTb != null ">
+			AND cp.is_search_tb = #{isSearchTb}
+		</if>
+		<if test="executeStatus != null ">
+			AND cp.execute_status = #{executeStatus}
+		</if>
+		<if test="notExecuteStatus != null ">
+			AND cp.execute_status != #{notExecuteStatus}
+		</if>
+		<if test="executeStatusArr !=null ">
+			AND cp.execute_status in
+           	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+      				#{term}
+			</foreach>
+		</if>
+		<if test="productType != null ">
+			AND cp.product_type = #{productType}
+		</if>
+		<if test="productTypeArr !=null ">
+			AND cp.product_type in
+           	<foreach collection="productTypeArr" item="term" index="index" open="(" separator="," close=")">
+      				#{term}
+			</foreach>
+		</if>
+		<if test="siteCode != null ">
+			AND co.site_code = #{siteCode}
+		</if>
+		<if test="databaseTreeList != null ">
+			and co.site_code in
+				<foreach collection="databaseTreeList" item="item" open="(" separator="," close=")">
+					#{item.orgSiteCode}
+				</foreach>
+		</if>
+		<if test="orgFlag !=null">
+			AND length(co.site_code)=6
+		</if>
+		<if test="tbFlag !=null">
+			AND length(co.site_code)=10
+		</if>
+		<if test="nowTime != null">
+				and #{nowTime} BETWEEN co.order_begin_time AND co.order_end_time
+		</if>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="orgFlag !=null and tbFlag != null">
+			GROUP BY co.site_code
+		</if>
+	</select>
+	
+	<select id="getSecurityProducts" parameterType="com.ucap.cloud_web.dto.CrmProductsRequest" resultType="com.ucap.cloud_web.dtoResponse.CrmProductsResponse">
+		 SELECT
+			cp.*
+		FROM
+			database_tree_info d,
+			database_tree_info dd,
+			crm_products cp,
+			crm_order co
+		WHERE
+			d.parent_id = dd.id
+		AND d.is_link = 1
+		AND dd.is_link = 1
+		<if test="siteCode != null ">
+			AND d.site_code = #{siteCode}
+		</if>
+		AND d.site_code = co.site_code
+		AND cp.order_id = co.id
+		<if test="productType != null ">
+			AND cp.product_type = #{productType}
+		</if>
+		<if test="executeStatus != null ">
+			AND cp.execute_status = #{executeStatus}
+		</if>
+		<if test="orderTypes != null ">
+			AND co.order_types = #{orderTypes}
+		</if>
+		
+		<if test="executeStatusArr !=null ">
+			AND cp.execute_status in
+           	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+      				#{term}
+			</foreach>
+		</if>
+		<if test="isSearchTb != null ">
+			AND cp.is_search_tb = #{isSearchTb}
+		</if>
+	</select>
+
+	<select id="getTaskCrmProductsList" parameterType="com.ucap.cloud_web.dto.CrmProductsRequest" resultType="com.ucap.cloud_web.dtoResponse.CrmProductsResponse">
+		SELECT
+			co.site_code AS siteCode,
+			sp.id AS servicePeriodId
+		FROM
+			crm_products cp,
+			crm_order co,
+			service_period sp
+		WHERE
+			cp.order_id = co.id
+		AND cp.id = sp.contract_info_id
+		<if test="orgFlag !=null">
+			AND LENGTH(co.site_code) = 6 
+		</if>
+		<if test="tbFlag !=null">
+			AND LENGTH(co.site_code) = 10 
+		</if>
+		<if test="executeStatusArr !=null ">
+			AND cp.execute_status in
+           	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+      				#{term}
+			</foreach>
+		</if>
+		<if test="servicePdId !=null" >
+			and sp.id=#{servicePdId}
+		</if>
+		<if test="scanDate !=null">
+			AND DATE(#{scanDate})  BETWEEN sp.start_date AND sp.end_date 
+		</if>
+	</select>
+	
+	<select id="getOnCrmProductsList" parameterType="com.ucap.cloud_web.dto.CrmProductsRequest" resultType="com.ucap.cloud_web.dtoResponse.CrmProductsResponse">
+		SELECT
+			cp.*, co.site_code siteCode,
+			co.order_begin_time beginTime,
+			co.order_end_time endTime
+		FROM 
+			crm_products cp,
+			crm_order co,
+			database_tree_info dti
+		WHERE
+			cp.order_id = co.id
+			AND co.site_code = dti.org_site_code
+		<if test="siteCode !=null">
+			AND dti.site_code = #{siteCode}
+		</if>
+		<if test="isLink !=null">
+			AND dti.is_link = #{isLink}
+		</if>
+		<if test="isExp !=null">
+			AND dti.isexp = #{isExp}
+		</if>
+		<if test="nowTime != null">
+			and #{nowTime} BETWEEN co.order_begin_time AND co.order_end_time
+		</if>
+	</select>
+	<select id="historyCrmProductsList" parameterType="com.ucap.cloud_web.dto.CrmProductsRequest" resultType="com.ucap.cloud_web.dtoResponse.CrmProductsResponse">
+		SELECT
+			cp.* 
+		FROM
+			crm_products cp,
+			crm_order co
+		WHERE
+			cp.order_id = co.id
+		<if test="isSearchTb != null ">
+			AND cp.is_search_tb = #{isSearchTb}
+		</if>
+		<if test="executeStatus != null ">
+			AND cp.execute_status = #{executeStatus}
+		</if>
+		<if test="notExecuteStatus != null ">
+			AND cp.execute_status != #{notExecuteStatus}
+		</if>
+		<if test="executeStatusArr !=null ">
+			AND cp.execute_status in
+           	<foreach collection="executeStatusArr" item="term" index="index" open="(" separator="," close=")">
+      				#{term}
+			</foreach>
+		</if>
+		<if test="siteCode != null ">
+			AND co.site_code = #{siteCode}
+		</if>
+		<if test="protoContractCode != null ">
+			AND co.proto_contract_code != ""
+		</if>
+		<if test="nowTime != null">
+				and #{nowTime} BETWEEN co.order_begin_time AND co.order_end_time
+		</if>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+	</select>
+	<select id="queryByMap" parameterType="HashMap" resultType="int">
+		SELECT 
+		  cp.ID
+		FROM
+		  database_tree_info dti,
+		  crm_order co,
+		  crm_products cp 
+		WHERE dti.org_site_code = co.site_code 
+		  AND co.id = cp.order_id 
+		  <if test="executeStatus !=null">
+		  	AND cp.execute_status = #{executeStatus}
+		  </if>
+		  <if test="productType !=null">
+		  	AND cp.product_type = #{productType} 
+		  </if>
+		  <if test="isSearchTb !=null">
+		  	AND cp.is_search_tb = #{isSearchTb}
+		  </if>
+		   <if test="siteCode !=null ">
+		   	AND dti.site_code =#{siteCode}
+		   </if>
+	</select>
+</mapper>

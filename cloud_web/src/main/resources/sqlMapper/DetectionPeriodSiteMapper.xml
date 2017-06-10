@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucap.cloud_web.dao.DetectionPeriodSiteDao">
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="true"/>
+
+	<resultMap type="com.ucap.cloud_web.entity.DetectionPeriodSite" id="resultMap"/>
+
+	<sql id="where">
+		<where>
+			1=1
+			<if test="siteCode !=null">
+				AND site_code =#{siteCode}
+			</if>
+			<if test="servicePeroidId !=null">
+				AND service_peroid_id =#{servicePeroidId}
+			</if>
+			<if test="nowDate !=null">
+				AND #{nowDate} BETWEEN start_date AND end_date
+			</if>
+			
+		</where>
+	</sql>
+	
+	<!-- 添加 -->
+	<insert id="add" parameterType="com.ucap.cloud_web.entity.DetectionPeriodSite" useGeneratedKeys="true" keyProperty="id">
+		insert into detection_period_site ( 
+			<if test="id != null ">id,</if>
+			<if test="siteCode != null ">site_code,</if>
+			<if test="servicePeroidId != null ">service_peroid_id,</if>
+			<if test="startDate != null ">start_date,</if>
+			<if test="endDate != null ">end_date,</if>
+			<if test="linkAll != null ">link_all,</if>
+			<if test="securityBlank != null ">security_blank,</if>
+			<if test="securityResponse != null ">security_response,</if>
+			<if test="serviceGuide != null ">service_guide,</if>
+			<if test="serviceDownload != null ">service_download,</if>
+			<if test="serviceOther != null ">service_other,</if>
+			<if test="securityService != null ">security_service,</if>
+			<if test="seriousUnreal != null ">serious_unreal,</if>
+			<if test="seriousViolence != null ">serious_violence,</if>
+			<if test="seriousOthers != null ">serious_others,</if>
+			<if test="securityFatalError != null ">security_fatal_error,</if>
+			create_time,
+			modify_time
+		) values (
+			<if test="id != null ">#{id},</if>
+			<if test="siteCode != null ">#{siteCode},</if>
+			<if test="servicePeroidId != null ">#{servicePeroidId},</if>
+			<if test="startDate != null ">#{startDate},</if>
+			<if test="endDate != null ">#{endDate},</if>
+			<if test="linkAll != null ">#{linkAll},</if>
+			<if test="securityBlank != null ">#{securityBlank},</if>
+			<if test="securityResponse != null ">#{securityResponse},</if>
+			<if test="serviceGuide != null ">#{serviceGuide},</if>
+			<if test="serviceDownload != null ">#{serviceDownload},</if>
+			<if test="serviceOther != null ">#{serviceOther},</if>
+			<if test="securityService != null ">#{securityService},</if>
+			<if test="seriousUnreal != null ">#{seriousUnreal},</if>
+			<if test="seriousViolence != null ">#{seriousViolence},</if>
+			<if test="seriousOthers != null ">#{seriousOthers},</if>
+			<if test="securityFatalError != null ">#{securityFatalError},</if>
+			now(),
+			now()
+		)
+		<selectKey resultType="int" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<!-- 查询 -->
+	<select id="get" parameterType="int" resultType="com.ucap.cloud_web.entity.DetectionPeriodSite">
+		select * from detection_period_site where id=#{id}
+	</select>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.ucap.cloud_web.entity.DetectionPeriodSite">
+		update detection_period_site 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="id != null ">id = #{id},</if>
+				<if test="siteCode != null ">site_code = #{siteCode},</if>
+				<if test="servicePeroidId != null ">service_peroid_id = #{servicePeroidId},</if>
+				<if test="startDate != null ">start_date = #{startDate},</if>
+				<if test="endDate != null ">end_date = #{endDate},</if>
+				<if test="linkAll != null ">link_all = #{linkAll},</if>
+				<if test="securityBlank != null ">security_blank = #{securityBlank},</if>
+				<if test="securityResponse != null ">security_response = #{securityResponse},</if>
+				<if test="serviceGuide != null ">service_guide = #{serviceGuide},</if>
+				<if test="serviceDownload != null ">service_download = #{serviceDownload},</if>
+				<if test="serviceOther != null ">service_other = #{serviceOther},</if>
+				<if test="securityService != null ">security_service = #{securityService},</if>
+				<if test="seriousUnreal != null ">serious_unreal = #{seriousUnreal},</if>
+				<if test="seriousViolence != null ">serious_violence = #{seriousViolence},</if>
+				<if test="seriousOthers != null ">serious_others = #{seriousOthers},</if>
+				<if test="securityFatalError != null ">security_fatal_error = #{securityFatalError},</if>
+				<if test="createTime != null ">create_time = #{createTime},</if>
+				<if test="modifyTime != null ">modify_time = #{modifyTime},</if>
+			</trim>
+			where id=#{id} 
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterType="int">
+		delete from detection_period_site where id = #{id}
+	</delete>
+
+	<!-- 分页查询 -->
+	<select id="query" parameterType="HashMap" resultMap="resultMap">
+		select * from detection_period_site
+		<include refid="where"/>
+		<if test="queryOrderList != null">
+			order by
+			<foreach collection="queryOrderList" item="queryOrder" separator=",">
+				${queryOrder}
+			</foreach>
+		</if>
+		<if test="start != null and pageSize != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	<select id="queryCount" parameterType="HashMap" resultType="int">
+		select count(*) from detection_period_site
+		<include refid="where" />
+	</select>
+</mapper>

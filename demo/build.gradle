@@ -1,19 +1,4 @@
-buildscript {
-	ext {
-		springBootVersion = '2.0.1.BUILD-SNAPSHOT'
-	}
-	repositories {
-		mavenCentral()
-		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
-}
-
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
@@ -24,18 +9,40 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 // java编译的时候缺省状态下会因为中文字符而失败
 [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
-webAppDirName = 'webapp'
+webAppDirName = 'src/main/webapp'
 war{
 	archiveName ="demo.war"
-	from 'src/webapp' // adds a file-set to the root of the archive
+	from 'src/main/webapp' // adds a file-set to the root of the archive
 }
+
+buildscript {
+	ext {
+		springBootVersion = '2.0.1.BUILD-SNAPSHOT'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+		maven { url "https://repo.spring.io/libs-release" }
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+
 
 repositories {
 	mavenCentral()
 	maven { url "https://repo.spring.io/snapshot" }
 	maven { url "https://repo.spring.io/milestone" }
 }
-
+sourceSets {
+	main {
+		output.resourcesDir = "bin/classes"
+	}
+}
 dependencies {
 //	<!-- spring-boot的web启动的jar包 -->
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -56,11 +63,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-sourceSets {
-	main {
-		output.resourcesDir = "bin/classes"
-	}
-}
+
 task wrapper(type: Wrapper) {
 	gradleVersion = '4.0'
 }

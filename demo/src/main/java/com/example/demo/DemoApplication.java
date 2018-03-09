@@ -18,7 +18,7 @@ public class DemoApplication extends SpringBootServletInitializer {
 		return "Hello World!";//返回结果为字符串
 	}
 
-	@RequestMapping("/demo")
+	@RequestMapping(value ="/demo")
 	@ResponseBody
 	public String demo(){
 		return "demo";

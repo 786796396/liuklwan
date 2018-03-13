@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 //表明这是一个 Controller
 @Controller
@@ -18,8 +19,8 @@ public class DemoApplication extends SpringBootServletInitializer {
 		return "Hello World!";//返回结果为字符串
 	}
 
-	@RequestMapping(value ="/demo")
-	@ResponseBody
+	@RequestMapping(value ="/user", method = RequestMethod.GET)
+//	@ResponseBody
 	public String demo(){
 		return "demo";
 	}

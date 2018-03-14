@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <%--<script src="${pageContext.request.contextPath}/js/test.js"></script>--%>
 </head>
 <body>
 Welcome to BeiJing!!!!!!

@@ -14,7 +14,7 @@ war{
 	archiveName ="demo.war"
 	from 'src/main/webapp' // adds a file-set to the root of the archive
 }
-
+//http://mvnrepository.com/
 buildscript {
 	ext {
 		springBootVersion = '2.0.1.BUILD-SNAPSHOT'
@@ -60,6 +60,8 @@ dependencies {
 	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.5'
 //	mysql 驱动
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.9-rc'
+//	静态页面访问驱动
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.0.RELEASE'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

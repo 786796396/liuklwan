@@ -19,10 +19,30 @@ public class DemoApplication extends SpringBootServletInitializer {
 		return "Hello World!";//返回结果为字符串
 	}
 
-	@RequestMapping(value ="/user", method = RequestMethod.GET)
+	@RequestMapping(value ="/user")
 //	@ResponseBody
 	public String demo(){
 		return "demo";
+	}
+
+	@RequestMapping(value ="/index")
+	public String html5(){
+		return "index";
+	}
+
+	@RequestMapping(value ="/index2")
+	public String map(){
+		return "/index2";
+	}
+
+	@RequestMapping(value ="/indexZi")
+	public String indexZi(){
+		return "/indexZi";
+	}
+
+	@RequestMapping(value ="/indexDong")
+	public String indexDong(){
+		return "/indexDong";
 	}
 
 	public static void main(String[] args) {

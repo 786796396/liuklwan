@@ -5,3 +5,5 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+    thymeleaf:
+      prefix: classpath:/templates/

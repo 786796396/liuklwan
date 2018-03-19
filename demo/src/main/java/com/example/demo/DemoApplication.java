@@ -25,25 +25,6 @@ public class DemoApplication extends SpringBootServletInitializer {
 		return "demo";
 	}
 
-	@RequestMapping(value ="/index")
-	public String html5(){
-		return "index";
-	}
-
-	@RequestMapping(value ="/index2")
-	public String map(){
-		return "/index2";
-	}
-
-	@RequestMapping(value ="/indexZi")
-	public String indexZi(){
-		return "/indexZi";
-	}
-
-	@RequestMapping(value ="/indexDong")
-	public String indexDong(){
-		return "/indexDong";
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);

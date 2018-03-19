@@ -61,7 +61,8 @@ dependencies {
 //	mysql 驱动
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.9-rc'
 //	静态页面访问驱动
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.0.RELEASE'
+//TODO	jsp页面与thymeleaf html5静态页共存问题暂未解决先去除掉html5静态页访问
+//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.0.0.RELEASE'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

@@ -14,7 +14,6 @@
     <%--<%@ include file="/WEB-INF/views/common.jsp" %>--%>
     <link rel="stylesheet" type="text/css" href="${ctx}/css/left/nav.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/css/font/iconfont.css">
-    <script type="text/javascript" src="${ctx}/js/left/jquery.min.js"></script>
     <script type="text/javascript" src="${ctx}/js/left/nav.js"></script>
 </head>
 <body>

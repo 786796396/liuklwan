@@ -12,7 +12,6 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="${ctx}/css/top/head.css">
-    <script type="text/javascript" src="${ctx}/js/top/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 <%-- ===============================TOP START======================================--%>

@@ -11,7 +11,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>Title</title>
-    <%--<%@ include file="/WEB-INF/views/common.jsp" %>--%>
     <link rel="stylesheet" type="text/css" href="${ctx}/css/top/head.css">
     <script type="text/javascript" src="${ctx}/js/top/jquery-1.12.4.min.js"></script>
 </head>
@@ -25,6 +24,11 @@
         <ul class="headernav">
             <li class="logo">
                 <!---<img src="" alt="" />--->
+                <%--<h1 class="logo">--%>
+                    <img src="${ctx}/img/top/logo.png" alt="">
+                    <%--<a href="index.html">--%>
+                    <%--</a>--%>
+                <%--</h1>--%>
             </li>
             <li><a href="http://www.16sucai.com">Home</a></li>
             <li><a href="#" >投资咨询</a></li>

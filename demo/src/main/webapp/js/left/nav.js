@@ -1,7 +1,7 @@
 $(function(){
     // nav收缩展开
     $('.nav-item>a').on('click',function(){
-        if (!$('.nav').hasClass('nav-mini')) {
+        if (!$('.navLeft').hasClass('nav-mini')) {
             if ($(this).next().css('display') == "none") {
                 //展开未展开
                 $('.nav-item').children('ul').slideUp(300);
@@ -16,12 +16,12 @@ $(function(){
     });
     //nav-mini切换
     $('#mini').on('click',function(){
-        if (!$('.nav').hasClass('nav-mini')) {
+        if (!$('.navLeft').hasClass('nav-mini')) {
             $('.nav-item.nav-show').removeClass('nav-show');
             $('.nav-item').children('ul').removeAttr('style');
-            $('.nav').addClass('nav-mini');
+            $('.navLeft').addClass('nav-mini');
         }else{
-            $('.nav').removeClass('nav-mini');
+            $('.navLeft').removeClass('nav-mini');
         }
     });
 });

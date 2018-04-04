@@ -18,7 +18,7 @@
 </head>
 <body>
 <%-- ===============================LEFT START======================================--%>
-<div class="nav nav-mini">
+<div class="navLeft nav-mini">
     <div class="nav-top">
         <div id="mini" style="border-bottom:1px solid rgba(255,255,255,.1)"><img src="${ctx}/img/left/mini.png" ></div>
     </div>

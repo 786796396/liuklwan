@@ -15,6 +15,7 @@
 </head>
 <body>
 <%-- ===============================TOP START======================================--%>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="header">
     <%--<div>--%>
         <%--<strong>I do not know where to go,but I have been on the road. </strong>--%>
@@ -65,6 +66,7 @@
         </div>
     </div>
 </div>
+</nav>
 <%-- ===============================TOP END======================================--%>
 </body>
 <script>

@@ -15,6 +15,13 @@
     <link rel="stylesheet" type="text/css" href="${ctx}/css/left/nav.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/css/font/iconfont.css">
     <script type="text/javascript" src="${ctx}/js/left/nav.js"></script>
+    <style>
+        .navLeft{
+            position: absolute;
+            left: 0;
+            height: calc(100% - 100px);
+        }
+    </style>
 </head>
 <body>
 <%-- ===============================LEFT START======================================--%>

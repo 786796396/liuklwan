@@ -13,8 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController extends SpringBootServletInitializer {
 
     @RequestMapping(value ="/login")
-    public String map1(){
+    public String login(){
         return "login";
     }
 
+    @RequestMapping(value ="/test")
+    public String test(){
+        return "test";
+    }
+    @RequestMapping(value ="/index")
+    public String index(){
+        return "index";
+    }
 }

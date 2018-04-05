@@ -21,7 +21,7 @@ public class LoginController extends SpringBootServletInitializer {
     public String test(){
         return "test";
     }
-    @RequestMapping(value ="/index")
+    @RequestMapping(value ="/")
     public String index(){
         return "index";
     }

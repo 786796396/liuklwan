@@ -14,7 +14,7 @@
     <%@ include file="/WEB-INF/common/common.jsp" %>
     <style>
         .admin-content{
-            width: 100%;
+            width: 90%;
             padding-top: 100px;
             margin-left: 66px;
         }

@@ -12,13 +12,13 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>Title</title>
     <%@ include file="/WEB-INF/common/common.jsp" %>
-    <style>
-        .admin-content{
-            width: 90%;
-            padding-top: 100px;
-            margin-left: 66px;
-        }
-    </style>
+    <%--<style>--%>
+        <%--.admin-content{--%>
+            <%--width: 90%;--%>
+            <%--padding-top: 100px;--%>
+            <%--margin-left: 66px;--%>
+        <%--}--%>
+    <%--</style>--%>
 </head>
 <body>
 <%@ include file="/WEB-INF/common/top.jsp" %>

@@ -8,7 +8,7 @@ a{text-decoration:none;}
 /* 以上实际使用若已初始化可删除 */
 
 /* nav */
-.navLeft{width: 220px;height: 100%;background: #263238;transition: all .3s;margin-top:100px;}
+.navLeft{width: 220px;height: 100%;background: #263238;transition: all .3s;margin-top:100px;position:absolute;z-index:8888;}
 .navLeft a{display: block;overflow: hidden;padding-left: 20px;line-height: 46px;max-height: 46px;color: #ABB1B7;transition: all .3s;}
 .navLeft a span{margin-left: 30px;}
 .nav-item{position: relative;}

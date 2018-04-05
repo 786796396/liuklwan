@@ -15,7 +15,7 @@
 </head>
 <body>
 <%-- ===============================TOP START======================================--%>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="position:absolute;z-index:9999;">
 <div class="header">
     <%--<div>--%>
         <%--<strong>I do not know where to go,but I have been on the road. </strong>--%>
@@ -30,14 +30,15 @@
                     <%--</a>--%>
                 <%--</h1>--%>
             </li>
-            <li><a href="http://www.16sucai.com">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="#" >投资咨询</a></li>
             <li><a href="#">培训课程</a></li>
             <li><a href="#" >在线体验</a></li>
             <li><a href="#" >about</a></li>
-            <li class="search">
-                <a class="search_pic"></a>
-            </li>
+            <li><a href="#" >liukl Welcome </a></li>
+            <%--<li class="search">--%>
+                <%--<a class="search_pic"></a>--%>
+            <%--</li>--%>
             <li class="list">
                 <a></a>
             </li>

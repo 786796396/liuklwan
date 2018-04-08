@@ -10,7 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <title>Title</title>
+    <title>林神的娱乐</title>
     <%@ include file="/WEB-INF/common/common.jsp" %>
     <%--<style>--%>
         <%--.admin-content{--%>

@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+#   TODO	jsp页面与thymeleaf html5静态页共存问题暂未解决先去除掉html5静态页访问
+#    thymeleaf:
+#      prefix: classpath:/templates/

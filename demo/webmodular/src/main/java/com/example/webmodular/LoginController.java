@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.webmodular;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

@@ -1,11 +1,10 @@
-package com.example.demo;
+package com.example.webmodular;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 //表明这是一个 Controller
 @Controller
@@ -22,7 +21,7 @@ public class DemoApplication extends SpringBootServletInitializer {
 	@RequestMapping(value ="/user")
 //	@ResponseBody
 	public String demo(){
-		return "demo";
+		return "webmodular";
 	}
 
 

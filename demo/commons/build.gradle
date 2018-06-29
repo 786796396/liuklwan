@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+version '0.0.1-SNAPSHOT'
+group = 'com.example'
+archivesBaseName = 'commons'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.spring.io/libs-release" }
+    jcenter()
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
+
+idea {
+    module {
+        downloadJavadoc = false
+        downloadSources = false
+    }
+}
+
+
+sourceSets {
+    main {
+        output.resourcesDir = "bin/classes"
+    }
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.10.2'
+    compile 'org.apache.commons:commons-lang3:3.3.1'
+}

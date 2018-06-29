@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+此xml用于更新截取url地址使用， 对url进行按照规则截取 sessionid 等动态链接参数
+部分url链接参数被截取后不可使用， 谨慎操作
+
+注意: 截取参数是 ? or & 后的 不要携带非参数名称之外的符号
+
+属性说明：
+siteCode:站点标识码，唯一标识，
+identification: 截取标识， url根据此标识进行截取，此标识后的字符串全部截取掉
+fixme  如有需要可扩展标签 增加 正则 读取后根据正则过滤特定的url
+
+-->
+<rules>
+
+    <rule>
+        <site>3405230040</site>
+        <identification>r=</identification>
+    </rule>
+    <rule>
+        <site>3509210001</site>
+        <identification>r=</identification>
+    </rule>
+    <rule>
+        <site>2306000031</site>
+        <identification>pa=</identification>
+    </rule>
+    <rule>
+        <site>1202250003</site>
+        <identification>ydcs=</identification>
+    </rule>
+    <rule>
+        <site>1404000061</site>
+        <identification>pa=</identification>
+    </rule>
+    <rule>
+        <site>1411000034</site>
+        <identification>pa=</identification>
+    </rule>
+
+    <rule>
+        <site>4112240001</site>
+        <identification>a_k=</identification>
+    </rule>
+    <rule>
+        <site>5000000097</site>
+        <identification>argId=</identification>
+    </rule>
+    <rule>
+        <site>N000007397</site>
+        <identification>formhash=</identification>
+    </rule>
+    <rule>
+        <site>N000001453</site>
+        <identification>formhash=</identification>
+    </rule>
+    <rule>
+        <site>N000007406</site>
+        <identification>formhash=</identification>
+    </rule>
+    <rule>
+        <site>N000007412</site>
+        <identification>formhash=</identification>
+    </rule>
+    <rule>
+        <site>3700000059</site>
+        <identification>file=</identification>
+    </rule>
+    <rule>
+        <site>4301000018</site>
+        <identification>i_id=</identification>
+    </rule>
+    <rule>
+        <site>5304000020</site>
+        <identification>formhash=</identification>
+    </rule>
+</rules>
